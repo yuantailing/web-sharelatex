@@ -16,10 +16,10 @@ block content
 							form-messages(for="loginForm")
 							.form-group
 								input.form-control(
-									type='email',
+									type='text',
 									name='email',
 									required,
-									placeholder='email@example.com',
+									placeholder='Username',
 									ng-model="email",
 									ng-model-options="{ updateOn: 'blur' }",
 									ng-init="email = "+JSON.stringify(email),
