@@ -39,7 +39,7 @@ define(['base', 'libs/platform'], (App, platform) =>
         inbox: 'accounts'
       }
 
-      const request = $http.post('/support', data)
+      const request = $http.post('/SHARELATEX/support', data)
 
       request.catch(function() {
         $scope.error = true

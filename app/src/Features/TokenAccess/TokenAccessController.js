@@ -47,7 +47,7 @@ module.exports = TokenAccessController = {
           { token, userId, projectId: project._id },
           '[TokenAccess] user has higher access to project, redirecting'
         )
-        return res.redirect(302, `/project/${project._id}`)
+        return res.redirect(302, `/SHARELATEX/project/${project._id}`)
       }
     )
   },
@@ -123,7 +123,7 @@ module.exports = TokenAccessController = {
               '[TokenAccess] deny anonymous read-and-write token access'
             )
             AuthenticationController.setRedirectInSession(req)
-            return res.redirect('/restricted')
+            return res.redirect('/SHARELATEX/restricted')
           }
         }
         if (project.owner_ref.toString() === userId) {

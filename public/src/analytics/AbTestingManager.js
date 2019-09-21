@@ -44,7 +44,7 @@ define(['base', 'libs/md5'], function(App) {
 
     const _persistCookieStep = function(testName, bucket, newStep) {
       const cookieKey = _buildCookieKey(testName, bucket)
-      ipCookie(cookieKey, { step: newStep }, { expires: 100, path: '/' })
+      ipCookie(cookieKey, { step: newStep }, { expires: 100, path: '/SHARELATEX/' })
       return ga(
         'send',
         'event',
@@ -71,7 +71,7 @@ define(['base', 'libs/md5'], function(App) {
       let user_uuid = ipCookie(sl_user_test_token)
       if (user_uuid == null) {
         user_uuid = Math.random()
-        ipCookie(sl_user_test_token, user_uuid, { expires: 365, path: '/' })
+        ipCookie(sl_user_test_token, user_uuid, { expires: 365, path: '/SHARELATEX/' })
       }
       const hash = CryptoJS.MD5(`${user_uuid}:${testName}`)
       return hash

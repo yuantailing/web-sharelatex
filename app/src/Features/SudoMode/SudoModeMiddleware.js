@@ -45,7 +45,7 @@ module.exports = SudoModeMiddleware = {
       } else {
         logger.log({ userId }, '[SudoMode] sudo mode not active, redirecting')
         AuthenticationController.setRedirectInSession(req)
-        return res.redirect('/confirm-password')
+        return res.redirect('/SHARELATEX/confirm-password')
       }
     })
   }

@@ -193,7 +193,7 @@ define(['base'], function(App) {
 
     return ($scope.onComplete = function(error, name, response) {
       if (response.project_id != null) {
-        return (window.location = `/project/${response.project_id}`)
+        return (window.location = `/SHARELATEX/project/${response.project_id}`)
       }
     })
   })

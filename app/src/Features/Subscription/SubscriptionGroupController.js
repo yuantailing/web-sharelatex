@@ -78,9 +78,9 @@ module.exports = {
         return next(error)
       }
       if (!(subscription != null ? subscription.groupPlan : undefined)) {
-        return res.redirect('/user/subscription')
+        return res.redirect('/SHARELATEX/user/subscription')
       }
-      return res.redirect(`/manage/groups/${subscription._id}/members`)
+      return res.redirect(`/SHARELATEX/manage/groups/${subscription._id}/members`)
     })
   }
 }

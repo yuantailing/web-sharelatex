@@ -9,7 +9,7 @@ block content
 			authMethod: "!{authMethod}"
 		}
 
-	script(type="text/javascript" src='/socket.io/socket.io.js')
+	script(type="text/javascript" src='/SHARELATEX/socket.io/socket.io.js')
 
 	style.
 		hr { margin-bottom: 5px; }
@@ -31,7 +31,7 @@ block content
 								.text-center
 									h1 #{translate('welcome_to_sl')}
 									p
-										img(src=buildImgPath('/ol-brand/overleaf-o.svg'))
+										img(src=buildImgPath('/SHARELATEX/ol-brand/overleaf-o.svg'))
 
 						<!-- wrapper -->
 						.row
@@ -47,7 +47,7 @@ block content
 										div(ng-if="authMethod == 'local'")
 											form(async-form="register", name="registerForm", on-success="onCreateAdminSuccess"
 													on-error="onCreateAdminError"
-													action="/launchpad/register_admin", method="POST", ng-cloak)
+													action="/SHARELATEX/launchpad/register_admin", method="POST", ng-cloak)
 												input(name='_csrf', type='hidden', value=csrfToken)
 												form-messages(for="registerForm")
 												.form-group
@@ -91,7 +91,7 @@ block content
 
 											form(async-form="register", name="registerLdapForm", on-success="onCreateAdminSuccess"
 													on-error="onCreateAdminError"
-													action="/launchpad/register_ldap_admin", method="POST", ng-cloak)
+													action="/SHARELATEX/launchpad/register_ldap_admin", method="POST", ng-cloak)
 												input(name='_csrf', type='hidden', value=csrfToken)
 												form-messages(for="registerLdapForm")
 												.form-group
@@ -124,7 +124,7 @@ block content
 
 											form(async-form="register", name="registerSamlForm", on-success="onCreateAdminSuccess"
 													on-error="onCreateAdminError"
-													action="/launchpad/register_saml_admin", method="POST", ng-cloak)
+													action="/SHARELATEX/launchpad/register_saml_admin", method="POST", ng-cloak)
 												input(name='_csrf', type='hidden', value=csrfToken)
 												form-messages(for="registerSamlForm")
 												.form-group
@@ -153,7 +153,7 @@ block content
 										.row(ng-if="createAdminSuccess")
 											.col-md-12.text-center
 												.alert.alert-success
-													| !{translate('admin_user_created_message', {link: '/login?redir=/launchpad'})}
+													| !{translate('admin_user_created_message', {link: '/SHARELATEX/login?redir=/launchpad'})}
 
 										<!-- error message -->
 										.row(ng-if="createAdminError")
@@ -259,9 +259,9 @@ block content
 											.text-center
 												br
 												p
-													a(href="/admin").btn.btn-md
+													a(href="/SHARELATEX/admin").btn.btn-md
 														| Go To Admin Panel
 													| &nbsp;
-													a(href="/project").btn.btn-md.btn-primary
+													a(href="/SHARELATEX/project").btn.btn-md.btn-primary
 														| Start Using ShareLaTeX
 												br

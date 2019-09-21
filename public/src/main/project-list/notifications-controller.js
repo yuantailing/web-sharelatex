@@ -19,7 +19,7 @@ define(['base'], function(App) {
 
     return ($scope.dismiss = notification =>
       $http({
-        url: `/notifications/${notification._id}`,
+        url: `/SHARELATEX/notifications/${notification._id}`,
         method: 'DELETE',
         headers: {
           'X-Csrf-Token': window.csrfToken
@@ -38,7 +38,7 @@ define(['base'], function(App) {
     return ($scope.accept = function() {
       $scope.notification.inflight = true
       return $http({
-        url: `/project/${
+        url: `/SHARELATEX/project/${
           $scope.notification.messageOpts.projectId
         }/invite/token/${$scope.notification.messageOpts.token}/accept`,
         method: 'POST',

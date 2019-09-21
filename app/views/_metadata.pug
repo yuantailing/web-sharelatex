@@ -38,8 +38,8 @@
 	meta(name="image", content=buildImgPath('ol-brand/overleaf_og_logo.png'))
 -else
 	//- the default image for ShareLaTeX
-	meta(itemprop="image", content='/touch-icon-192x192.png')
-	meta(name="image", content='/touch-icon-192x192.png')
+	meta(itemprop="image", content='/SHARELATEX/touch-icon-192x192.png')
+	meta(name="image", content='/SHARELATEX/touch-icon-192x192.png')
 
 //- Keywords
 -if (metadata && metadata.keywords)
@@ -68,7 +68,7 @@ meta(name="twitter:card", content=metadata && metadata.twitterCardType ? metadat
 	meta(name="twitter:image", content=buildImgPath('ol-brand/overleaf_og_logo.png'))
 -else
 	//- the default image for ShareLaTeX
-	meta(name="twitter:image", content='/touch-icon-192x192.png')
+	meta(name="twitter:image", content='/SHARELATEX/touch-icon-192x192.png')
 
 //- Open Graph
 //- to do - add og:url
@@ -86,7 +86,7 @@ meta(name="twitter:card", content=metadata && metadata.twitterCardType ? metadat
 	meta(property="og:image", content=buildImgPath('ol-brand/overleaf_og_logo.png'))
 -else
 	//- the default image for ShareLaTeX
-	meta(property="og:image", content='/touch-icon-192x192.png')
+	meta(property="og:image", content='/SHARELATEX/touch-icon-192x192.png')
 -if (metadata && metadata.openGraphType)
 	meta(property="og:type", metadata.openGraphType)
 -else

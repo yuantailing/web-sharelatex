@@ -39,7 +39,7 @@ const Features = require('./Features')
 Modules = require('./Modules')
 const moment = require('moment')
 
-const jsPath = Settings.useMinifiedJs ? '/minjs/' : '/js/'
+const jsPath = Settings.useMinifiedJs ? '/SHARELATEX/minjs/' : '/SHARELATEX/js/'
 
 const ace = PackageVersions.lib('ace')
 const pdfjs = PackageVersions.lib('pdfjs')
@@ -248,7 +248,7 @@ module.exports = function(app, webRouter, privateApiRouter, publicApiRouter) {
 
     res.locals.buildCssPath = function(themeModifier, buildOpts) {
       const cssFileName = _buildCssFileName(themeModifier)
-      path = Path.join('/stylesheets/', cssFileName)
+      path = Path.join('/SHARELATEX/stylesheets/', cssFileName)
       if (
         (buildOpts != null ? buildOpts.hashedPath : undefined) &&
         hashedFiles[path] != null
@@ -260,7 +260,7 @@ module.exports = function(app, webRouter, privateApiRouter, publicApiRouter) {
     }
 
     res.locals.buildImgPath = function(imgFile) {
-      path = Path.join('/img/', imgFile)
+      path = Path.join('/SHARELATEX/img/', imgFile)
       return Url.resolve(staticFilesBase, path)
     }
 

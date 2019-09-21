@@ -22,7 +22,7 @@ define(['base'], App =>
       console.log('>> clearing all sessions')
       return $http({
         method: 'POST',
-        url: '/user/sessions/clear',
+        url: '/SHARELATEX/user/sessions/clear',
         headers: { 'X-CSRF-Token': window.csrfToken }
       })
         .then(function() {

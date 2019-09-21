@@ -26,7 +26,7 @@ const InstitutionsAPI = {
     return makeAffiliationRequest(
       {
         method: 'GET',
-        path: `/api/v2/institutions/${institutionId.toString()}/affiliations`,
+        path: `/SHARELATEX/api/v2/institutions/${institutionId.toString()}/affiliations`,
         defaultErrorMessage: "Couldn't get institution affiliations"
       },
       (error, body) => callback(error, body || [])
@@ -40,7 +40,7 @@ const InstitutionsAPI = {
     return makeAffiliationRequest(
       {
         method: 'GET',
-        path: `/api/v2/institutions/${institutionId.toString()}/institution_licences`,
+        path: `/SHARELATEX/api/v2/institutions/${institutionId.toString()}/institution_licences`,
         body: { start_date: startDate, end_date: endDate, lag },
         defaultErrorMessage: "Couldn't get institution licences"
       },
@@ -55,7 +55,7 @@ const InstitutionsAPI = {
     return makeAffiliationRequest(
       {
         method: 'GET',
-        path: `/api/v2/institutions/${institutionId.toString()}/new_institution_licences`,
+        path: `/SHARELATEX/api/v2/institutions/${institutionId.toString()}/new_institution_licences`,
         body: { start_date: startDate, end_date: endDate, lag },
         defaultErrorMessage: "Couldn't get institution new licences"
       },
@@ -70,7 +70,7 @@ const InstitutionsAPI = {
     return makeAffiliationRequest(
       {
         method: 'GET',
-        path: `/api/v2/users/${userId.toString()}/affiliations`,
+        path: `/SHARELATEX/api/v2/users/${userId.toString()}/affiliations`,
         defaultErrorMessage: "Couldn't get user affiliations"
       },
       (error, body) => callback(error, body || [])
@@ -88,7 +88,7 @@ const InstitutionsAPI = {
     return makeAffiliationRequest(
       {
         method: 'POST',
-        path: `/api/v2/users/${userId.toString()}/affiliations`,
+        path: `/SHARELATEX/api/v2/users/${userId.toString()}/affiliations`,
         body: { email, university, department, role, confirmedAt },
         defaultErrorMessage: "Couldn't create affiliation"
       },
@@ -121,7 +121,7 @@ const InstitutionsAPI = {
     return makeAffiliationRequest(
       {
         method: 'POST',
-        path: `/api/v2/users/${userId.toString()}/affiliations/remove`,
+        path: `/SHARELATEX/api/v2/users/${userId.toString()}/affiliations/remove`,
         body: { email },
         extraSuccessStatusCodes: [404], // `Not Found` responses are considered successful
         defaultErrorMessage: "Couldn't remove affiliation"
@@ -137,7 +137,7 @@ const InstitutionsAPI = {
     return makeAffiliationRequest(
       {
         method: 'POST',
-        path: `/api/v2/users/${userId.toString()}/affiliations/endorse`,
+        path: `/SHARELATEX/api/v2/users/${userId.toString()}/affiliations/endorse`,
         body: { email, role, department },
         defaultErrorMessage: "Couldn't endorse affiliation"
       },
@@ -152,7 +152,7 @@ const InstitutionsAPI = {
     return makeAffiliationRequest(
       {
         method: 'DELETE',
-        path: `/api/v2/users/${userId.toString()}/affiliations`,
+        path: `/SHARELATEX/api/v2/users/${userId.toString()}/affiliations`,
         defaultErrorMessage: "Couldn't delete affiliations"
       },
       callback

@@ -59,7 +59,7 @@ define(['moment', 'base', 'modules/localStorage'], function(moment, App) {
 
     const _sendEditingSessionHeartbeat = () =>
       $http({
-        url: `/editingSession/${window.project_id}`,
+        url: `/SHARELATEX/editingSession/${window.project_id}`,
         method: 'PUT',
         headers: {
           'X-CSRF-Token': window.csrfToken
@@ -106,7 +106,7 @@ define(['moment', 'base', 'modules/localStorage'], function(moment, App) {
           segmentation = {}
         }
         return $http({
-          url: `/event/${key}`,
+          url: `/SHARELATEX/event/${key}`,
           method: 'POST',
           data: segmentation,
           headers: {

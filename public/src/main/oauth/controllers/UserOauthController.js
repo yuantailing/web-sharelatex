@@ -28,7 +28,7 @@ define(['base'], App =>
           providerId
         }
         $http
-          .post('/user/oauth-unlink', data)
+          .post('/SHARELATEX/user/oauth-unlink', data)
           .catch(error => {
             $scope.providers[providerId].ui.isProcessing = false
             _unlinkError(providerId, error)

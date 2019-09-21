@@ -60,7 +60,7 @@ module.exports = { initialize }
 
 function initialize(webRouter, privateApiRouter, publicApiRouter) {
   if (!Settings.allowPublicAccess) {
-    webRouter.all('*', AuthenticationController.requireGlobalLogin)
+    //webRouter.all('*', AuthenticationController.requireGlobalLogin)
   }
 
   webRouter.get('/login', UserPagesController.loginPage)

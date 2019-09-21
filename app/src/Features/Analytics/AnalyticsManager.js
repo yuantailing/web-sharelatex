@@ -86,7 +86,7 @@ module.exports = {
       },
       json: true,
       method: 'POST',
-      url: `/user/${userId}/identify`
+      url: `/SHARELATEX/user/${userId}/identify`
     }
     makeAnalyticsBackgroundRequest(userId, opts, callback)
   },
@@ -108,7 +108,7 @@ module.exports = {
       },
       json: true,
       method: 'POST',
-      url: `/user/${userId}/event`
+      url: `/SHARELATEX/user/${userId}/event`
     }
 
     makeAnalyticsBackgroundRequest(userId, opts, callback)
@@ -131,7 +131,7 @@ module.exports = {
 
     const opts = {
       method: 'PUT',
-      url: '/editingSession',
+      url: '/SHARELATEX/editingSession',
       qs: query,
       maxAttempts: 6 // dont retry for too long as session ping timestamp are
       // recorded when the request is received on the analytics
@@ -148,7 +148,7 @@ module.exports = {
       json: true,
       method: 'POST',
       timeout: 1000,
-      url: `/user/${userId}/event/last_occurrence`
+      url: `/SHARELATEX/user/${userId}/event/last_occurrence`
     }
     makeAnalyticsRequest(userId, opts, function(err, response, body) {
       if (err != null) {

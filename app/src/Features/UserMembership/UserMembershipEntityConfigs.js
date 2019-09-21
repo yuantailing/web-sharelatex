@@ -27,10 +27,10 @@ module.exports = {
     },
     pathsFor(id) {
       return {
-        addMember: `/manage/groups/${id}/invites`,
-        removeMember: `/manage/groups/${id}/user`,
-        removeInvite: `/manage/groups/${id}/invites`,
-        exportMembers: `/manage/groups/${id}/members/export`
+        addMember: `/SHARELATEX/manage/groups/${id}/invites`,
+        removeMember: `/SHARELATEX/manage/groups/${id}/user`,
+        removeInvite: `/SHARELATEX/manage/groups/${id}/invites`,
+        exportMembers: `/SHARELATEX/manage/groups/${id}/members/export`
       }
     }
   },

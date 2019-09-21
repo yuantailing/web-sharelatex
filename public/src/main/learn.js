@@ -72,7 +72,7 @@ define(['base', 'directives/mathjax', 'services/algolia-search'], function(
       content = matching_lines.join('\n...\n')
       const result = {
         name: pageName,
-        url: `/learn/${pagePath}${pageSlug}${section_underscored}`,
+        url: `/SHARELATEX/learn/${pagePath}${pageSlug}${section_underscored}`,
         content
       }
       return result

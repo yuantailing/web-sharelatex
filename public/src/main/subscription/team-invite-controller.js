@@ -24,7 +24,7 @@ define(['base'], App =>
 
     $scope.cancelPersonalSubscription = function() {
       $scope.inflight = true
-      const request = $http.post('/user/subscription/cancel', {
+      const request = $http.post('/SHARELATEX/user/subscription/cancel', {
         _csrf: window.csrfToken
       })
       request.then(function() {
@@ -41,7 +41,7 @@ define(['base'], App =>
     return ($scope.joinTeam = function() {
       $scope.inflight = true
       const request = $http.put(
-        `/subscription/invites/${window.inviteToken}/`,
+        `/SHARELATEX/subscription/invites/${window.inviteToken}/`,
         { _csrf: window.csrfToken }
       )
       request.then(function(response) {
