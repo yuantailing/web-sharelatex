@@ -39,7 +39,7 @@ const Features = require('./Features')
 Modules = require('./Modules')
 const moment = require('moment')
 
-const jsPath = Settings.useMinifiedJs ? '/SHARELATEX/minjs/' : '/SHARELATEX/js/'
+const jsPath = Settings.useMinifiedJs ? '/minjs/' : '/js/'
 
 const ace = PackageVersions.lib('ace')
 const pdfjs = PackageVersions.lib('pdfjs')
@@ -180,7 +180,7 @@ module.exports = function(app, webRouter, privateApiRouter, publicApiRouter) {
       if (opts == null) {
         opts = {}
       }
-      path = Path.join(jsPath, jsFile)
+      path = Path.join('/SHARELATEX', jsPath, jsFile)
 
       if (opts.hashedPath && hashedFiles[path] != null) {
         path = hashedFiles[path]
