@@ -57,8 +57,10 @@ module.exports = AuthenticationManager = {
         'client' : 'sharelatex',
         'api_secret': process.env.CGSERVER_API_SECRET,
       },
-    }, (err, httpResponse, body) => {
+    }, (err, response, body) => {
       if (err)
+        return callback(null, null);
+      if (response.statusCode != 200)
         return callback(null, null);
       var data = JSON.parse(body);
       if (data.error) {
