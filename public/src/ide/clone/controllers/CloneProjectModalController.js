@@ -29,7 +29,7 @@ define(['base'], App =>
     )
 
     const cloneProject = cloneName =>
-      $http.post(`/project/${ide.$scope.project._id}/clone`, {
+      $http.post(`/SHARELATEX/project/${ide.$scope.project._id}/clone`, {
         _csrf: window.csrfToken,
         projectName: cloneName
       })
@@ -40,7 +40,7 @@ define(['base'], App =>
       return cloneProject($scope.inputs.projectName)
         .then(function(response) {
           const { data } = response
-          return (window.location = `/project/${data.project_id}`)
+          return (window.location = `/SHARELATEX/project/${data.project_id}`)
         })
         .catch(function(response) {
           const { data, status } = response

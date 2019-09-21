@@ -13,7 +13,7 @@ define(['base'], App =>
   App.factory('projectMembers', (ide, $http) => ({
     removeMember(member) {
       return $http({
-        url: `/project/${ide.project_id}/users/${member._id}`,
+        url: `/SHARELATEX/project/${ide.project_id}/users/${member._id}`,
         method: 'DELETE',
         headers: {
           'X-Csrf-Token': window.csrfToken
@@ -22,7 +22,7 @@ define(['base'], App =>
     },
 
     addGroup(group_id, privileges) {
-      return $http.post(`/project/${ide.project_id}/group`, {
+      return $http.post(`/SHARELATEX/project/${ide.project_id}/group`, {
         group_id,
         privileges,
         _csrf: window.csrfToken
@@ -30,7 +30,7 @@ define(['base'], App =>
     },
 
     getMembers() {
-      return $http.get(`/project/${ide.project_id}/members`, {
+      return $http.get(`/SHARELATEX/project/${ide.project_id}/members`, {
         json: true,
         headers: {
           'X-Csrf-Token': window.csrfToken

@@ -334,7 +334,7 @@ define([], function() {
         const requestHandler = this.$q.defer()
         const options = { timeout: requestHandler.promise }
         const httpRequest = this.$http
-          .post(`/spelling${endpoint}`, data, options)
+          .post(`/SHARELATEX/spelling${endpoint}`, data, options)
           .then(response => {
             return callback(null, response.data)
           })

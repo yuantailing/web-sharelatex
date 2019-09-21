@@ -12,7 +12,7 @@ module.exports = {
   proxyRequestToSpellingApi(req, res) {
     const { language } = req.body
 
-    let url = req.url.slice('/SHARELATEX/spelling'.length)
+    let url = req.url.slice('/spelling'.length)
 
     if (url === '/check') {
       if (!language) {
@@ -29,7 +29,7 @@ module.exports = {
     }
 
     const userId = AuthenticationController.getLoggedInUserId(req)
-    url = `/SHARELATEX/user/${userId}${url}`
+    url = `/user/${userId}${url}`
     req.headers['Host'] = Settings.apis.spelling.host
     return request({
       url: Settings.apis.spelling.url + url,

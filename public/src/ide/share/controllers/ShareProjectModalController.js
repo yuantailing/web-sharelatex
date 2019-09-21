@@ -75,7 +75,7 @@ define(['base'], App =>
 
     $scope.autocompleteContacts = []
     ;(loadAutocompleteUsers = () =>
-      $http.get('/user/contacts').then(function(response) {
+      $http.get('/SHARELATEX/user/contacts').then(function(response) {
         const { data } = response
         $scope.autocompleteContacts = data.contacts || []
         return (() => {

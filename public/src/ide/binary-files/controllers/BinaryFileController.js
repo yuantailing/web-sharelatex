@@ -111,7 +111,7 @@ define(['base', 'moment'], (App, moment) =>
     }
 
     function loadTextFilePreview() {
-      const url = `/project/${window.project_id}/file/${$scope.openFile.id}`
+      const url = `/SHARELATEX/project/${window.project_id}/file/${$scope.openFile.id}`
       let truncated = false
       displayPreviewLoading()
       getFileSize(url)

@@ -233,7 +233,7 @@ define(['base'], function(App) {
       var decreseTimeout = () =>
         $timeout(function() {
           if ($scope.secondsToRedirect === 0) {
-            return ($window.location.href = `/login?redir=/project/${
+            return ($window.location.href = `/SHARELATEX/login?redir=/SHARELATEX/project/${
               ide.project_id
             }`)
           } else {
@@ -471,7 +471,7 @@ define(['base'], function(App) {
     $scope.getUserProjects = function() {
       _setInFlight('projects')
       return ide.$http
-        .get('/user/projects', {
+        .get('/SHARELATEX/user/projects', {
           _csrf: window.csrfToken
         })
         .then(function(resp) {
@@ -487,7 +487,7 @@ define(['base'], function(App) {
     $scope.getProjectEntities = project_id => {
       _setInFlight('entities')
       return ide.$http
-        .get(`/project/${project_id}/entities`, {
+        .get(`/SHARELATEX/project/${project_id}/entities`, {
           _csrf: window.csrfToken
         })
         .then(function(resp) {
@@ -502,7 +502,7 @@ define(['base'], function(App) {
     $scope.compileProjectAndGetOutputFiles = project_id => {
       _setInFlight('compile')
       return ide.$http
-        .post(`/project/${project_id}/compile`, {
+        .post(`/SHARELATEX/project/${project_id}/compile`, {
           check: 'silent',
           draft: false,
           incrementalCompilesEnabled: false,
