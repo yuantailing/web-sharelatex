@@ -105,6 +105,7 @@ webRouter.use(
     proxy: Settings.behindProxy,
     cookie: {
       domain: Settings.cookieDomain,
+      path: '/SHARELATEX/',
       maxAge: Settings.cookieSessionLength, // in milliseconds, see https://github.com/expressjs/session#cookiemaxage
       secure: Settings.secureCookie
     },
@@ -243,21 +244,21 @@ const enableApiRouter =
   Settings.web != null ? Settings.web.enableApiRouter : undefined
 if (enableApiRouter || notDefined(enableApiRouter)) {
   logger.info('providing api router')
-  app.use(privateApiRouter)
-  app.use(HttpErrorController.handleError)
-  app.use(ErrorController.handleApiError)
+  app.use('/SHARELATEX', privateApiRouter)
+  app.use('/SHARELATEX', HttpErrorController.handleError)
+  app.use('/SHARELATEX', ErrorController.handleApiError)
 }
 
 const enableWebRouter =
   Settings.web != null ? Settings.web.enableWebRouter : undefined
 if (enableWebRouter || notDefined(enableWebRouter)) {
   logger.info('providing web router')
-  app.use(publicApiRouter) // public API goes with web router for public access
-  app.use(HttpErrorController.handleError)
-  app.use(ErrorController.handleApiError)
-  app.use(webRouter)
-  app.use(HttpErrorController.handleError)
-  app.use(ErrorController.handleError)
+  app.use('/SHARELATEX', publicApiRouter) // public API goes with web router for public access
+  app.use('/SHARELATEX', HttpErrorController.handleError)
+  app.use('/SHARELATEX', ErrorController.handleApiError)
+  app.use('/SHARELATEX', webRouter)
+  app.use('/SHARELATEX', HttpErrorController.handleError)
+  app.use('/SHARELATEX', ErrorController.handleError)
 }
 
 metrics.injectMetricsRoute(webRouter)

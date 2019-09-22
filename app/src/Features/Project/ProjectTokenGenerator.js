@@ -79,7 +79,7 @@ const ProjectTokenGenerator = {
 
         return V1Api.request(
           {
-            url: `/api/v1/sharelatex/docs/read_token/${token}/exists`,
+            url: `/SHARELATEX/api/v1/sharelatex/docs/read_token/${token}/exists`,
             json: true
           },
           function(err, response, body) {

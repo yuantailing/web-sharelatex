@@ -37,7 +37,7 @@ block content
 			.alert.alert-warning.small(ng-if="sync_tex_error")
 				strong #{translate("synctex_failed")}.
 				a#synctex-more-info-button.alert-link-as-btn.pull-right(
-					href="/learn/how-to/SyncTeX_Errors"
+					href="/SHARELATEX/learn/how-to/SyncTeX_Errors"
 					target="_blank"
 				) #{translate("more_info")}
 
@@ -115,7 +115,7 @@ block content
 	script(src=mathJaxPath)
 
 block requirejs
-	script(type="text/javascript" src='/socket.io/socket.io.js')
+	script(type="text/javascript" src='/SHARELATEX/socket.io/socket.io.js')
 
 	//- don't use cdn for workers
 	- var aceWorkerPath = buildJsPath(lib('ace'), {cdn:false})

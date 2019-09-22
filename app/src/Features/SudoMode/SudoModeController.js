@@ -23,7 +23,7 @@ module.exports = SudoModeController = {
   sudoModePrompt(req, res, next) {
     if (req.externalAuthenticationSystemUsed() && Settings.overleaf == null) {
       logger.log({ userId }, '[SudoMode] using external auth, redirecting')
-      return res.redirect('/project')
+      return res.redirect('/SHARELATEX/project')
     }
     var userId = AuthenticationController.getLoggedInUserId(req)
     logger.log({ userId }, '[SudoMode] rendering sudo mode password page')
@@ -40,7 +40,7 @@ module.exports = SudoModeController = {
           { userId },
           '[SudoMode] sudo mode already active, redirecting'
         )
-        return res.redirect('/project')
+        return res.redirect('/SHARELATEX/project')
       }
       return res.render('sudo_mode/sudo_mode_prompt', {
         title: 'confirm_password_to_continue'
@@ -51,7 +51,7 @@ module.exports = SudoModeController = {
   submitPassword(req, res, next) {
     const userId = AuthenticationController.getLoggedInUserId(req)
     const redir =
-      AuthenticationController._getRedirectFromSession(req) || '/project'
+      AuthenticationController._getRedirectFromSession(req) || '/SHARELATEX/project'
     const { password } = req.body
     if (!password) {
       logger.log(

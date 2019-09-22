@@ -28,7 +28,7 @@ module.exports = BetaProgramController = {
       if (err) {
         return next(err)
       }
-      return res.redirect('/beta/participate')
+      return res.redirect('/SHARELATEX/beta/participate')
     })
   },
 
@@ -42,7 +42,7 @@ module.exports = BetaProgramController = {
       if (err) {
         return next(err)
       }
-      return res.redirect('/beta/participate')
+      return res.redirect('/SHARELATEX/beta/participate')
     })
   },
 

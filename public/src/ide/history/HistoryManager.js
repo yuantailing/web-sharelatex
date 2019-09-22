@@ -111,7 +111,7 @@ define([
         ].selectedFrom = true)
       }
       fetchNextBatchOfUpdates() {
-        let url = `/project/${this.ide.project_id}/updates?min_count=${
+        let url = `/SHARELATEX/project/${this.ide.project_id}/updates?min_count=${
           this.BATCH_SIZE
         }`
         if (this.$scope.history.nextBeforeTimestamp != null) {
@@ -164,7 +164,7 @@ define([
 
         if (!doc.deleted) {
           diff.loading = true
-          let url = `/project/${this.$scope.project_id}/doc/${diff.doc.id}/diff`
+          let url = `/SHARELATEX/project/${this.$scope.project_id}/doc/${diff.doc.id}/diff`
           if (diff.fromV != null && diff.toV != null) {
             url += `?from=${diff.fromV}&to=${diff.toV}`
           }
@@ -191,7 +191,7 @@ define([
       }
 
       restoreDeletedDoc(doc) {
-        const url = `/project/${this.$scope.project_id}/doc/${doc.id}/restore`
+        const url = `/SHARELATEX/project/${this.$scope.project_id}/doc/${doc.id}/restore`
         return this.ide.$http.post(url, {
           name: doc.name,
           _csrf: window.csrfToken
@@ -199,7 +199,7 @@ define([
       }
 
       restoreDiff(diff) {
-        const url = `/project/${this.$scope.project_id}/doc/${
+        const url = `/SHARELATEX/project/${this.$scope.project_id}/doc/${
           diff.doc.id
         }/version/${diff.fromV}/restore`
         return this.ide.$http.post(url, { _csrf: window.csrfToken })

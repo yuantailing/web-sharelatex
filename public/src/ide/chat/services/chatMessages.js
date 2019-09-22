@@ -16,9 +16,9 @@
  */
 define(['base', 'libs/md5'], App =>
   App.factory('chatMessages', function($http, ide) {
-    const MESSAGES_URL = `/project/${ide.project_id}/messages`
+    const MESSAGES_URL = `/SHARELATEX/project/${ide.project_id}/messages`
     const MESSAGE_LIMIT = 50
-    const CONNECTED_USER_URL = `/project/${ide.project_id}/connected_users`
+    const CONNECTED_USER_URL = `/SHARELATEX/project/${ide.project_id}/connected_users`
 
     const chat = {
       state: {

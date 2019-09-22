@@ -21,7 +21,7 @@ span(ng-controller="NotificationsController").userNotifications
 											| #{translate("joining")}...
 								.notification_body(ng-show="notification.accepted")
 									| !{translate("notification_project_invite_accepted_message", { projectName: "{{ projectName }}" })}
-									a.pull-right.btn.btn-sm.btn-info(href="/project/{{ notification.messageOpts.projectId }}") #{translate("open_project")}
+									a.pull-right.btn.btn-sm.btn-info(href="/SHARELATEX/project/{{ notification.messageOpts.projectId }}") #{translate("open_project")}
 								span().notification_close
 									button(ng-click="dismiss(notification)").close.pull-right
 										span(aria-hidden="true") &times;
@@ -35,7 +35,7 @@ span(ng-controller="NotificationsController").userNotifications
 									strong  free Overleaf Professional accounts 
 									|	 to everyone at {{notification.messageOpts.university_name}}? <br/>
 									|	Add an institutional email address to claim your account.
-									a.pull-right.btn.btn-sm.btn-info(href="/user/settings")
+									a.pull-right.btn.btn-sm.btn-info(href="/SHARELATEX/user/settings")
 										| Add Affiliation
 								span().notification_close
 									button(ng-click="dismiss(notification)").close.pull-right

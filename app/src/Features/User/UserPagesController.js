@@ -51,7 +51,7 @@ const UserPagesController = {
           // Already seen this user, so account must be activate
           // This lets users keep clicking the 'activate' link in their email
           // as a way to log in which, if I know our users, they will.
-          res.redirect(`/login?email=${encodeURIComponent(user.email)}`)
+          res.redirect(`/SHARELATEX/login?email=${encodeURIComponent(user.email)}`)
         } else {
           res.render('user/activate', {
             title: 'activate_account',

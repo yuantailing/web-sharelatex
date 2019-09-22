@@ -2,7 +2,7 @@
 head
 	title Mocha Tests
 	link(rel="stylesheet",href="stylesheets/mocha.css")
-	script require = { baseUrl : "/js", "urlArgs" : "fingerprint=#{date}", "paths": { "underscore" : "libs/underscore" } }
+	script require = { baseUrl : "/SHARELATEX/js", "urlArgs" : "fingerprint=#{date}", "paths": { "underscore" : "libs/underscore" } }
 body
 	#mocha
 	#test-area()
@@ -11,4 +11,4 @@ body
 		window.userSettings = {
 			project_id: "test-project"
 		}
-	script(src="/js/libs/require.js",data-main="tests/unit/run.js")
+	script(src="/SHARELATEX/js/libs/require.js",data-main="tests/unit/run.js")

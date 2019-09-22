@@ -32,9 +32,9 @@ define(['base'], App =>
           )
         }
         if (window.useV2TrialUrl) {
-          url = '/user/trial'
+          url = '/SHARELATEX/user/trial'
         } else {
-          url = `/user/subscription/new?planCode=${plan}&ssp=true`
+          url = `/SHARELATEX/user/subscription/new?planCode=${plan}&ssp=true`
           if (couponCode != null) {
             url = `${url}&cc=${couponCode}`
           }

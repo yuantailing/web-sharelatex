@@ -870,9 +870,9 @@ function initialize(webRouter, privateApiRouter, publicApiRouter) {
   webRouter.get('/chrome', function(req, res, next) {
     // Match v1 behaviour - this is used for a Chrome web app
     if (AuthenticationController.isUserLoggedIn(req)) {
-      res.redirect('/project')
+      res.redirect('/SHARELATEX/project')
     } else {
-      res.redirect('/register')
+      res.redirect('/SHARELATEX/register')
     }
   })
 
@@ -885,7 +885,7 @@ function initialize(webRouter, privateApiRouter, publicApiRouter) {
   webRouter.get(
     '/admin/user',
     AuthorizationMiddleware.ensureUserIsSiteAdmin,
-    (req, res) => res.redirect('/admin/register')
+    (req, res) => res.redirect('/SHARELATEX/admin/register')
   ) // this gets removed by admin-panel addon
   webRouter.get(
     '/admin/register',

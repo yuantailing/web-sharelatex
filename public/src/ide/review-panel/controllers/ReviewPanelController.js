@@ -361,7 +361,7 @@ define([
 
     const refreshRanges = () =>
       $http
-        .get(`/project/${$scope.project_id}/ranges`)
+        .get(`/SHARELATEX/project/${$scope.project_id}/ranges`)
         .then(function(response) {
           const docs = response.data
           return (() => {
@@ -626,7 +626,7 @@ define([
 
     var _doAcceptChanges = function(change_ids) {
       $http.post(
-        `/project/${$scope.project_id}/doc/${
+        `/SHARELATEX/project/${$scope.project_id}/doc/${
           $scope.editor.open_doc_id
         }/changes/accept`,
         { change_ids, _csrf: window.csrfToken }
@@ -724,7 +724,7 @@ define([
       thread.submitting = true
       $scope.$broadcast('comment:add', thread_id, offset, length)
       $http
-        .post(`/project/${$scope.project_id}/thread/${thread_id}/messages`, {
+        .post(`/SHARELATEX/project/${$scope.project_id}/thread/${thread_id}/messages`, {
           content,
           _csrf: window.csrfToken
         })
@@ -751,7 +751,7 @@ define([
       const { thread_id } = entry
       const content = entry.replyContent
       $http
-        .post(`/project/${$scope.project_id}/thread/${thread_id}/messages`, {
+        .post(`/SHARELATEX/project/${$scope.project_id}/thread/${thread_id}/messages`, {
           content,
           _csrf: window.csrfToken
         })
@@ -785,7 +785,7 @@ define([
     $scope.resolveComment = function(entry, entry_id) {
       entry.focused = false
       $http.post(
-        `/project/${$scope.project_id}/thread/${entry.thread_id}/resolve`,
+        `/SHARELATEX/project/${$scope.project_id}/thread/${entry.thread_id}/resolve`,
         { _csrf: window.csrfToken }
       )
       _onCommentResolved(entry.thread_id, ide.$scope.user)
@@ -796,7 +796,7 @@ define([
 
     $scope.unresolveComment = function(thread_id) {
       _onCommentReopened(thread_id)
-      $http.post(`/project/${$scope.project_id}/thread/${thread_id}/reopen`, {
+      $http.post(`/SHARELATEX/project/${$scope.project_id}/thread/${thread_id}/reopen`, {
         _csrf: window.csrfToken
       })
       return event_tracking.sendMB('rp-comment-reopen')
@@ -858,7 +858,7 @@ define([
       _onThreadDeleted(thread_id)
       $http({
         method: 'DELETE',
-        url: `/project/${$scope.project_id}/doc/${doc_id}/thread/${thread_id}`,
+        url: `/SHARELATEX/project/${$scope.project_id}/doc/${doc_id}/thread/${thread_id}`,
         headers: {
           'X-CSRF-Token': window.csrfToken
         }
@@ -868,7 +868,7 @@ define([
 
     $scope.saveEdit = function(thread_id, comment) {
       $http.post(
-        `/project/${$scope.project_id}/thread/${thread_id}/messages/${
+        `/SHARELATEX/project/${$scope.project_id}/thread/${thread_id}/messages/${
           comment.id
         }/edit`,
         {
@@ -883,7 +883,7 @@ define([
       _onCommentDeleted(thread_id, comment.id)
       $http({
         method: 'DELETE',
-        url: `/project/${$scope.project_id}/thread/${thread_id}/messages/${
+        url: `/SHARELATEX/project/${$scope.project_id}/thread/${thread_id}/messages/${
           comment.id
         }`,
         headers: {
@@ -990,7 +990,7 @@ define([
         }
       }
       data._csrf = window.csrfToken
-      return $http.post(`/project/${$scope.project_id}/track_changes`, data)
+      return $http.post(`/SHARELATEX/project/${$scope.project_id}/track_changes`, data)
     }
 
     const applyTrackChangesStateToClient = function(state) {
@@ -1118,7 +1118,7 @@ define([
       _refreshingRangeUsers = true
 
       return $http
-        .get(`/project/${$scope.project_id}/changes/users`)
+        .get(`/SHARELATEX/project/${$scope.project_id}/changes/users`)
         .then(function(response) {
           const users = response.data
           _refreshingRangeUsers = false
@@ -1154,7 +1154,7 @@ define([
       _threadsLoaded = true
       $scope.reviewPanel.loadingThreads = true
       return $http
-        .get(`/project/${$scope.project_id}/threads`)
+        .get(`/SHARELATEX/project/${$scope.project_id}/threads`)
         .then(function(response) {
           const threads = response.data
           $scope.reviewPanel.loadingThreads = false

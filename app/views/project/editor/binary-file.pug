@@ -5,7 +5,7 @@ div.binary-file.full-size(
 )
 	img(
 		ng-show="!failedLoad"
-		ng-src="/project/{{ project_id }}/file/{{ openFile.id }}"
+		ng-src="/SHARELATEX/project/{{ project_id }}/file/{{ openFile.id }}"
 		ng-if="isImageFile()"
 		ng-class="{'img-preview': !imgLoaded}"
 		onerror="sl_binaryFilePreviewError()"
@@ -15,7 +15,7 @@ div.binary-file.full-size(
 
 	img(
 		ng-show="!failedLoad"
-		ng-src="/project/{{ project_id }}/file/{{ openFile.id }}?format=png"
+		ng-src="/SHARELATEX/project/{{ project_id }}/file/{{ openFile.id }}?format=png"
 		ng-if="isPreviewableFile()"
 		ng-class="{'img-preview': !imgLoaded}"
 		onerror="sl_binaryFilePreviewError()"
@@ -55,7 +55,7 @@ div.binary-file.full-size(
 				| Imported from
 				|
 				a(ng-if='!openFile.linkedFileData.v1_source_doc_id'
-					ng-href='/project/{{openFile.linkedFileData.source_project_id}}' target="_blank")
+					ng-href='/SHARELATEX/project/{{openFile.linkedFileData.source_project_id}}' target="_blank")
 					| Another project
 				span(ng-if='openFile.linkedFileData.v1_source_doc_id')
 					| Another project
@@ -70,7 +70,7 @@ div.binary-file.full-size(
 				| Imported from the output of
 				|
 				a(ng-if='!openFile.linkedFileData.v1_source_doc_id'
-					ng-href='/project/{{openFile.linkedFileData.source_project_id}}' target="_blank")
+					ng-href='/SHARELATEX/project/{{openFile.linkedFileData.source_project_id}}' target="_blank")
 					| Another project
 				span(ng-if='openFile.linkedFileData.v1_source_doc_id')
 					| Another project
@@ -92,7 +92,7 @@ div.binary-file.full-size(
 				span(ng-show="refreshing") Refreshing...
 			| &nbsp;
 		a.btn.btn-info(
-			ng-href="/project/{{ project_id }}/file/{{ openFile.id }}"
+			ng-href="/SHARELATEX/project/{{ project_id }}/file/{{ openFile.id }}"
 		)
 			i.fa.fa-fw.fa-download
 			|

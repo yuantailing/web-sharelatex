@@ -422,7 +422,7 @@ define(['base'], function(App) {
     const getDefaultDepartmentHints = () => $q.resolve(defaultDepartmentHints)
 
     const getUserEmails = () =>
-      $http.get('/user/emails').then(response => response.data)
+      $http.get('/SHARELATEX/user/emails').then(response => response.data)
 
     const getUserDefaultEmail = () =>
       getUserEmails().then(userEmails =>
@@ -435,7 +435,7 @@ define(['base'], function(App) {
         universitiesFromCountry = universities[country.code]
       } else {
         universitiesFromCountry = $http
-          .get('/institutions/list', {
+          .get('/SHARELATEX/institutions/list', {
             params: { country_code: country.code }
           })
           .then(response => (universities[country.code] = response.data))
@@ -450,7 +450,7 @@ define(['base'], function(App) {
         return $q.resolve(universitiesByDomain[partialDomainInput])
       } else {
         return $http
-          .get('/institutions/domains', {
+          .get('/SHARELATEX/institutions/domains', {
             params: { hostname: partialDomainInput, limit: 1 }
           })
           .then(function(response) {
@@ -470,11 +470,11 @@ define(['base'], function(App) {
 
     const getUniversityDetails = universityId =>
       $http
-        .get(`/institutions/list/${universityId}`)
+        .get(`/SHARELATEX/institutions/list/${universityId}`)
         .then(response => response.data)
 
     const addUserEmail = email =>
-      $http.post('/user/emails', {
+      $http.post('/SHARELATEX/user/emails', {
         email,
         _csrf: window.csrfToken
       })
@@ -486,7 +486,7 @@ define(['base'], function(App) {
       role,
       department
     ) =>
-      $http.post('/user/emails', {
+      $http.post('/SHARELATEX/user/emails', {
         email,
         university: {
           name: unknownUniversityName,
@@ -498,7 +498,7 @@ define(['base'], function(App) {
       })
 
     const addUserAffiliation = (email, universityId, role, department) =>
-      $http.post('/user/emails', {
+      $http.post('/SHARELATEX/user/emails', {
         email,
         university: {
           id: universityId
@@ -509,7 +509,7 @@ define(['base'], function(App) {
       })
 
     const addRoleAndDepartment = (email, role, department) =>
-      $http.post('/user/emails/endorse', {
+      $http.post('/SHARELATEX/user/emails/endorse', {
         email,
         role,
         department,
@@ -517,19 +517,19 @@ define(['base'], function(App) {
       })
 
     const setDefaultUserEmail = email =>
-      $http.post('/user/emails/default', {
+      $http.post('/SHARELATEX/user/emails/default', {
         email,
         _csrf: window.csrfToken
       })
 
     const removeUserEmail = email =>
-      $http.post('/user/emails/delete', {
+      $http.post('/SHARELATEX/user/emails/delete', {
         email,
         _csrf: window.csrfToken
       })
 
     const resendConfirmationEmail = email =>
-      $http.post('/user/emails/resend_confirmation', {
+      $http.post('/SHARELATEX/user/emails/resend_confirmation', {
         email,
         _csrf: window.csrfToken
       })

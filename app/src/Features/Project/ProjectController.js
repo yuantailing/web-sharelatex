@@ -206,7 +206,7 @@ module.exports = ProjectController = {
     const { projectName } = req.body
     logger.log({ project_id, projectName }, 'cloning project')
     if (!AuthenticationController.isUserLoggedIn(req)) {
-      return res.send({ redir: '/register' })
+      return res.send({ redir: '/SHARELATEX/register' })
     }
     const currentUser = AuthenticationController.getSessionUser(req)
     return projectDuplicator.duplicate(

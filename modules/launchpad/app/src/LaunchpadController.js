@@ -70,7 +70,7 @@ module.exports = LaunchpadController = {
               authMethod
             })
           } else {
-            return res.redirect('/restricted')
+            return res.redirect('/SHARELATEX/restricted')
           }
         })
       }
@@ -178,13 +178,13 @@ module.exports = LaunchpadController = {
                 return next(err)
               }
 
-              AuthenticationController.setRedirectInSession(req, '/launchpad')
+              AuthenticationController.setRedirectInSession(req, '/SHARELATEX/launchpad')
               logger.log(
                 { email, user_id: user._id, authMethod },
                 'created first admin account'
               )
 
-              return res.json({ redir: '/launchpad', email })
+              return res.json({ redir: '/SHARELATEX/launchpad', email })
             }
           )
         })
@@ -239,7 +239,7 @@ module.exports = LaunchpadController = {
                 return next(err)
               }
 
-              AuthenticationController.setRedirectInSession(req, '/launchpad')
+              AuthenticationController.setRedirectInSession(req, '/SHARELATEX/launchpad')
               logger.log(
                 { email, user_id: user._id },
                 'created first admin account'

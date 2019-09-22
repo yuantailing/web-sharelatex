@@ -257,7 +257,7 @@ const UserController = {
       if (err != null) {
         return next(err)
       }
-      const redirectUrl = '/login'
+      const redirectUrl = '/SHARELATEX/login'
       res.redirect(redirectUrl)
     })
   },

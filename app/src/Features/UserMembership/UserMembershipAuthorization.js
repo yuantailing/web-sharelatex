@@ -139,7 +139,7 @@ module.exports = UserMembershipAuthorization = {
     return request(
       {
         baseUrl: settings.apis.v1.url,
-        url: `/api/v2/templates/${templateId}`,
+        url: `/SHARELATEX/api/v2/templates/${templateId}`,
         method: 'GET',
         auth: {
           user: settings.apis.v1.user,
@@ -290,7 +290,7 @@ var requireAccessToEntity = function(
 
       if (hasEntityCreationAccess(loggedInUser) && entityConfig.canCreate) {
         // entity doesn't exists, admin can create it
-        return res.redirect(`/entities/${entityName}/create/${entityId}`)
+        return res.redirect(`/SHARELATEX/entities/${entityName}/create/${entityId}`)
       }
 
       return next(new Errors.NotFoundError())

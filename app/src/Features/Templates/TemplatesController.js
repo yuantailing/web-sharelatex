@@ -62,7 +62,7 @@ module.exports = TemplatesController = {
           return next(err)
         }
         delete req.session.templateData
-        return res.redirect(`/project/${project._id}`)
+        return res.redirect(`/SHARELATEX/project/${project._id}`)
       }
     )
   }

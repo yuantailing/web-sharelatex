@@ -77,7 +77,7 @@ module.exports = BlogController = {
   },
 
   getIndexPage(req, res) {
-    req.url = '/blog/index.html'
+    req.url = '/SHARELATEX/blog/index.html'
     return BlogController.getPage(req, res)
   },
 

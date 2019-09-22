@@ -107,13 +107,13 @@ const AuthenticationController = (module.exports = {
 
   finishLogin(user, req, res, next) {
     if (user === false) {
-      return res.redirect('/login')
+      return res.redirect('/SHARELATEX/login')
     } // OAuth2 'state' mismatch
     if (user.must_reconfirm) {
       return AuthenticationController._redirectToReconfirmPage(req, res, user)
     }
     const redir =
-      AuthenticationController._getRedirectFromSession(req) || '/project'
+      AuthenticationController._getRedirectFromSession(req) || '/SHARELATEX/project'
     AuthenticationController._loginAsyncHandlers(req, user)
     AuthenticationController.afterLoginSessionSetup(req, user, function(err) {
       if (err) {
@@ -327,7 +327,7 @@ const AuthenticationController = (module.exports = {
         'user trying to access endpoint not in global whitelist'
       )
       AuthenticationController.setRedirectInSession(req)
-      res.redirect('/login')
+      res.redirect('/SHARELATEX/login')
     }
   },
 
@@ -343,12 +343,12 @@ const AuthenticationController = (module.exports = {
     if (value == null) {
       value =
         Object.keys(req.query).length > 0
-          ? `${req.path}?${querystring.stringify(req.query)}`
-          : `${req.path}`
+          ? `/SHARELATEX${req.path}?${querystring.stringify(req.query)}`
+          : `/SHARELATEX${req.path}`
     }
     if (
       req.session != null &&
-      !/^\/(socket.io|js|stylesheets|img)\/.*$/.test(value) &&
+      !/^\/SHARELATEX\/(socket.io|js|stylesheets|img)\/.*$/.test(value) &&
       !/^.*\.(png|jpeg|svg)$/.test(value)
     ) {
       const safePath = AuthenticationController._getSafeRedirectPath(value)
@@ -360,7 +360,7 @@ const AuthenticationController = (module.exports = {
     if (
       req.query.zipUrl != null ||
       req.query.project_name != null ||
-      req.path === '/user/subscription/new'
+      req.path === '/SHARELATEX/user/subscription/new'
     ) {
       AuthenticationController._redirectToRegisterPage(req, res)
     } else {
@@ -374,7 +374,7 @@ const AuthenticationController = (module.exports = {
       'user not logged in so redirecting to login page'
     )
     AuthenticationController.setRedirectInSession(req)
-    const url = `/login?${querystring.stringify(req.query)}`
+    const url = `/SHARELATEX/login?${querystring.stringify(req.query)}`
     res.redirect(url)
     Metrics.inc('security.login-redirect')
   },
@@ -385,7 +385,7 @@ const AuthenticationController = (module.exports = {
       'user needs to reconfirm so redirecting to reconfirm page'
     )
     req.session.reconfirm_email = user != null ? user.email : undefined
-    const redir = '/user/reconfirm'
+    const redir = '/SHARELATEX/user/reconfirm'
     if (_.get(req, ['headers', 'accept'], '').match(/^application\/json.*$/)) {
       res.json({ redir })
     } else {
@@ -399,7 +399,7 @@ const AuthenticationController = (module.exports = {
       'user not logged in so redirecting to register page'
     )
     AuthenticationController.setRedirectInSession(req)
-    const url = `/register?${querystring.stringify(req.query)}`
+    const url = `/SHARELATEX/register?${querystring.stringify(req.query)}`
     res.redirect(url)
     Metrics.inc('security.login-redirect')
   },

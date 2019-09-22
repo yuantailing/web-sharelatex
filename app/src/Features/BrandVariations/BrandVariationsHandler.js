@@ -29,7 +29,7 @@ module.exports = BrandVariationsHandler = {
     logger.log({ brandVariationId }, 'fetching brand variation details from v1')
     return V1Api.request(
       {
-        uri: `/api/v2/brand_variations/${brandVariationId}`
+        uri: `/SHARELATEX/api/v2/brand_variations/${brandVariationId}`
       },
       function(error, response, brandVariationDetails) {
         if (error != null) {

@@ -26,7 +26,7 @@ define(['base'], App =>
     }
 
     const refreshAnnouncements = () =>
-      $http.get('/announcements').then(function(response) {
+      $http.get('/SHARELATEX/announcements').then(function(response) {
         $scope.announcements = response.data
         return ($scope.ui.newItems = _.filter(
           $scope.announcements,

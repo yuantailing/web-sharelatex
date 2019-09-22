@@ -13,7 +13,7 @@ define(['base'], function(App) {
       $scope.unsubscribing = true
       return $http({
         method: 'DELETE',
-        url: '/user/newsletter/unsubscribe',
+        url: '/SHARELATEX/user/newsletter/unsubscribe',
         headers: {
           'X-CSRF-Token': window.csrfToken
         }
@@ -85,7 +85,7 @@ define(['base'], function(App) {
       $scope.state.error = null
       return $http({
         method: 'POST',
-        url: '/user/delete',
+        url: '/SHARELATEX/user/delete',
         headers: {
           'X-CSRF-Token': window.csrfToken,
           'Content-Type': 'application/json'
@@ -99,7 +99,7 @@ define(['base'], function(App) {
           $modalInstance.close()
           $scope.state.inflight = false
           $scope.state.error = null
-          setTimeout(() => (window.location = '/login'), 1000)
+          setTimeout(() => (window.location = '/SHARELATEX/login'), 1000)
         })
         .catch(function(response) {
           const { data, status } = response

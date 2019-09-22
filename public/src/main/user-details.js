@@ -22,7 +22,7 @@ define(['base', 'libs/algolia-2.5.2'], function(App, algolia) {
 
   App.controller('UserProfileController', function($scope, $modal, $http) {
     $scope.institutions = []
-    $http.get('/user/personal_info').then(function(response) {
+    $http.get('/SHARELATEX/user/personal_info').then(function(response) {
       const { data } = response
       return ($scope.userInfoForm = {
         first_name: data.first_name || '',
@@ -82,7 +82,7 @@ define(['base', 'libs/algolia-2.5.2'], function(App, algolia) {
     $modalInstance.result.finally(() => sendUpdate())
 
     var sendUpdate = function() {
-      const request = $http.post('/user/settings', $scope.userInfoForm)
+      const request = $http.post('/SHARELATEX/user/settings', $scope.userInfoForm)
       request.then(function() {})
       return request.catch(() => console.log('the request failed'))
     }

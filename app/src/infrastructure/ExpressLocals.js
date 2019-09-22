@@ -180,7 +180,7 @@ module.exports = function(app, webRouter, privateApiRouter, publicApiRouter) {
       if (opts == null) {
         opts = {}
       }
-      path = Path.join(jsPath, jsFile)
+      path = Path.join('/SHARELATEX', jsPath, jsFile)
 
       if (opts.hashedPath && hashedFiles[path] != null) {
         path = hashedFiles[path]
@@ -248,7 +248,7 @@ module.exports = function(app, webRouter, privateApiRouter, publicApiRouter) {
 
     res.locals.buildCssPath = function(themeModifier, buildOpts) {
       const cssFileName = _buildCssFileName(themeModifier)
-      path = Path.join('/stylesheets/', cssFileName)
+      path = Path.join('/SHARELATEX/stylesheets/', cssFileName)
       if (
         (buildOpts != null ? buildOpts.hashedPath : undefined) &&
         hashedFiles[path] != null
@@ -260,7 +260,7 @@ module.exports = function(app, webRouter, privateApiRouter, publicApiRouter) {
     }
 
     res.locals.buildImgPath = function(imgFile) {
-      path = Path.join('/img/', imgFile)
+      path = Path.join('/SHARELATEX/img/', imgFile)
       return Url.resolve(staticFilesBase, path)
     }
 
