@@ -343,8 +343,8 @@ const AuthenticationController = (module.exports = {
     if (value == null) {
       value =
         Object.keys(req.query).length > 0
-          ? `${req.path}?${querystring.stringify(req.query)}`
-          : `${req.path}`
+          ? `/SHARELATEX${req.path}?${querystring.stringify(req.query)}`
+          : `/SHARELATEX${req.path}`
     }
     if (
       req.session != null &&
