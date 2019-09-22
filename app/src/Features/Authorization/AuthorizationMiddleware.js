@@ -273,7 +273,7 @@ module.exports = AuthorizationMiddleware = {
 
   redirectToRestricted(req, res, next) {
     // TODO: move this to throwing ForbiddenError
-    return res.redirect(`/SHARELATEX/restricted?from=${encodeURIComponent(req.url)}`)
+    return res.redirect(`/SHARELATEX/restricted?from=${encodeURIComponent('/SHARELATEX' + req.url)}`)
   },
 
   restricted(req, res, next) {

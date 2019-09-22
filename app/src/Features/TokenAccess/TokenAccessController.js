@@ -79,7 +79,7 @@ module.exports = TokenAccessController = {
         return TokenAccessController._handleV1Project(
           token,
           userId,
-          `/${token}`,
+          `/SHARELATEX/${token}`,
           res,
           next
         )
@@ -198,7 +198,7 @@ module.exports = TokenAccessController = {
           return TokenAccessController._handleV1Project(
             token,
             userId,
-            `/read/${token}`,
+            `/SHARELATEX/read/${token}`,
             res,
             next
           )
