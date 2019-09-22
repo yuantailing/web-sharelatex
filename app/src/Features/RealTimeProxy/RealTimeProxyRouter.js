@@ -29,6 +29,7 @@ proxyMod.on('proxyRes', function (proxyRes, req, res) {
   });
   proxyRes.on('end', function () {
     body = Buffer.concat(body).toString();
+    res.setHeader('Content-Type', 'application/javascript');
     res.end(body.replace('"socket.io"', '"SHARELATEX/socket.io"'));
   });
 });
