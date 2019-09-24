@@ -57,7 +57,7 @@ module.exports = UserEmailsConfirmationHandler = {
           to: email,
           confirmEmailUrl: `${
             settings.siteUrl
-          }/user/emails/confirm?token=${token}`,
+          }/SHARELATEX/user/emails/confirm?token=${token}`,
           sendingUser_id: user_id
         }
         return EmailHandler.sendEmail(emailTemplate, emailOptions, callback)

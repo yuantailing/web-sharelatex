@@ -131,7 +131,7 @@ const UserRegistrationHandler = {
 
             const setNewPasswordUrl = `${
               settings.siteUrl
-            }/user/activate?token=${token}&user_id=${user._id}`
+            }/SHARELATEX/user/activate?token=${token}&user_id=${user._id}`
 
             EmailHandler.sendEmail(
               'registered',

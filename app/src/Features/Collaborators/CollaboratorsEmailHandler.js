@@ -18,7 +18,7 @@ const Settings = require('settings-sharelatex')
 module.exports = CollaboratorsEmailHandler = {
   _buildInviteUrl(project, invite) {
     return (
-      `${Settings.siteUrl}/project/${project._id}/invite/token/${
+      `${Settings.siteUrl}/SHARELATEX/project/${project._id}/invite/token/${
         invite.token
       }?` +
       [
