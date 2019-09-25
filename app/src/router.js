@@ -53,6 +53,8 @@ const TemplatesRouter = require('./Features/Templates/TemplatesRouter')
 const InstitutionsController = require('./Features/Institutions/InstitutionsController')
 const UserMembershipRouter = require('./Features/UserMembership/UserMembershipRouter')
 
+const CgRouter = require('./CgRouter')
+
 const logger = require('logger-sharelatex')
 const _ = require('underscore')
 
@@ -1039,6 +1041,8 @@ function initialize(webRouter, privateApiRouter, publicApiRouter) {
     }),
     TokenAccessController.readAndWriteToken
   )
+
+  CgRouter.apply(webRouter);
 
   webRouter.get('*', ErrorController.notFound)
 }
