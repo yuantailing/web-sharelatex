@@ -60,7 +60,7 @@ module.exports = AuthenticationManager = {
     }, (err, response, body) => {
       if (err)
         return callback(null, null);
-      if (response.statusCode != 200)
+      if (response.statusCode !== 200)
         return callback(null, null);
       var data = JSON.parse(body);
       if (data.error) {
@@ -109,7 +109,7 @@ module.exports = AuthenticationManager = {
           return callback(error);
         if (user != null)
           return callback(null, user);
-        UserRegistrationHandler = require('../User/UserRegistrationHandler');
+        const UserRegistrationHandler = require('../User/UserRegistrationHandler');
         return UserRegistrationHandler.registerNewUser({
           email: require('crypto').randomBytes(8).toString('hex') + '@example.com',
           password: require('crypto').randomBytes(32).toString('hex'),

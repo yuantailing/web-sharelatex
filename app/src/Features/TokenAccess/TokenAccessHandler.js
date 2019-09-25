@@ -257,7 +257,7 @@ const TokenAccessHandler = {
     return Project.findOne({'publicAccesLevel': 'tokenBased', 'tokens.readOnly': token}, (error, project) => {
       if (error != null)
         return callback(error);
-      if (project != null && project.publicAccesLevel == 'tokenBased' && project.tokens.readOnly == token)
+      if (project != null && project.publicAccesLevel === 'tokenBased' && project.tokens.readOnly === token)
         return callback(null, { allow: true });
       return callback(null, { allow: false });
     });

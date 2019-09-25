@@ -34,7 +34,7 @@ const UserRegistrationHandler = {
           email: userDetails.email,
           first_name: userDetails.first_name,
           last_name: userDetails.last_name,
-          thirdPartyIdentifiers: userDetails.thirdPartyIdentifiers
+          thirdPartyIdentifiers: userDetails.thirdPartyIdentifiers || []
         },
         callback
       )
