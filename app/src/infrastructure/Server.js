@@ -35,7 +35,7 @@ const UserSessionsManager = require('../Features/User/UserSessionsManager')
 const AuthenticationController = require('../Features/Authentication/AuthenticationController')
 
 const STATIC_CACHE_AGE = Settings.cacheStaticAssets
-  ? oneDayInMilliseconds * 365
+  ? oneDayInMilliseconds * 1
   : 0
 
 // Init the session store
