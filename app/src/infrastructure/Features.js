@@ -50,7 +50,7 @@ module.exports = Features = {
       case 'overleaf-integration':
         return Settings.overleaf != null
       case 'references':
-        return Settings.apis.references.url != null
+        return true;
       case 'saml':
         return Settings.enableSaml != null
       default:
