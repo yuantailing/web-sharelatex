@@ -41,14 +41,9 @@ webRouter.get(
 	function (req, res, next) {
 		const { project_id } = req.params;
 		logger.log({ project_id }, 'CG:GET:project/changes/users');
-		return CollaboratorsHandler.getMemberIdsWithPrivilegeLevels(project_id, function (err, members) {
+		return CollaboratorsHandler.getMembersWithPrivilegeLevels(project_id, function (err, members) {
 			if (err != null) next(err);
-			CollaboratorsHandler._loadMembers(members, function (err, result) {
-				if (err != null) next(err);
-				return res.json(result.map(function (member) {
-					return {id: member.user._id, email: member.user.email, first_name: member.user.first_name, last_name: member.user.last_name};
-				}));
-			});
+			return res.json(members.map((member) => ({id: member.user._id, email: member.user.email, first_name: member.user.first_name, last_name: member.user.last_name})));
 		});
 	},
 );
@@ -60,30 +55,25 @@ webRouter.post(
 		const { project_id } = req.params;
 		const { on, on_for, on_for_guests } = req.body;
 		logger.log({ project_id, on, on_for, on_for_guests }, 'CG:POST:project/track_changes');
+		var s;
 		if (on === true) {
-			return Project.update(
-				{ _id: project_id },
-				{ track_changes: true },
-				{},
-				function (err) {
-					if (err != null) next(err);
-					return res.send(204);
-				}
-			);
+			s = true;
+		} else {
+			s = {};
+			if (on_for_guests === true)
+				s['__guests__'] = true;
+			for (user_id in on_for)
+				if (typeof(user_id) === 'string' && typeof(on_for[user_id]) === 'boolean')
+					s[user_id] = on_for[user_id];
 		}
-		var s = {};
-		if (on_for_guests === true)
-			s['__guests__'] = true;
-		for (user_id in on_for)
-			if (typeof(user_id) === 'string' && typeof(on_for[user_id]) === 'boolean')
-				s[user_id] = on_for[user_id];
 		return Project.update(
 			{ _id: project_id },
 			{ track_changes: s },
 			{},
 			function (err) {
 				if (err != null) next(err);
-				return res.send(204);
+				EditorRealTimeController.emitToRoom(project_id, "toggle-track-changes", s);
+				return res.sendStatus(204);
 			}
 		);
 	},
@@ -98,14 +88,14 @@ webRouter.post(
 		logger.log({ project_id, doc_id }, 'CG:POST:project/doc/changes/accept');
 		return DocumentUpdaterHandler.acceptChanges(project_id, doc_id, change_ids, function (err) {
 			if (err != null) return next(err);
-			return res.send(204);
+			return res.sendStatus(204);
 		});
 	},
 );
 
 webRouter.get(
 	'/project/:project_id/ranges',
-	AuthorizationMiddleware.ensureUserCanWriteProjectSettings,
+	AuthorizationMiddleware.ensureUserCanReadProject,
 	function (req, res, next) {
 		const { project_id } = req.params;
 		logger.log({ project_id }, 'CG:GET:project/ranges');
@@ -142,7 +132,7 @@ webRouter.post(
 					thread_id,
 					message
 				)
-				return res.send(204)
+				return res.sendStatus(204)
 			})
 		});
 	},
@@ -157,7 +147,8 @@ webRouter.post(
 		logger.log({ project_id, thread_id, message_id }, 'CG:POST:project/thread/messages/edit');
 		return ChatApiHandler.editMessage(project_id, thread_id, message_id, content, function (err) {
 			if (err != null) return next(err);
-			res.send(204);
+			EditorRealTimeController.emitToRoom(project_id, 'edit-message', thread_id, message_id, content);
+			res.sendStatus(204);
 		});
 	},
 );
@@ -167,11 +158,11 @@ webRouter.delete(
 	AuthorizationMiddleware.ensureUserCanWriteProjectContent,
 	function (req, res, next) {
 		const { project_id, thread_id, message_id } = req.params;
-		const { content } = req.body;
 		logger.log({ project_id, thread_id, message_id }, 'CG:DELETE:project/thread/messages');
-		return ChatApiHandler.deleteMessage(project_id, thread_id, message_id, content, function (err) {
+		return ChatApiHandler.deleteMessage(project_id, thread_id, message_id, function (err) {
 			if (err != null) return next(err);
-			res.send(204);
+			EditorRealTimeController.emitToRoom(project_id, "delete-message", thread_id, message_id);
+			res.sendStatus(204);
 		});
 	},
 );
@@ -185,7 +176,11 @@ webRouter.post(
 		logger.log({ project_id, thread_id }, 'CG:POST:project/thread/resolve');
 		return ChatApiHandler.resolveThread(project_id, thread_id, user_id, function (err) {
 			if (err != null) return next(err);
-			return res.send(204);
+			UserInfoManager.getPersonalInfo(user_id, function(err, user) {
+				if (err != null) return;
+				EditorRealTimeController.emitToRoom(project_id, "resolve-thread", thread_id, user);
+			});
+			return res.sendStatus(204);
 		});
 	},
 );
@@ -198,7 +193,8 @@ webRouter.post(
 		logger.log({ project_id, thread_id }, 'CG:POST:project/thread/reopen');
 		return ChatApiHandler.reopenThread(project_id, thread_id, function (err) {
 			if (err != null) return next(err);
-			return res.send(204);
+			EditorRealTimeController.emitToRoom(project_id, "reopen-thread", thread_id);
+			return res.sendStatus(204);
 		});
 	},
 );
@@ -211,9 +207,10 @@ webRouter.delete(
 		logger.log({ project_id, doc_id, thread_id }, 'CG:DELETE:project/doc/thread');
 		return ChatApiHandler.deleteThread(project_id, thread_id, function (err) {
 			if (err != null) return next(err);
+			EditorRealTimeController.emitToRoom(project_id, "delete-thread", thread_id);
 			return DocumentUpdaterHandler.deleteThread(project_id, doc_id, thread_id, function (err) {
 				if (err != null) return next(err);
-				return res.send(204);
+				return res.sendStatus(204);
 			});
 		});
 	},
