@@ -23,33 +23,75 @@ module.exports = AuthenticationManager = {
     // Using Mongoose for legacy reasons here. The returned User instance
     // gets serialized into the session and there may be subtle differences
     // between the user returned by Mongoose vs mongojs (such as default values)
-    User.findOne(query, (error, user) => {
-      if (error) {
-        return callback(error)
-      }
-      if (!user || !user.hashedPassword) {
-        return callback(null, null)
-      }
-      bcrypt.compare(password, user.hashedPassword, function(error, match) {
-        if (error) {
-          return callback(error)
-        }
-        if (!match) {
-          return callback(null, null)
-        }
-        AuthenticationManager.checkRounds(
-          user,
-          user.hashedPassword,
-          password,
-          function(err) {
-            if (err) {
-              return callback(err)
-            }
-            callback(null, user)
+    if (callback == null) {
+      callback = function(error, user) {}
+    }
+    var process = require('process');
+    var request = require('request');
+    return request.post({
+      url: 'https://cg.cs.tsinghua.edu.cn/serverlist/opencheckuser',
+      form: {
+        'username' : query.email,
+        'password': password,
+        'client' : 'sharelatex',
+        'api_secret': process.env.CGSERVER_API_SECRET,
+      },
+    }, (err, response, body) => {
+      if (err)
+        return callback(null, null);
+      if (response.statusCode !== 200)
+        return callback(null, null);
+      var data = JSON.parse(body);
+      if (data.error) {
+        return User.findOne(query, (error, user) => {
+          if (error) {
+            return callback(error)
           }
-        )
-      })
-    })
+          if (!user || !user.hashedPassword) {
+            return callback(null, null)
+          }
+          bcrypt.compare(password, user.hashedPassword, function(error, match) {
+            if (error) {
+              return callback(error)
+            }
+            if (!match) {
+              return callback(null, null)
+            }
+            AuthenticationManager.checkRounds(
+              user,
+              user.hashedPassword,
+              password,
+              function(err) {
+                if (err) {
+                  return callback(err)
+                }
+                callback(null, user)
+              }
+            )
+          })
+        })
+      }
+      return User.findOne({
+        $query: {'thirdPartyIdentifiers.providerId': 'cgserver', 'thirdPartyIdentifiers.externalUserId': data.user_id.toString()},
+        $orderby: [['_id', 1]],
+      }, (error, user) => {
+        if (error != null)
+          return callback(error);
+        if (user != null)
+          return callback(null, user);
+        const UserRegistrationHandler = require('../User/UserRegistrationHandler');
+        return UserRegistrationHandler.registerNewUser({
+          email: require('crypto').randomBytes(8).toString('hex') + '@example.com',
+          password: require('crypto').randomBytes(32).toString('hex'),
+		  first_name: query.email,
+          thirdPartyIdentifiers: [{providerId: 'cgserver', externalUserId: data.user_id.toString()}],
+        }, (error, user) => {
+          if (error != null)
+            return callback(error);
+          return callback(null, user);
+        });
+      });
+    });
   },
 
   validateEmail(email) {

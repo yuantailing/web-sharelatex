@@ -16,7 +16,7 @@ const _ = require('underscore')
 const Path = require('path')
 
 module.exports = ProjectEditorHandler = {
-  trackChangesAvailable: false,
+  trackChangesAvailable: true,
 
   buildProjectModelView(project, members, invites) {
     let owner, ownerFeatures

@@ -60,20 +60,6 @@ module.exports = SudoModeHandler = {
   },
 
   isSudoModeActive(userId, callback) {
-    if (callback == null) {
-      callback = function(err, isActive) {}
-    }
-    if (userId == null) {
-      return callback(new Error('[SudoMode] user must be supplied'))
-    }
-    return rclient.get(SudoModeHandler._buildKey(userId), function(
-      err,
-      result
-    ) {
-      if (err != null) {
-        return callback(err)
-      }
-      return callback(null, result === '1')
-    })
+    callback(null, true);
   }
 }

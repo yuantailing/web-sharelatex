@@ -56,6 +56,7 @@ span(ng-controller="NotificationsController").userNotifications
 		li.notification_entry(
 			ng-repeat="userEmail in userEmails",
 			ng-if="!userEmail.confirmedAt && !userEmail.hide"
+			ng-hide="true"
 		)
 			.row
 				.col-xs-12
