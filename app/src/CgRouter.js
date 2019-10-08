@@ -15,9 +15,25 @@ const EditorRealTimeController = require('./Features/Editor/EditorRealTimeContro
 
 const { Project } = require('./models/Project')
 
+const passport = require('passport')
 const logger = require('logger-sharelatex')
 
 module.exports = { apply(webRouter) {
+
+webRouter.get(
+	'/githubcallback',
+	function(req, res, next) {
+		const { code, state } = req.query;
+		const host = req.headers['x-forwarded-host'] || req.headers.host;
+		if (host == 'cg.cs.tsinghua.edu.cn' && state == 'www.thucg.com')
+			return res.redirect('https://www.thucg.com' + req.originalUrl);
+		next();
+	},
+	passport.authenticate('github', {}),
+	function(req, res) {
+		res.redirect('/SHARELATEX/');
+	},
+);
 
 webRouter.get(
 	'/project/:project_id/threads',

@@ -26,8 +26,40 @@ module.exports = AuthenticationManager = {
     if (callback == null) {
       callback = function(error, user) {}
     }
-    var process = require('process');
-    var request = require('request');
+    const process = require('process');
+    const request = require('request');
+    const UserRegistrationHandler = require('../User/UserRegistrationHandler');
+    if (typeof(password) === 'object' && password.provider == 'github') { // GitHub OAuth
+      return request.get({
+        url: 'https://api.github.com/orgs/thu-media/members/' + password.login,
+        headers: {Authorization: 'token ' + Settings.cgservice.GITHUB_PERSONAL_ACCESS_TOKEN, 'User-Agent': 'Sharelatex Community Plus'},
+        json: true,
+      }, function (e, r, body) {
+        if (e)
+          return callback(e);
+        if (r.statusCode != 204)
+          return callback(null, null);
+        return User.findOne({
+          $query: {'thirdPartyIdentifiers.providerId': 'github', 'thirdPartyIdentifiers.externalUserId': password.id.toString()},
+          $orderby: [['_id', 1]],
+        }, (error, user) => {
+          if (error)
+            return callback(error);
+          if (user != null)
+            return callback(null, user);
+          return UserRegistrationHandler.registerNewUser({
+            email: require('crypto').randomBytes(8).toString('hex') + '@example.com',
+            password: require('crypto').randomBytes(32).toString('hex'),
+            first_name: query.login,
+            thirdPartyIdentifiers: [{providerId: 'github', externalUserId: password.id.toString()}],
+          }, (error, user) => {
+            if (error != null)
+              return callback(error);
+            return callback(null, user);
+          });
+        });
+      });
+    }
     return request.post({
       url: 'https://cg.cs.tsinghua.edu.cn/serverlist/opencheckuser',
       form: {
@@ -79,11 +111,10 @@ module.exports = AuthenticationManager = {
           return callback(error);
         if (user != null)
           return callback(null, user);
-        const UserRegistrationHandler = require('../User/UserRegistrationHandler');
         return UserRegistrationHandler.registerNewUser({
           email: require('crypto').randomBytes(8).toString('hex') + '@example.com',
           password: require('crypto').randomBytes(32).toString('hex'),
-		  first_name: query.email,
+          first_name: query.email,
           thirdPartyIdentifiers: [{providerId: 'cgserver', externalUserId: data.user_id.toString()}],
         }, (error, user) => {
           if (error != null)
