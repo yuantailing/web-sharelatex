@@ -21,6 +21,7 @@ const bearerToken = require('express-bearer-token')
 
 const passport = require('passport')
 const LocalStrategy = require('passport-local').Strategy
+const GithubStrategy = require('passport-github').Strategy
 
 const oneDayInMilliseconds = 86400000
 const ReferalConnect = require('../Features/Referal/ReferalConnect')
@@ -126,6 +127,19 @@ passport.use(
       passwordField: 'password'
     },
     AuthenticationController.doPassportLogin
+  )
+)
+passport.use(
+  new GithubStrategy(
+    {
+      clientID: Settings.cgservice.GITHUB_CLIENT_ID,
+      clientSecret: Settings.cgservice.GITHUB_CLIENT_SECRET,
+      passReqToCallback: true,
+    },
+    function(req, accessToken, refreshToken, profile, cb) {
+      AuthenticationController.doPassportLogin(req, 'github_id__' + profile.id,
+        {provider: 'github', id: profile.id, login: profile.username, accessToken: accessToken}, cb);
+    }
   )
 )
 passport.serializeUser(AuthenticationController.serializeUser)
