@@ -31,7 +31,7 @@ module.exports = AuthenticationManager = {
     const UserRegistrationHandler = require('../User/UserRegistrationHandler');
     if (typeof(password) === 'object' && password.provider == 'github') { // GitHub OAuth
       return User.findOne({
-        $query: {'thirdPartyIdentifiers.providerId': 'github', 'thirdPartyIdentifiers.externalUserId': password.id.toString()},
+        $query: {thirdPartyIdentifiers: {$elemMatch: {providerId: 'github', externalUserId: password.id.toString()}}},
         $orderby: [['_id', 1]],
       }, (error, user) => {
         if (error)
@@ -104,7 +104,7 @@ module.exports = AuthenticationManager = {
         })
       }
       return User.findOne({
-        $query: {'thirdPartyIdentifiers.providerId': 'cgserver', 'thirdPartyIdentifiers.externalUserId': data.user_id.toString()},
+        $query: {thirdPartyIdentifiers: {$elemMatch: {providerId: 'cgserver', externalUserId: data.user_id.toString()}}},
         $orderby: [['_id', 1]],
       }, (error, user) => {
         if (error != null)
