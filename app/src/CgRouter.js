@@ -15,6 +15,7 @@ const EditorRealTimeController = require('./Features/Editor/EditorRealTimeContro
 
 const { Project } = require('./models/Project')
 
+const async = require("async");
 const passport = require('passport')
 const logger = require('logger-sharelatex')
 
@@ -68,9 +69,21 @@ webRouter.get(
 	function (req, res, next) {
 		const { project_id } = req.params;
 		logger.log({ project_id }, 'CG:GET:project/changes/users');
-		return CollaboratorsHandler.getMembersWithPrivilegeLevels(project_id, function (err, members) {
-			if (err != null) next(err);
-			return res.json(members.map((member) => ({id: member.user._id, email: member.user.email, first_name: member.user.first_name, last_name: member.user.last_name})));
+		return DocumentUpdaterHandler.flushProjectToMongo(project_id, function(err) {
+			if (err != null) return next(err);
+			return DocstoreManager.getAllRanges(project_id, function (err, docs) {
+				if (err != null) return next(err);
+				const user_ids = {};
+				for (let doc of Array.from(docs)) {
+					for (let change of Array.from((doc.ranges != null ? doc.ranges.changes : undefined) || [])) {
+						user_ids[change.metadata.user_id] = true;
+					}
+				}
+				return async.mapSeries(Object.keys(user_ids), UserInfoManager.getPersonalInfo, function(err, users) {
+					if (err) return next(err);
+					return res.json(users.filter(u => u != null).map(UserInfoController.formatPersonalInfo));
+				});
+			});
 		});
 	},
 );
@@ -98,7 +111,7 @@ webRouter.post(
 			{ track_changes: s },
 			{},
 			function (err) {
-				if (err != null) next(err);
+				if (err != null) return next(err);
 				EditorRealTimeController.emitToRoom(project_id, "toggle-track-changes", s);
 				return res.sendStatus(204);
 			}
@@ -126,9 +139,12 @@ webRouter.get(
 	function (req, res, next) {
 		const { project_id } = req.params;
 		logger.log({ project_id }, 'CG:GET:project/ranges');
-		DocstoreManager.getAllRanges(project_id, function (err, data) {
-			if (err != null) next(err);
-			res.json(data);
+		return DocumentUpdaterHandler.flushProjectToMongo(project_id, function(err) {
+			if (err) return next(err);
+			return DocstoreManager.getAllRanges(project_id, function (err, data) {
+				if (err != null) return next(err);
+				return res.json(data);
+			});
 		});
 	},
 );
