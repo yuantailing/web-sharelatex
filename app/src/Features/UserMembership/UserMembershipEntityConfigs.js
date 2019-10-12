@@ -20,10 +20,10 @@ module.exports = {
     },
     pathsFor(id) {
       return {
-        addMember: `/manage/groups/${id}/invites`,
-        removeMember: `/manage/groups/${id}/user`,
-        removeInvite: `/manage/groups/${id}/invites`,
-        exportMembers: `/manage/groups/${id}/members/export`
+        addMember: `/SHARELATEX/manage/groups/${id}/invites`,
+        removeMember: `/SHARELATEX/manage/groups/${id}/user`,
+        removeInvite: `/SHARELATEX/manage/groups/${id}/invites`,
+        exportMembers: `/SHARELATEX/manage/groups/${id}/members/export`
       }
     }
   },
@@ -59,8 +59,8 @@ module.exports = {
     },
     pathsFor(id) {
       return {
-        addMember: `/manage/groups/${id}/managers`,
-        removeMember: `/manage/groups/${id}/managers`
+        addMember: `/SHARELATEX/manage/groups/${id}/managers`,
+        removeMember: `/SHARELATEX/manage/groups/${id}/managers`
       }
     }
   },
@@ -81,9 +81,9 @@ module.exports = {
     },
     pathsFor(id) {
       return {
-        index: `/manage/institutions/${id}/managers`,
-        addMember: `/manage/institutions/${id}/managers`,
-        removeMember: `/manage/institutions/${id}/managers`
+        index: `/SHARELATEX/manage/institutions/${id}/managers`,
+        addMember: `/SHARELATEX/manage/institutions/${id}/managers`,
+        removeMember: `/SHARELATEX/manage/institutions/${id}/managers`
       }
     }
   },
@@ -104,9 +104,9 @@ module.exports = {
     },
     pathsFor(id) {
       return {
-        index: `/manage/publishers/${id}/managers`,
-        addMember: `/manage/publishers/${id}/managers`,
-        removeMember: `/manage/publishers/${id}/managers`
+        index: `/SHARELATEX/manage/publishers/${id}/managers`,
+        addMember: `/SHARELATEX/manage/publishers/${id}/managers`,
+        removeMember: `/SHARELATEX/manage/publishers/${id}/managers`
       }
     }
   }

@@ -240,7 +240,7 @@ function requireEntityOrCreate(creationStaffAccess) {
     }
 
     if (UserMembershipAuthorization.hasStaffAccess(creationStaffAccess)(req)) {
-      res.redirect(`/entities/${req.entityName}/create/${req.params.id}`)
+      res.redirect(`/SHARELATEX/entities/${req.entityName}/create/${req.params.id}`)
       return
     }
 

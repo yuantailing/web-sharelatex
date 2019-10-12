@@ -22,7 +22,7 @@ const PasswordResetHandler = {
           to: email,
           setNewPasswordUrl: `${
             settings.siteUrl
-          }/user/password/set?passwordResetToken=${token}&email=${encodeURIComponent(
+          }/SHARELATEX/user/password/set?passwordResetToken=${token}&email=${encodeURIComponent(
             email
           )}`
         }

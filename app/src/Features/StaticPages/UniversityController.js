@@ -18,10 +18,10 @@ module.exports = UniversityController = {
   getPage(req, res, next) {
     const url =
       req.url != null ? req.url.toLowerCase().replace('.html', '') : undefined
-    return res.redirect(`/i${url}`)
+    return res.redirect(`/SHARELATEX/i${url}`)
   },
 
   getIndexPage(req, res) {
-    return res.redirect('/i/university')
+    return res.redirect('/SHARELATEX/i/university')
   }
 }

@@ -273,7 +273,7 @@ module.exports = CollaboratorsInviteController = {
             { projectId, userId: currentUser._id },
             'user is already a member of this project, redirecting'
           )
-          return res.redirect(`/project/${projectId}`)
+          return res.redirect(`/SHARELATEX/project/${projectId}`)
         }
         // get the invite
         return CollaboratorsInviteHandler.getInviteByToken(
@@ -360,7 +360,7 @@ module.exports = CollaboratorsInviteController = {
         if (req.xhr) {
           return res.sendStatus(204) //  Done async via project page notification
         } else {
-          return res.redirect(`/project/${projectId}`)
+          return res.redirect(`/SHARELATEX/project/${projectId}`)
         }
       }
     )

@@ -62,7 +62,7 @@
     "handlebars": "^4.0.11",
     "heapdump": "^0.3.7",
     "helmet": "^3.8.1",
-    "http-proxy": "^1.8.1",
+    "http-proxy": "^1.18.0",
     "is-utf8": "^0.2.1",
     "joi-mongodb-objectid": "^0.1.0",
     "jquery": "^1.11.1",

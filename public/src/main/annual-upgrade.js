@@ -12,7 +12,7 @@
  */
 define(['base'], App =>
   App.controller('AnnualUpgradeController', function($scope, $http, $modal) {
-    const MESSAGES_URL = '/user/subscription/upgrade-annual'
+    const MESSAGES_URL = '/SHARELATEX/user/subscription/upgrade-annual'
 
     $scope.upgradeComplete = false
     const savings = {

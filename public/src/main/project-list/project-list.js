@@ -330,7 +330,7 @@ define(['base', 'main/project-list/services/project-list'], function(App) {
       for (let projectId of removedProjectIds) {
         queuedHttp({
           method: 'DELETE',
-          url: `/tag/${tag._id}/project/${projectId}`,
+          url: `/SHARELATEX/tag/${tag._id}/project/${projectId}`,
           headers: {
             'X-CSRF-Token': window.csrfToken
           }
@@ -355,7 +355,7 @@ define(['base', 'main/project-list/services/project-list'], function(App) {
         project.tags.splice(index, 1)
         queuedHttp({
           method: 'DELETE',
-          url: `/tag/${tag._id}/project/${project.id}`,
+          url: `/SHARELATEX/tag/${tag._id}/project/${project.id}`,
           headers: {
             'X-CSRF-Token': window.csrfToken
           }
@@ -392,7 +392,7 @@ define(['base', 'main/project-list/services/project-list'], function(App) {
       }
 
       for (let projectId of addedProjectIds) {
-        queuedHttp.post(`/tag/${tag._id}/project/${projectId}`, {
+        queuedHttp.post(`/SHARELATEX/tag/${tag._id}/project/${projectId}`, {
           _csrf: window.csrfToken
         })
       }
@@ -421,7 +421,7 @@ define(['base', 'main/project-list/services/project-list'], function(App) {
         template = 'none'
       }
       return queuedHttp
-        .post('/project/new', {
+        .post('/SHARELATEX/project/new', {
           _csrf: window.csrfToken,
           projectName: name,
           template
@@ -463,13 +463,13 @@ define(['base', 'main/project-list/services/project-list'], function(App) {
       })
 
       modalInstance.result.then(
-        projectId => (window.location = `/project/${projectId}`)
+        projectId => (window.location = `/SHARELATEX/project/${projectId}`)
       )
     }
 
     $scope.renameProject = (project, newName) =>
       queuedHttp
-        .post(`/project/${project.id}/rename`, {
+        .post(`/SHARELATEX/project/${project.id}/rename`, {
           newProjectName: newName,
           _csrf: window.csrfToken
         })
@@ -504,7 +504,7 @@ define(['base', 'main/project-list/services/project-list'], function(App) {
         'Clone'
       )
       return queuedHttp
-        .post(`/project/${project.id}/clone`, {
+        .post(`/SHARELATEX/project/${project.id}/clone`, {
           _csrf: window.csrfToken,
           projectName: cloneName
         })
@@ -581,7 +581,7 @@ define(['base', 'main/project-list/services/project-list'], function(App) {
         project.archived = true
         queuedHttp({
           method: 'DELETE',
-          url: `/project/${project.id}`,
+          url: `/SHARELATEX/project/${project.id}`,
           headers: {
             'X-CSRF-Token': window.csrfToken
           }
@@ -595,7 +595,7 @@ define(['base', 'main/project-list/services/project-list'], function(App) {
 
         queuedHttp({
           method: 'POST',
-          url: `/project/${project.id}/leave`,
+          url: `/SHARELATEX/project/${project.id}/leave`,
           headers: {
             'X-CSRF-Token': window.csrfToken
           }
@@ -642,7 +642,7 @@ define(['base', 'main/project-list/services/project-list'], function(App) {
       for (let projectId of selectedProjectIds) {
         queuedHttp({
           method: 'DELETE',
-          url: `/project/${projectId}?forever=true`,
+          url: `/SHARELATEX/project/${projectId}?forever=true`,
           headers: {
             'X-CSRF-Token': window.csrfToken
           }
@@ -664,7 +664,7 @@ define(['base', 'main/project-list/services/project-list'], function(App) {
       for (let projectId of projectIds) {
         queuedHttp({
           method: 'POST',
-          url: `/project/${projectId}/restore`,
+          url: `/SHARELATEX/project/${projectId}/restore`,
           headers: {
             'X-CSRF-Token': window.csrfToken
           }
@@ -692,9 +692,9 @@ define(['base', 'main/project-list/services/project-list'], function(App) {
         'Download Zip'
       )
       if (projectIds.length > 1) {
-        path = `/project/download/zip?project_ids=${projectIds.join(',')}`
+        path = `/SHARELATEX/project/download/zip?project_ids=${projectIds.join(',')}`
       } else {
-        path = `/project/${projectIds[0]}/download/zip`
+        path = `/SHARELATEX/project/${projectIds[0]}/download/zip`
       }
       return (window.location = path)
     }
@@ -735,14 +735,14 @@ define(['base', 'main/project-list/services/project-list'], function(App) {
         project.accessLevel === 'readAndWrite' &&
         project.source === 'token'
       ) {
-        return `/${project.tokens.readAndWrite}`
+        return `/SHARELATEX/${project.tokens.readAndWrite}`
       } else if (
         project.accessLevel === 'readOnly' &&
         project.source === 'token'
       ) {
-        return `/read/${project.tokens.readOnly}`
+        return `/SHARELATEX/read/${project.tokens.readOnly}`
       } else {
-        return `/project/${project.id}`
+        return `/SHARELATEX/project/${project.id}`
       }
     }
 
@@ -824,7 +824,7 @@ define(['base', 'main/project-list/services/project-list'], function(App) {
         $scope.project.isTableActionInflight = true
         return queuedHttp({
           method: 'DELETE',
-          url: `/project/${$scope.project.id}?forever=true`,
+          url: `/SHARELATEX/project/${$scope.project.id}?forever=true`,
           headers: {
             'X-CSRF-Token': window.csrfToken
           }

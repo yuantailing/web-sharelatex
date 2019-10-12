@@ -34,7 +34,7 @@ define(['base', 'directives/creditCards'], App =>
         'subscription-form-switch-to-student',
         window.plan_code
       )
-      window.location = `/user/subscription/new?planCode=${planCode}&currency=${
+      window.location = `/SHARELATEX/user/subscription/new?planCode=${planCode}&currency=${
         $scope.currencyCode
       }&cc=${$scope.data.coupon}`
     }
@@ -242,7 +242,7 @@ define(['base', 'directives/creditCards'], App =>
         )
 
         return $http
-          .post('/user/subscription/create', postData)
+          .post('/SHARELATEX/user/subscription/create', postData)
           .then(function() {
             event_tracking.sendMB('subscription-submission-success')
             event_tracking.send(
@@ -250,7 +250,7 @@ define(['base', 'directives/creditCards'], App =>
               'subscription-submission-success',
               postData.subscriptionDetails.plan_code
             )
-            window.location.href = '/user/subscription/thank-you'
+            window.location.href = '/SHARELATEX/user/subscription/thank-you'
           })
           .catch(response => {
             $scope.processing = false

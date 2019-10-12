@@ -26,7 +26,7 @@ module.exports = V1Handler = {
     return V1Api.request(
       {
         method: 'POST',
-        url: '/api/v1/sharelatex/login',
+        url: '/SHARELATEX/api/v1/sharelatex/login',
         json: { email, password },
         expectedStatusCodes: [403]
       },
@@ -71,7 +71,7 @@ module.exports = V1Handler = {
     return V1Api.request(
       {
         method: 'POST',
-        url: '/api/v1/sharelatex/reset_password',
+        url: '/SHARELATEX/api/v1/sharelatex/reset_password',
         json: {
           user_id: v1_user_id,
           password
@@ -117,7 +117,7 @@ module.exports = V1Handler = {
     }
 
     return V1Api.request(
-      { url: `/api/v1/sharelatex/docs/${token}/exported_to_v2` },
+      { url: `/SHARELATEX/api/v1/sharelatex/docs/${token}/exported_to_v2` },
       function(err, response, body) {
         if (err != null) {
           return callback(err)

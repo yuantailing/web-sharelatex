@@ -204,7 +204,7 @@ Your subscription was reactivated successfully.\
     return 'View Subscription Dashboard'
   },
   ctaURL(opts) {
-    return `${settings.siteUrl}/user/subscription`
+    return `${settings.siteUrl}/SHARELATEX/user/subscription`
   }
 })
 
@@ -343,7 +343,7 @@ We have now unlinked all your Dropbox and Overleaf Accounts. To ensure your proj
     return 'Link Dropbox Account'
   },
   ctaURL(opts) {
-    return `${settings.siteUrl}/user/settings`
+    return `${settings.siteUrl}/SHARELATEX/user/settings`
   }
 })
 

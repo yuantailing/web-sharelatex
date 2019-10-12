@@ -69,7 +69,7 @@ class SAMLSessionDataMissing extends BackwardCompatibleError {
     super(arg)
     if (!this.message) {
       this.message =
-        'Please resubmit your institutional email.<br/><a href="/institutional-login">institutional login</a>'
+        'Please resubmit your institutional email.<br/><a href="/SHARELATEX/institutional-login">institutional login</a>'
     }
   }
 }

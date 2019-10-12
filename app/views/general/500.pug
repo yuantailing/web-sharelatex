@@ -2,7 +2,7 @@ doctype html
 html.full-height(itemscope, itemtype='http://schema.org/Product')
 	head
 		title Something went wrong
-		link(rel="icon", href="/" + settings.brandPrefix + "favicon.ico")
+		link(rel="icon", href="/SHARELATEX/" + settings.brandPrefix + "favicon.ico")
 		if buildCssPath
 			link(rel="stylesheet", href=buildCssPath(null, { hashedPath: true }))
 		link(href="//netdna.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css",rel="stylesheet")
@@ -12,7 +12,7 @@ html.full-height(itemscope, itemtype='http://schema.org/Product')
 				.error-container.full-height
 					.error-figure.error-figure-500
 						img.error-img(
-							src="/img/brand/500-visual-socket.svg"
+							src="/SHARELATEX/img/brand/500-visual-socket.svg"
 							alt="Error"
 						)
 					.error-details
@@ -26,4 +26,4 @@ html.full-height(itemscope, itemtype='http://schema.org/Product')
 							|
 							a(href="mailto:" + settings.adminEmail) #{settings.adminEmail}
 							| .
-						a.error-btn(href="/") Home
+						a.error-btn(href="/SHARELATEX/") Home

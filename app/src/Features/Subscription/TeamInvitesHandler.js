@@ -197,7 +197,7 @@ var createInvite = function(subscription, email, inviter, callback) {
       const opts = {
         to: email,
         inviterName,
-        acceptInviteUrl: `${settings.siteUrl}/subscription/invites/${
+        acceptInviteUrl: `${settings.siteUrl}/SHARELATEX/subscription/invites/${
           invite.token
         }/`,
         appName: settings.appName

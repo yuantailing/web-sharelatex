@@ -55,7 +55,7 @@ define(['base', 'services/algolia-search'], App =>
           hit._highlightResult.pageName.value +
           ' - ' +
           hit._highlightResult.sectionName.value,
-        url: `/learn/${page_underscored}#${section_underscored}`,
+        url: `/SHARELATEX/learn/${page_underscored}#${section_underscored}`,
         content
       }
       return result

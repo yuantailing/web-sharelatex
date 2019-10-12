@@ -12,7 +12,7 @@
 define(['base'], App =>
   App.factory('projectInvites', (ide, $http) => ({
     sendInvite(email, privileges, grecaptchaResponse) {
-      return $http.post(`/project/${ide.project_id}/invite`, {
+      return $http.post(`/SHARELATEX/project/${ide.project_id}/invite`, {
         email,
         privileges,
         _csrf: window.csrfToken,
@@ -22,7 +22,7 @@ define(['base'], App =>
 
     revokeInvite(inviteId) {
       return $http({
-        url: `/project/${ide.project_id}/invite/${inviteId}`,
+        url: `/SHARELATEX/project/${ide.project_id}/invite/${inviteId}`,
         method: 'DELETE',
         headers: {
           'X-Csrf-Token': window.csrfToken
@@ -32,7 +32,7 @@ define(['base'], App =>
 
     resendInvite(inviteId, privileges) {
       return $http.post(
-        `/project/${ide.project_id}/invite/${inviteId}/resend`,
+        `/SHARELATEX/project/${ide.project_id}/invite/${inviteId}/resend`,
         {
           _csrf: window.csrfToken
         }
@@ -40,7 +40,7 @@ define(['base'], App =>
     },
 
     getInvites() {
-      return $http.get(`/project/${ide.project_id}/invites`, {
+      return $http.get(`/SHARELATEX/project/${ide.project_id}/invites`, {
         json: true,
         headers: {
           'X-Csrf-Token': window.csrfToken
