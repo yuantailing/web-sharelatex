@@ -262,6 +262,11 @@ function initialize(webRouter, privateApiRouter, publicApiRouter) {
   webRouter.get(
     '/project',
     AuthenticationController.requireLogin(),
+    RateLimiterMiddleware.rateLimit({
+      endpointName: 'open-dashboard',
+      maxRequests: 30,
+      timeInterval: 60
+    }),
     ProjectController.projectListPage
   )
   webRouter.post(
@@ -303,6 +308,7 @@ function initialize(webRouter, privateApiRouter, publicApiRouter) {
   )
   webRouter.post(
     '/project/:Project_id/settings/admin',
+    AuthenticationController.requireLogin(),
     AuthorizationMiddleware.ensureUserCanAdminProject,
     ProjectController.updateProjectAdminSettings
   )
@@ -443,13 +449,37 @@ function initialize(webRouter, privateApiRouter, publicApiRouter) {
     CompileController.wordCount
   )
 
+  webRouter.post(
+    '/Project/:Project_id/archive',
+    AuthorizationMiddleware.ensureUserCanReadProject,
+    ProjectController.archiveProject
+  )
+  webRouter.delete(
+    '/Project/:Project_id/archive',
+    AuthorizationMiddleware.ensureUserCanReadProject,
+    ProjectController.unarchiveProject
+  )
+  webRouter.post(
+    '/project/:project_id/trash',
+    AuthorizationMiddleware.ensureUserCanReadProject,
+    ProjectController.trashProject
+  )
+  webRouter.delete(
+    '/project/:project_id/trash',
+    AuthorizationMiddleware.ensureUserCanReadProject,
+    ProjectController.untrashProject
+  )
+
   webRouter.delete(
     '/Project/:Project_id',
+    AuthenticationController.requireLogin(),
     AuthorizationMiddleware.ensureUserCanAdminProject,
     ProjectController.deleteProject
   )
+
   webRouter.post(
     '/Project/:Project_id/restore',
+    AuthenticationController.requireLogin(),
     AuthorizationMiddleware.ensureUserCanAdminProject,
     ProjectController.restoreProject
   )
@@ -461,10 +491,15 @@ function initialize(webRouter, privateApiRouter, publicApiRouter) {
 
   webRouter.post(
     '/project/:Project_id/rename',
+    AuthenticationController.requireLogin(),
     AuthorizationMiddleware.ensureUserCanAdminProject,
     ProjectController.renameProject
   )
-
+  webRouter.post(
+    '/project/:Project_id/transfer-ownership',
+    AuthorizationMiddleware.ensureUserCanAdminProject,
+    ProjectController.transferOwnership
+  )
   webRouter.get(
     '/project/:Project_id/updates',
     AuthorizationMiddleware.ensureUserCanReadProject,
@@ -577,7 +612,6 @@ function initialize(webRouter, privateApiRouter, publicApiRouter) {
     AuthenticationController.requireLogin(),
     MetaController.broadcastMetadataForDoc
   )
-
   privateApiRouter.post(
     '/internal/expire-deleted-projects-after-duration',
     AuthenticationController.httpAuth,

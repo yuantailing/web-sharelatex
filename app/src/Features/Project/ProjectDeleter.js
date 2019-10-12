@@ -20,8 +20,10 @@ const logger = require('logger-sharelatex')
 const DocumentUpdaterHandler = require('../DocumentUpdater/DocumentUpdaterHandler')
 const TagsHandler = require('../Tags/TagsHandler')
 const async = require('async')
+const ProjectHelper = require('./ProjectHelper')
 const ProjectDetailsHandler = require('./ProjectDetailsHandler')
 const CollaboratorsHandler = require('../Collaborators/CollaboratorsHandler')
+const CollaboratorsGetter = require('../Collaborators/CollaboratorsGetter')
 const DocstoreManager = require('../Docstore/DocstoreManager')
 const moment = require('moment')
 
@@ -72,7 +74,7 @@ const ProjectDeleter = {
           if (err != null) {
             return callback(err)
           }
-          return CollaboratorsHandler.removeUserFromAllProjets(
+          return CollaboratorsHandler.removeUserFromAllProjects(
             user_id,
             callback
           )
@@ -122,7 +124,7 @@ const ProjectDeleter = {
     )
   },
 
-  archiveProject(project_id, callback) {
+  legacyArchiveProject(project_id, callback) {
     if (callback == null) {
       callback = function(error) {}
     }
@@ -157,6 +159,49 @@ const ProjectDeleter = {
 }
 
 // Async methods
+
+async function archiveProject(project_id, userId) {
+  logger.log({ project_id }, 'archiving project from user request')
+
+  try {
+    let project = await Project.findOne({ _id: project_id }).exec()
+    if (!project) {
+      throw new Errors.NotFoundError('project not found')
+    }
+    const archived = ProjectHelper.calculateArchivedArray(
+      project,
+      userId,
+      'ARCHIVE'
+    )
+
+    await Project.update({ _id: project_id }, { $set: { archived: archived } })
+  } catch (err) {
+    logger.warn({ err }, 'problem archiving project')
+    throw err
+  }
+}
+
+async function unarchiveProject(project_id, userId) {
+  logger.log({ project_id }, 'unarchiving project from user request')
+
+  try {
+    let project = await Project.findOne({ _id: project_id }).exec()
+    if (!project) {
+      throw new Errors.NotFoundError('project not found')
+    }
+
+    const archived = ProjectHelper.calculateArchivedArray(
+      project,
+      userId,
+      'UNARCHIVE'
+    )
+
+    await Project.update({ _id: project_id }, { $set: { archived: archived } })
+  } catch (err) {
+    logger.warn({ err }, 'problem unarchiving project')
+    throw err
+  }
+}
 
 async function deleteProject(project_id, options = {}) {
   logger.log({ project_id }, 'deleting project')
@@ -205,8 +250,7 @@ async function deleteProject(project_id, options = {}) {
     )
     await flushProjectToMongoAndDelete(project_id)
 
-    const getMemberIds = promisify(CollaboratorsHandler.getMemberIds)
-    let member_ids = await getMemberIds(project_id)
+    let member_ids = await CollaboratorsGetter.promises.getMemberIds(project_id)
 
     // fire these jobs in the background
     Array.from(member_ids).forEach(member_id =>
@@ -304,6 +348,8 @@ async function expireDeletedProject(projectId) {
 // Exported class
 
 const promises = {
+  archiveProject: archiveProject,
+  unarchiveProject: unarchiveProject,
   deleteProject: deleteProject,
   undeleteProject: undeleteProject,
   expireDeletedProject: expireDeletedProject,
@@ -311,6 +357,8 @@ const promises = {
 }
 
 ProjectDeleter.promises = promises
+ProjectDeleter.archiveProject = callbackify(archiveProject)
+ProjectDeleter.unarchiveProject = callbackify(unarchiveProject)
 ProjectDeleter.deleteProject = callbackify(deleteProject)
 ProjectDeleter.undeleteProject = callbackify(undeleteProject)
 ProjectDeleter.expireDeletedProject = callbackify(expireDeletedProject)

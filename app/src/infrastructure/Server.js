@@ -5,6 +5,7 @@ const logger = require('logger-sharelatex')
 const metrics = require('metrics-sharelatex')
 const crawlerLogger = require('./CrawlerLogger')
 const expressLocals = require('./ExpressLocals')
+const Validation = require('./Validation')
 const Router = require('../router')
 const helmet = require('helmet')
 const UserSessionsRedis = require('../Features/User/UserSessionsRedis')
@@ -243,6 +244,7 @@ const enableApiRouter =
 if (enableApiRouter || notDefined(enableApiRouter)) {
   logger.info('providing api router')
   app.use('/SHARELATEX', privateApiRouter)
+  app.use('/SHARELATEX', Validation.errorMiddleware)
   app.use('/SHARELATEX', HttpErrorController.handleError)
   app.use('/SHARELATEX', ErrorController.handleApiError)
 }
@@ -251,10 +253,14 @@ const enableWebRouter =
   Settings.web != null ? Settings.web.enableWebRouter : undefined
 if (enableWebRouter || notDefined(enableWebRouter)) {
   logger.info('providing web router')
+
   app.use('/SHARELATEX', publicApiRouter) // public API goes with web router for public access
+  app.use('/SHARELATEX', Validation.errorMiddleware)
   app.use('/SHARELATEX', HttpErrorController.handleError)
   app.use('/SHARELATEX', ErrorController.handleApiError)
+
   app.use('/SHARELATEX', webRouter)
+  app.use('/SHARELATEX', Validation.errorMiddleware)
   app.use('/SHARELATEX', HttpErrorController.handleError)
   app.use('/SHARELATEX', ErrorController.handleError)
 }

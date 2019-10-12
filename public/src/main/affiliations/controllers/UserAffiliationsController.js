@@ -19,9 +19,15 @@ define(['base'], App =>
     $scope,
     UserAffiliationsDataService,
     $q,
+    $window,
     _
   ) {
     $scope.userEmails = []
+    $scope.linkedInstitutionIds = []
+    $scope.hideInstitutionNotifications = {}
+    $scope.closeInstitutionNotification = type => {
+      $scope.hideInstitutionNotifications[type] = true
+    }
 
     const LOCAL_AND_DOMAIN_REGEX = /([^@]+)@(.+)/
     const EMAIL_REGEX = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\ ".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA -Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
@@ -78,6 +84,15 @@ define(['base'], App =>
         $scope.newAffiliation.department = null
         return $q.reject(null)
       }
+    }
+
+    $scope.linkInstitutionAcct = function(email, institutionId) {
+      _resetMakingRequestType()
+      $scope.ui.isMakingRequest = true
+      $scope.ui.isProcessing = true
+      $window.location.href = `${
+        window.samlInitPath
+      }?university_id=${institutionId}&auto=true&email=${email}`
     }
 
     $scope.selectUniversityManually = function() {
@@ -183,6 +198,7 @@ define(['base'], App =>
     }
 
     $scope.resendConfirmationEmail = function(userEmail) {
+      _resetMakingRequestType()
       $scope.ui.isResendingConfirmation = true
       return _monitorRequest(
         UserAffiliationsDataService.resendConfirmationEmail(userEmail.email)
@@ -218,6 +234,12 @@ define(['base'], App =>
       return ($scope.ui.showManualUniversitySelectionUI = false)
     }
 
+    var _resetMakingRequestType = function() {
+      $scope.ui.isLoadingEmails = false
+      $scope.ui.isProcessing = false
+      $scope.ui.isResendingConfirmation = false
+    }
+
     var _reset = function() {
       $scope.ui = {
         hasError: false,
@@ -225,8 +247,7 @@ define(['base'], App =>
         showChangeAffiliationUI: false,
         isMakingRequest: false,
         isLoadingEmails: false,
-        isAddingNewEmail: false,
-        isResendingConfirmation: false
+        isAddingNewEmail: false
       }
       _resetAffiliationToChange()
       _resetNewAffiliation()
@@ -249,11 +270,32 @@ define(['base'], App =>
       return promise
     }
 
+    $scope.institutionAlreadyLinked = function(emailData) {
+      const institutionId =
+        emailData.affiliation &&
+        emailData.affiliation.institution &&
+        emailData.affiliation.institution &&
+        emailData.affiliation.institution.id
+          ? emailData.affiliation.institution.id.toString()
+          : undefined
+      return $scope.linkedInstitutionIds.indexOf(institutionId) !== -1
+    }
+
     // Populates the emails table
     var _getUserEmails = function() {
+      _resetMakingRequestType()
       $scope.ui.isLoadingEmails = true
       return _monitorRequest(UserAffiliationsDataService.getUserEmails())
-        .then(emails => ($scope.userEmails = emails))
+        .then(emails => {
+          $scope.userEmails = emails
+          $scope.linkedInstitutionIds = emails
+            .filter(email => {
+              if (email.samlProviderId) {
+                return email.samlProviderId
+              }
+            })
+            .map(email => email.samlProviderId)
+        })
         .finally(() => ($scope.ui.isLoadingEmails = false))
     }
     return _getUserEmails()

@@ -4,6 +4,7 @@ const metrics = require('metrics-sharelatex')
 const { db } = mongojs
 const async = require('async')
 const { ObjectId } = mongojs
+const { promisify } = require('util')
 const UserGetter = require('./UserGetter')
 const {
   addAffiliation,
@@ -172,7 +173,7 @@ const UserUpdater = {
         if (res.n === 0) {
           return callback(new Error('email update error'))
         }
-        NewsletterManager.changeEmail(oldEmail, email, err => {
+        NewsletterManager.changeEmail(user, email, err => {
           if (err != null) {
             logger.warn(
               { err, oldEmail, newEmail: email },
@@ -248,5 +249,13 @@ const UserUpdater = {
 ].map(method =>
   metrics.timeAsyncMethod(UserUpdater, method, 'mongo.UserUpdater', logger)
 )
+
+const promises = {
+  addEmailAddress: promisify(UserUpdater.addEmailAddress),
+  confirmEmail: promisify(UserUpdater.confirmEmail),
+  updateUser: promisify(UserUpdater.updateUser)
+}
+
+UserUpdater.promises = promises
 
 module.exports = UserUpdater
