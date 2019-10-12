@@ -52,7 +52,7 @@ module.exports = Features = {
       case 'references':
         return true;
       case 'saml':
-        return Settings.enableSaml != null
+        return Settings.enableSaml
       default:
         throw new Error(`unknown feature: ${feature}`)
     }

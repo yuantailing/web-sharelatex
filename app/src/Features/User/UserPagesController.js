@@ -4,6 +4,7 @@ const ErrorController = require('../Errors/ErrorController')
 const logger = require('logger-sharelatex')
 const Settings = require('settings-sharelatex')
 const AuthenticationController = require('../Authentication/AuthenticationController')
+const _ = require('lodash')
 
 const UserPagesController = {
   registerPage(req, res) {
@@ -21,7 +22,8 @@ const UserPagesController = {
       title: 'register',
       sharedProjectData,
       newTemplateData,
-      new_email: req.query.new_email || ''
+      new_email: req.query.new_email || '',
+      samlBeta: req.session.samlBeta
     })
   },
 
@@ -80,6 +82,7 @@ const UserPagesController = {
       title: 'login',
       email: req.query.email,
       github_oauth_url: 'https://github.com/login/oauth/authorize?client_id=' + Settings.cgservice.GITHUB_CLIENT_ID + '&state=' + encodeURIComponent(req.headers['x-forwarded-host'] || req.headers.host),
+      samlBeta: req.session.samlBeta
     })
   },
 
@@ -107,10 +110,15 @@ const UserPagesController = {
 
   settingsPage(req, res, next) {
     const userId = AuthenticationController.getLoggedInUserId(req)
+    // SSO
     const ssoError = req.session.ssoError
     if (ssoError) {
       delete req.session.ssoError
     }
+    // Institution SSO
+    const institutionLinked = _.get(req.session, ['saml', 'linked'])
+    const institutionNotLinked = _.get(req.session, ['saml', 'notLinked'])
+    delete req.session.saml
     logger.log({ user: userId }, 'loading settings page')
     let shouldAllowEditingDetails = true
     if (Settings.ldap && Settings.ldap.updateUserDetailsOnLogin) {
@@ -137,9 +145,12 @@ const UserPagesController = {
           req
         ),
         oauthUseV2: Settings.oauthUseV2 || false,
+        samlInitPath: _.get(Settings, ['saml', 'ukamf', 'initPath']),
+        institutionLinked,
+        institutionNotLinked,
+        samlBeta: req.session.samlBeta,
         ssoError: ssoError,
-        thirdPartyIds: UserPagesController._restructureThirdPartyIds(user),
-        previewOauth: req.query.prvw != null
+        thirdPartyIds: UserPagesController._restructureThirdPartyIds(user)
       })
     })
   },
