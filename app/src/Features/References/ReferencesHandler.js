@@ -199,7 +199,7 @@ module.exports = ReferencesHandler = {
             "            continue\n" +
             "        if res.code // 100 == 2:\n" +
             "            text = res.read().decode('utf-8')\n" +
-            "            for entry in bibtexparser.loads(text).entries:\n" +
+            "            for entry in bibtexparser.loads(text, bibtexparser.bparser.BibTexParser(common_strings=True)).entries:\n" +
             "                if 'ID' in entry:\n" +
             "                    keys.append(entry['ID'])\n" +
             "    print(json.dumps(keys, ensure_ascii=True))\n"
