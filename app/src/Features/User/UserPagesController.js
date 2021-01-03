@@ -38,8 +38,12 @@ const UserPagesController = {
     }
     res.render('user/login', {
       title: 'login',
-      email: req.query.email
-      github_oauth_url: 'https://github.com/login/oauth/authorize?client_id=' + Settings.cgservice.GITHUB_CLIENT_ID + '&state=' + encodeURIComponent(req.headers['x-forwarded-host'] || req.headers.host),
+      email: req.query.email,
+      github_oauth_url:
+        'https://github.com/login/oauth/authorize?client_id=' +
+        Settings.cgservice.GITHUB_CLIENT_ID +
+        '&state=' +
+        encodeURIComponent(req.headers['x-forwarded-host'] || req.headers.host)
     })
   },
 

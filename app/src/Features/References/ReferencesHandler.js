@@ -189,28 +189,34 @@ module.exports = ReferencesHandler = {
             { projectId, isFullIndex, docIds, bibDocUrls },
             'sending request to references service'
           )
-          const pycode = "import bibtexparser\n" +
-            "import json\n" +
-            "import urllib.error\n" +
-            "import urllib.request\n" +
-            "import sys\n" +
+          const pycode =
+            'import bibtexparser\n' +
+            'import json\n' +
+            'import urllib.error\n' +
+            'import urllib.request\n' +
+            'import sys\n' +
             "if __name__ == '__main__':\n" +
-            "    keys = []\n" +
-            "    for url in sys.argv[1:]:\n" +
-            "        try:\n" +
-            "            res = urllib.request.urlopen(url, timeout=5)\n" +
-            "        except urllib.error.HTTPError:\n" +
-            "            continue\n" +
-            "        if res.code // 100 == 2:\n" +
+            '    keys = []\n' +
+            '    for url in sys.argv[1:]:\n' +
+            '        try:\n' +
+            '            res = urllib.request.urlopen(url, timeout=5)\n' +
+            '        except urllib.error.HTTPError:\n' +
+            '            continue\n' +
+            '        if res.code // 100 == 2:\n' +
             "            text = res.read().decode('utf-8')\n" +
-            "            for entry in bibtexparser.loads(text, bibtexparser.bparser.BibTexParser(common_strings=True)).entries:\n" +
+            '            for entry in bibtexparser.loads(text, bibtexparser.bparser.BibTexParser(common_strings=True)).entries:\n' +
             "                if 'ID' in entry:\n" +
             "                    keys.append(entry['ID'])\n" +
-            "    print(json.dumps(keys, ensure_ascii=True))\n"
-          return child_process.execFile('python3', ['-c', pycode].concat(allUrls), {timeout: 5000}, function(error, stdout, stderr) {
-            if (error) return callback(error);
-            return callback(null, {keys: JSON.parse(stdout)});
-          });
+            '    print(json.dumps(keys, ensure_ascii=True))\n'
+          return child_process.execFile(
+            'python3',
+            ['-c', pycode].concat(allUrls),
+            { timeout: 5000 },
+            function(error, stdout, stderr) {
+              if (error) return callback(error)
+              return callback(null, { keys: JSON.parse(stdout) })
+            }
+          )
         }
       )
     })

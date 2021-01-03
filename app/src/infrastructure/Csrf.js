@@ -50,7 +50,9 @@ class Csrf {
 
     // do not check csrf token for real-time
     if (req.path.startsWith('/socket.io/'))
-      return csrf(req, res, err => { next() });
+      return csrf(req, res, err => {
+        next()
+      })
 
     // check whether the request method is excluded for the specified route
     if (
