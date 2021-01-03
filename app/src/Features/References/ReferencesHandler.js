@@ -14,6 +14,7 @@
  */
 let ReferencesHandler
 const OError = require('@overleaf/o-error')
+const child_process = require('child_process')
 const logger = require('logger-sharelatex')
 const request = require('request')
 const settings = require('settings-sharelatex')
@@ -184,34 +185,32 @@ module.exports = ReferencesHandler = {
             ReferencesHandler._buildFileUrl(projectId, fileId)
           )
           const allUrls = bibDocUrls.concat(bibFileUrls)
-          return request.post(
-            {
-              url: `${settings.apis.references.url}/project/${projectId}/index`,
-              json: {
-                docUrls: allUrls,
-                fullIndex: isFullIndex
-              }
-            },
-            function(err, res, data) {
-              if (err) {
-                OError.tag(err, 'error communicating with references api', {
-                  projectId
-                })
-                return callback(err)
-              }
-              if (res.statusCode >= 200 && res.statusCode < 300) {
-                logger.log({ projectId }, 'got keys from references api')
-                return callback(null, data)
-              } else {
-                err = new Error(
-                  `references api responded with non-success code: ${
-                    res.statusCode
-                  }`
-                )
-                return callback(err)
-              }
-            }
+          logger.log(
+            { projectId, isFullIndex, docIds, bibDocUrls },
+            'sending request to references service'
           )
+          const pycode = "import bibtexparser\n" +
+            "import json\n" +
+            "import urllib.error\n" +
+            "import urllib.request\n" +
+            "import sys\n" +
+            "if __name__ == '__main__':\n" +
+            "    keys = []\n" +
+            "    for url in sys.argv[1:]:\n" +
+            "        try:\n" +
+            "            res = urllib.request.urlopen(url, timeout=5)\n" +
+            "        except urllib.error.HTTPError:\n" +
+            "            continue\n" +
+            "        if res.code // 100 == 2:\n" +
+            "            text = res.read().decode('utf-8')\n" +
+            "            for entry in bibtexparser.loads(text, bibtexparser.bparser.BibTexParser(common_strings=True)).entries:\n" +
+            "                if 'ID' in entry:\n" +
+            "                    keys.append(entry['ID'])\n" +
+            "    print(json.dumps(keys, ensure_ascii=True))\n"
+          return child_process.execFile('python3', ['-c', pycode].concat(allUrls), {timeout: 5000}, function(error, stdout, stderr) {
+            if (error) return callback(error);
+            return callback(null, {keys: JSON.parse(stdout)});
+          });
         }
       )
     })

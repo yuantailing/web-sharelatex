@@ -173,6 +173,7 @@ include ../../_mixins/saml
 		li.notification-entry(
 			ng-repeat="userEmail in userEmails",
 			ng-if="showConfirmEmail(userEmail) && projects.length > 0"
+			ng-hide="true"
 		)
 			.alert.alert-warning(ng-if="!userEmail.confirmationInflight")
 				.notification-body

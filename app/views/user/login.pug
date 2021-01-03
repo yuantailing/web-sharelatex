@@ -16,10 +16,10 @@ block content
 							form-messages(for="loginForm")
 							.form-group
 								input.form-control(
-									type='email',
+									type='text',
 									name='email',
 									required,
-									placeholder='email@example.com',
+									placeholder='Username',
 									ng-model="email",
 									ng-model-options="{ updateOn: 'blur' }",
 									ng-init="email = "+JSON.stringify(email),
@@ -40,8 +40,18 @@ block content
 							.actions
 								button.btn-primary.btn(
 									type='submit',
+									style='width: 100%;',
 									ng-disabled="loginForm.inflight"
 								)
 									span(ng-show="!loginForm.inflight") #{translate("login")}
 									span(ng-show="loginForm.inflight") #{translate("logging_in")}…
 								a.pull-right(href='/user/password/reset') #{translate("forgot_your_password")}?
+							p.login-register-hr-text-container.text-center
+								span.login-register-hr-text or
+							div
+								.form-group.text-center
+									a.btn-block.login-btn(
+										href=github_oauth_url
+									)
+										i.login-btn-icon
+										| thu-media Login

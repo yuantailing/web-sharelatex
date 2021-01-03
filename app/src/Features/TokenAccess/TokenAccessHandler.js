@@ -254,19 +254,13 @@ const TokenAccessHandler = {
   },
 
   getV1DocPublishedInfo(token, callback) {
-    // default to allowing access
-    if (!Settings.apis.v1 || !Settings.apis.v1.url) {
-      return callback(null, { allow: true })
-    }
-    V1Api.request(
-      { url: `/api/v1/sharelatex/docs/${token}/is_published` },
-      function(err, response, body) {
-        if (err != null) {
-          return callback(err)
-        }
-        callback(null, body)
-      }
-    )
+    return Project.findOne({'publicAccesLevel': 'tokenBased', 'tokens.readOnly': token}, (error, project) => {
+      if (error != null)
+        return callback(error);
+      if (project != null && project.publicAccesLevel === 'tokenBased' && project.tokens.readOnly === token)
+        return callback(null, { allow: true });
+      return callback(null, { allow: false });
+    });
   },
 
   getV1DocInfo(token, v2UserId, callback) {
