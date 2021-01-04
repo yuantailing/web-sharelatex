@@ -93,7 +93,7 @@ module.exports = SubscriptionController = {
         return next(err)
       }
       if (hasSubscription) {
-        return res.redirect('/user/subscription?hasSubscription=true')
+        return res.redirect('/SHARELATEX/user/subscription?hasSubscription=true')
       } else {
         // LimitationsManager.userHasV2Subscription only checks Mongo. Double check with
         // Recurly as well at this point (we don't do this most places for speed).
@@ -104,7 +104,7 @@ module.exports = SubscriptionController = {
               return next(error)
             }
             if (!valid) {
-              res.redirect('/user/subscription?hasSubscription=true')
+              res.redirect('/SHARELATEX/user/subscription?hasSubscription=true')
             } else {
               let currency =
                 req.query.currency != null
@@ -253,7 +253,7 @@ module.exports = SubscriptionController = {
           return next(error)
         }
         if (personalSubscription == null) {
-          return res.redirect('/user/subscription/plans')
+          return res.redirect('/SHARELATEX/user/subscription/plans')
         }
         return res.render('subscriptions/successful_subscription', {
           title: 'thank_you',
@@ -275,7 +275,7 @@ module.exports = SubscriptionController = {
       }
       // Note: this redirect isn't used in the main flow as the redirection is
       // handled by Angular
-      return res.redirect('/user/subscription/canceled')
+      return res.redirect('/SHARELATEX/user/subscription/canceled')
     })
   },
 
@@ -296,7 +296,7 @@ module.exports = SubscriptionController = {
         })
         return next(err)
       }
-      return res.redirect('/user/subscription')
+      return res.redirect('/SHARELATEX/user/subscription')
     })
   },
 
@@ -325,7 +325,7 @@ module.exports = SubscriptionController = {
           })
           return next(err)
         }
-        return res.redirect('/user/subscription')
+        return res.redirect('/SHARELATEX/user/subscription')
       }
     )
   },
@@ -352,7 +352,7 @@ module.exports = SubscriptionController = {
         })
         return next(err)
       }
-      return res.redirect('/user/subscription')
+      return res.redirect('/SHARELATEX/user/subscription')
     })
   },
 
@@ -419,7 +419,7 @@ module.exports = SubscriptionController = {
         planName = 'collaborator'
       }
       if (!hasSubscription) {
-        return res.redirect('/user/subscription/plans')
+        return res.redirect('/SHARELATEX/user/subscription/plans')
       }
       return res.render('subscriptions/upgradeToAnnual', {
         title: 'Upgrade to annual',

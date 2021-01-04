@@ -37,9 +37,9 @@ async function _userAlreadyHasHigherPrivilege(
 
 const makePostUrl = token => {
   if (TokenAccessHandler.isReadAndWriteToken(token)) {
-    return `/${token}/grant`
+    return `/SHARELATEX/${token}/grant`
   } else if (TokenAccessHandler.isReadOnlyToken(token)) {
-    return `/read/${token}/grant`
+    return `/SHARELATEX/read/${token}/grant`
   } else {
     throw new Error('invalid token type')
   }
@@ -144,7 +144,7 @@ async function checkAndGetProjectOrResponseAction(
           null,
           () => {
             res.json({
-              redirect: `/project/${projectId}`,
+              redirect: `/SHARELATEX/project/${projectId}`,
               grantAnonymousAccess: tokenType
             })
           }
@@ -162,7 +162,7 @@ async function checkAndGetProjectOrResponseAction(
           null,
           () => {
             res.json({
-              redirect: '/restricted',
+              redirect: '/SHARELATEX/restricted',
               anonWriteAccessDenied: true
             })
           }
@@ -175,7 +175,7 @@ async function checkAndGetProjectOrResponseAction(
         null,
         () => {
           res.json({
-            redirect: `/project/${projectId}`,
+            redirect: `/SHARELATEX/project/${projectId}`,
             grantAnonymousAccess: tokenType
           })
         }
@@ -194,7 +194,7 @@ async function checkAndGetProjectOrResponseAction(
     return [
       null,
       () => {
-        res.json({ redirect: `/project/${project._id}`, higherAccess: true })
+        res.json({ redirect: `/SHARELATEX/project/${project._id}`, higherAccess: true })
       }
     ]
   }
@@ -236,7 +236,7 @@ async function grantTokenAccessReadAndWrite(req, res, next) {
       project._id
     )
     return res.json({
-      redirect: `/project/${project._id}`,
+      redirect: `/SHARELATEX/project/${project._id}`,
       tokenAccessGranted: tokenType
     })
   } catch (err) {
@@ -283,7 +283,7 @@ async function grantTokenAccessReadOnly(req, res, next) {
       project._id
     )
     return res.json({
-      redirect: `/project/${project._id}`,
+      redirect: `/SHARELATEX/project/${project._id}`,
       tokenAccessGranted: tokenType
     })
   } catch (err) {

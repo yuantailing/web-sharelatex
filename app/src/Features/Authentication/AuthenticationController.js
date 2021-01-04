@@ -76,7 +76,7 @@ const AuthenticationController = {
 
   finishLogin(user, req, res, next) {
     if (user === false) {
-      return res.redirect('/login')
+      return res.redirect('/SHARELATEX/login')
     } // OAuth2 'state' mismatch
 
     const Modules = require('../../infrastructure/Modules')
@@ -96,7 +96,7 @@ const AuthenticationController = {
       }
 
       const redir =
-        AuthenticationController._getRedirectFromSession(req) || '/project'
+        AuthenticationController._getRedirectFromSession(req) || '/SHARELATEX/project'
       _loginAsyncHandlers(req, user)
       _afterLoginSessionSetup(req, user, function(err) {
         if (err) {
@@ -307,7 +307,7 @@ const AuthenticationController = {
       )
       if (acceptsJson(req)) return send401WithChallenge(res)
       AuthenticationController.setRedirectInSession(req)
-      res.redirect('/login')
+      res.redirect('/SHARELATEX/login')
     }
   },
 
@@ -358,12 +358,12 @@ const AuthenticationController = {
     if (value == null) {
       value =
         Object.keys(req.query).length > 0
-          ? `${req.path}?${querystring.stringify(req.query)}`
-          : `${req.path}`
+          ? `/SHARELATEX${req.path}?${querystring.stringify(req.query)}`
+          : `/SHARELATEX${req.path}`
     }
     if (
       req.session != null &&
-      !/^\/(socket.io|js|stylesheets|img)\/.*$/.test(value) &&
+      !/^\/SHARELATEX\/(socket.io|js|stylesheets|img)\/.*$/.test(value) &&
       !/^.*\.(png|jpeg|svg)$/.test(value)
     ) {
       const safePath = UrlHelper.getSafeRedirectPath(value)
@@ -375,7 +375,7 @@ const AuthenticationController = {
     if (
       req.query.zipUrl != null ||
       req.query.project_name != null ||
-      req.path === '/user/subscription/new'
+      req.path === '/SHARELATEX/user/subscription/new'
     ) {
       AuthenticationController._redirectToRegisterPage(req, res)
     } else {
@@ -389,7 +389,7 @@ const AuthenticationController = {
       'user not logged in so redirecting to login page'
     )
     AuthenticationController.setRedirectInSession(req)
-    const url = `/login?${querystring.stringify(req.query)}`
+    const url = `/SHARELATEX/login?${querystring.stringify(req.query)}`
     res.redirect(url)
     Metrics.inc('security.login-redirect')
   },
@@ -400,7 +400,7 @@ const AuthenticationController = {
       'user needs to reconfirm so redirecting to reconfirm page'
     )
     req.session.reconfirm_email = user != null ? user.email : undefined
-    const redir = '/user/reconfirm'
+    const redir = '/SHARELATEX/user/reconfirm'
     AsyncFormHelper.redirect(req, res, redir)
   },
 
@@ -410,7 +410,7 @@ const AuthenticationController = {
       'user not logged in so redirecting to register page'
     )
     AuthenticationController.setRedirectInSession(req)
-    const url = `/register?${querystring.stringify(req.query)}`
+    const url = `/SHARELATEX/register?${querystring.stringify(req.query)}`
     res.redirect(url)
     Metrics.inc('security.login-redirect')
   },

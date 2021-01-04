@@ -29,7 +29,7 @@ block content
 								.row.text-centered
 									.col-md-12
 										if user.betaProgram
-											form(id="beta-program-opt-out", method="post", action="/beta/opt-out", novalidate)
+											form(id="beta-program-opt-out", method="post", action="/SHARELATEX/beta/opt-out", novalidate)
 												input(type="hidden", name="_csrf", value=csrfToken)
 												.form-group
 													a(
@@ -43,9 +43,9 @@ block content
 													)
 														span #{translate("beta_program_opt_out_action")}
 												.form-group
-													a(href="/project").btn.btn-link.btn-sm #{translate("back_to_your_projects")}
+													a(href="/SHARELATEX/project").btn.btn-link.btn-sm #{translate("back_to_your_projects")}
 										else
-											form(id="beta-program-opt-in", method="post", action="/beta/opt-in", novalidate)
+											form(id="beta-program-opt-in", method="post", action="/SHARELATEX/beta/opt-in", novalidate)
 												input(type="hidden", name="_csrf", value=csrfToken)
 												.form-group
 													button.btn.btn-primary(
@@ -53,4 +53,4 @@ block content
 													)
 														span #{translate("beta_program_opt_in_action")}
 												.form-group
-													a(href="/project").btn.btn-link.btn-sm #{translate("back_to_your_projects")}
+													a(href="/SHARELATEX/project").btn.btn-link.btn-sm #{translate("back_to_your_projects")}

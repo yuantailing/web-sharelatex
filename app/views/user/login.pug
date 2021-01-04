@@ -11,7 +11,7 @@ block content
 					.card
 						.page-header
 							h1 #{translate("log_in")}
-						form(async-form="login", name="loginForm", action='/login', method="POST", ng-cloak)
+						form(async-form="login", name="loginForm", action='/SHARELATEX/login', method="POST", ng-cloak)
 							input(name='_csrf', type='hidden', value=csrfToken)
 							form-messages(for="loginForm")
 							.form-group
@@ -45,7 +45,7 @@ block content
 								)
 									span(ng-show="!loginForm.inflight") #{translate("login")}
 									span(ng-show="loginForm.inflight") #{translate("logging_in")}…
-								a.pull-right.hidden(href='/user/password/reset') #{translate("forgot_your_password")}?
+								a.pull-right.hidden(href='/SHARELATEX/user/password/reset') #{translate("forgot_your_password")}?
 							p.login-register-hr-text-container.text-center
 								span.login-register-hr-text or
 							div

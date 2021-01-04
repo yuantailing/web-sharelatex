@@ -14,7 +14,7 @@ block content
 		.editor.full-size
 			div
 				| &nbsp;
-				a(href="/project", style="font-size: 2rem; margin-left: 1rem; color: #ddd;")
+				a(href="/SHARELATEX/project", style="font-size: 2rem; margin-left: 1rem; color: #ddd;")
 					i.fa.fa-arrow-left
 
 			.loading-screen(
@@ -42,7 +42,7 @@ block content
 							div(ng-switch-default)
 								.alert.alert-danger(aria-live="assertive") #{translate('token_access_failure')}
 								p
-									a(href="/") #{translate('home')}
+									a(href="/SHARELATEX/") #{translate('home')}
 
 			.loading-screen(
 				ng-show="mode == 'v1Import'"
@@ -52,7 +52,7 @@ block content
 						.col-sm-8.col-sm-offset-2
 							h1.text-center Move project to Overleaf v2
 							img.v2-import__img(
-								src="/img/v1-import/v2-editor.png"
+								src="/SHARELATEX/img/v1-import/v2-editor.png"
 								alt="The new V2 editor."
 							)
 
@@ -62,7 +62,7 @@ block content
 								p.text-center.row-spaced-small
 									| The project you are attempting to access must be imported to Overleaf v2 before it can be accessed. Please contact the project owner or
 									|
-									a(href="/contact") contact support
+									a(href="/SHARELATEX/contact") contact support
 									|
 									| for assistance.
 
@@ -74,7 +74,7 @@ block content
 
 								.row-spaced.text-center
 									a.btn.btn-primary(
-										href="/login?redir={{ currentPath() }}"
+										href="/SHARELATEX/login?redir={{ currentPath() }}"
 									) Log In To Move Project
 
 							div(ng-if="v1ImportData.status == 'canDownloadZip'")

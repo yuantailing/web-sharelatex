@@ -104,10 +104,10 @@ module.exports = {
   renderSetPasswordForm(req, res) {
     if (req.query.passwordResetToken != null) {
       req.session.resetToken = req.query.passwordResetToken
-      return res.redirect('/user/password/set')
+      return res.redirect('/SHARELATEX/user/password/set')
     }
     if (req.session.resetToken == null) {
-      return res.redirect('/user/password/reset')
+      return res.redirect('/SHARELATEX/user/password/reset')
     }
     res.render('user/setPassword', {
       title: 'set_password',

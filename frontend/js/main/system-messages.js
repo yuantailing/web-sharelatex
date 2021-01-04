@@ -21,7 +21,7 @@ App.controller('SystemMessagesController', ($http, $scope) => {
     }
 
     $http
-      .get('/system/messages')
+      .get('/SHARELATEX/system/messages')
       .then(response => {
         // Ignore if content-type is anything but JSON, prevents a bug where
         // the user logs out in another tab, then a 302 redirect was returned,

@@ -86,11 +86,11 @@ mixin linkPrintNewTab(linkText, linkClass, icon, track)
 		span(ng-non-bindable) #{linkText ? linkText : 'print'}
 
 mixin linkSignIn(linkText, linkClass, redirect)
-	a(href=`/login${redirect ? '?redir=' + redirect : ''}` class=linkClass ? linkClass : '', ng-non-bindable)
+	a(href=`/SHARELATEX/login${redirect ? '?redir=' + redirect : ''}` class=linkClass ? linkClass : '', ng-non-bindable)
 		| #{linkText ? linkText : 'sign in'}
 
 mixin linkSignUp(linkText, linkClass, redirect)
-	a(href=`/register${redirect ? '?redir=' + redirect : ''}` class=linkClass ? linkClass : '', ng-non-bindable)
+	a(href=`/SHARELATEX/register${redirect ? '?redir=' + redirect : ''}` class=linkClass ? linkClass : '', ng-non-bindable)
 		| #{linkText ? linkText : 'sign up'}
 
 mixin linkTweet(linkText, linkClass, tweetText, track)

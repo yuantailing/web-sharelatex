@@ -30,9 +30,9 @@ module.exports = HomeController = {
   index(req, res) {
     if (AuthenticationController.isUserLoggedIn(req)) {
       if (req.query.scribtex_path != null) {
-        return res.redirect(`/project?scribtex_path=${req.query.scribtex_path}`)
+        return res.redirect(`/SHARELATEX/project?scribtex_path=${req.query.scribtex_path}`)
       } else {
-        return res.redirect('/project')
+        return res.redirect('/SHARELATEX/project')
       }
     } else {
       return HomeController.home(req, res)
@@ -43,7 +43,7 @@ module.exports = HomeController = {
     if (Features.hasFeature('homepage') && homepageExists) {
       return res.render('external/home/v2')
     } else {
-      return res.redirect('/login')
+      return res.redirect('/SHARELATEX/login')
     }
   },
 

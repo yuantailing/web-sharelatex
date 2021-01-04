@@ -30,11 +30,11 @@ const TokenAccessHandler = {
   READ_ONLY_URL_REGEX: new RegExp(`^/read/${READ_ONLY_TOKEN_PATTERN}$`),
 
   makeReadAndWriteTokenUrl(token) {
-    return `/${token}`
+    return `/SHARELATEX/${token}`
   },
 
   makeReadOnlyTokenUrl(token) {
-    return `/read/${token}`
+    return `/SHARELATEX/read/${token}`
   },
 
   makeTokenUrl(token) {
