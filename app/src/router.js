@@ -1107,7 +1107,7 @@ function initialize(webRouter, privateApiRouter, publicApiRouter) {
     TokenAccessController.grantTokenAccessReadOnly
   )
 
-  CgRouter.apply(webRouter);
+  CgRouter.apply(webRouter)
 
   webRouter.get('*', ErrorController.notFound)
 }

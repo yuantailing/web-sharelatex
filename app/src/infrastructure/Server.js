@@ -143,11 +143,20 @@ passport.use(
     {
       clientID: Settings.cgservice.GITHUB_CLIENT_ID,
       clientSecret: Settings.cgservice.GITHUB_CLIENT_SECRET,
-      passReqToCallback: true,
+      passReqToCallback: true
     },
     function(req, accessToken, refreshToken, profile, cb) {
-      AuthenticationController.doPassportLogin(req, 'github_id__' + profile.id,
-        {provider: 'github', id: profile.id, login: profile.username, accessToken: accessToken}, cb);
+      AuthenticationController.doPassportLogin(
+        req,
+        'github_id__' + profile.id,
+        {
+          provider: 'github',
+          id: profile.id,
+          login: profile.username,
+          accessToken: accessToken
+        },
+        cb
+      )
     }
   )
 )

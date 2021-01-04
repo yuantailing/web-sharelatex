@@ -254,13 +254,19 @@ const TokenAccessHandler = {
   },
 
   getV1DocPublishedInfo(token, callback) {
-    return Project.findOne({'publicAccesLevel': 'tokenBased', 'tokens.readOnly': token}, (error, project) => {
-      if (error != null)
-        return callback(error);
-      if (project != null && project.publicAccesLevel === 'tokenBased' && project.tokens.readOnly === token)
-        return callback(null, { allow: true });
-      return callback(null, { allow: false });
-    });
+    return Project.findOne(
+      { publicAccesLevel: 'tokenBased', 'tokens.readOnly': token },
+      (error, project) => {
+        if (error != null) return callback(error)
+        if (
+          project != null &&
+          project.publicAccesLevel === 'tokenBased' &&
+          project.tokens.readOnly === token
+        )
+          return callback(null, { allow: true })
+        return callback(null, { allow: false })
+      }
+    )
   },
 
   getV1DocInfo(token, v2UserId, callback) {
