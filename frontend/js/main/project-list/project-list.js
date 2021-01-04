@@ -471,7 +471,7 @@ App.controller('ProjectPageController', function(
     })
 
     modalInstance.result.then(
-      projectId => (window.location = `/project/${projectId}`)
+      projectId => (window.location = `/SHARELATEX/project/${projectId}`)
     )
   }
 

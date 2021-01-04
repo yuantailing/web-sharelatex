@@ -323,7 +323,7 @@ App.controller('PdfController', function(
     ) {
       return `${pdfDownloadDomain}${path}`
     } else {
-      return path
+      return '/SHARELATEX' + path
     }
   }
 
@@ -542,11 +542,11 @@ App.controller('PdfController', function(
         // FIXME clean this up when we have file.urls out consistently
         opts.url = file.url
       } else if (file && file.build) {
-        opts.url = `/SHARELATEX/project/${$scope.project_id}/build/${
+        opts.url = `/project/${$scope.project_id}/build/${
           file.build
         }/output/${name}`
       } else {
-        opts.url = `/SHARELATEX/project/${$scope.project_id}/output/${name}`
+        opts.url = `/project/${$scope.project_id}/output/${name}`
       }
       // check if we need to bust cache (build id is unique so don't need it in that case)
       if (!(file && file.build)) {

@@ -271,6 +271,6 @@ module.exports = AuthorizationMiddleware = {
     if (from) {
       AuthenticationController.setRedirectInSession(req, from)
     }
-    res.redirect('/SHARELATEX/SHARELATEX/login')
+    res.redirect('/SHARELATEX/login')
   }
 }

@@ -266,7 +266,7 @@ App.controller('ShareProjectModalController', function(
 
   $scope.$watch('project.tokens.readAndWrite', function(token) {
     if (token != null) {
-      $scope.readAndWriteTokenLink = `${location.origin}/${token}`
+      $scope.readAndWriteTokenLink = `${location.origin}/SHARELATEX/${token}`
     } else {
       $scope.readAndWriteTokenLink = null
     }
@@ -274,7 +274,7 @@ App.controller('ShareProjectModalController', function(
 
   $scope.$watch('project.tokens.readOnly', function(token) {
     if (token != null) {
-      $scope.readOnlyTokenLink = `${location.origin}/read/${token}`
+      $scope.readOnlyTokenLink = `${location.origin}/SHARELATEX/read/${token}`
     } else {
       $scope.readOnlyTokenLink = null
     }

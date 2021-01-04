@@ -75,7 +75,7 @@ define(['base'], App =>
 
     $scope.autocompleteContacts = []
     ;(loadAutocompleteUsers = () =>
-      $http.get('/user/contacts').then(function(response) {
+      $http.get('/SHARELATEX/user/contacts').then(function(response) {
         const { data } = response
         $scope.autocompleteContacts = data.contacts || []
         return (() => {
@@ -317,7 +317,7 @@ define(['base'], App =>
 
     $scope.$watch('project.tokens.readAndWrite', function(token) {
       if (token != null) {
-        return ($scope.readAndWriteTokenLink = `${location.origin}/${token}`)
+        return ($scope.readAndWriteTokenLink = `${location.origin}/SHARELATEX/${token}`)
       } else {
         return ($scope.readAndWriteTokenLink = null)
       }
@@ -325,7 +325,7 @@ define(['base'], App =>
 
     $scope.$watch('project.tokens.readOnly', function(token) {
       if (token != null) {
-        return ($scope.readOnlyTokenLink = `${location.origin}/read/${token}`)
+        return ($scope.readOnlyTokenLink = `${location.origin}/SHARELATEX/read/${token}`)
       } else {
         return ($scope.readOnlyTokenLink = null)
       }
