@@ -48,7 +48,7 @@ const Features = {
       case 'overleaf-integration':
         return !!Settings.overleaf
       case 'references':
-        return !!_.get(Settings, ['apis', 'references', 'url'])
+        return true;
       case 'saml':
         return Settings.enableSaml
       case 'link-url':

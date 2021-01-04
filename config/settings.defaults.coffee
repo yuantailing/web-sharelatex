@@ -532,10 +532,7 @@ module.exports = settings =
 		# Example:
 		#   header_extras: [{text: "Some Page", url: "http://example.com/some/page", class: "subdued"}]
 
-	recaptcha:
-		disabled:
-			invite: true
-			register: true
+	recaptcha: null
 
 	customisation: {}
 
@@ -664,3 +661,8 @@ module.exports = settings =
 					'th': [ 'abbr', 'headers', 'colspan', 'rowspan', 'scope', 'sorted', 'style' ]
 					'tr': [ 'class' ]
 					'video': [ 'alt', 'class', 'controls', 'height', 'width' ]
+
+	cgservice:
+		GITHUB_CLIENT_ID: process.env['GITHUB_CLIENT_ID']
+		GITHUB_CLIENT_SECRET: process.env['GITHUB_CLIENT_SECRET']
+		GITHUB_PERSONAL_ACCESS_TOKEN: process.env['GITHUB_PERSONAL_ACCESS_TOKEN']
