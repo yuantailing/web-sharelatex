@@ -266,7 +266,7 @@ App.controller('PdfController', function(
     if (options == null) {
       options = {}
     }
-    const url = `/project/${$scope.project_id}/compile`
+    const url = `/SHARELATEX/project/${$scope.project_id}/compile`
     const params = {}
     if (options.isAutoCompileOnLoad || options.isAutoCompileOnChange) {
       params['auto_compile'] = true
@@ -379,12 +379,12 @@ App.controller('PdfController', function(
         const { build } = fileByPath['output.pdf']
         $scope.pdf.url = buildPdfDownloadUrl(
           pdfDownloadDomain,
-          `/project/${$scope.project_id}/build/${build}/output/output.pdf`
+          `/SHARELATEX/project/${$scope.project_id}/build/${build}/output/output.pdf`
         )
       } else {
         $scope.pdf.url = buildPdfDownloadUrl(
           pdfDownloadDomain,
-          `/project/${$scope.project_id}/output/output.pdf`
+          `/SHARELATEX/project/${$scope.project_id}/output/output.pdf`
         )
       }
       // check if we need to bust cache (build id is unique so don't need it in that case)
@@ -403,7 +403,7 @@ App.controller('PdfController', function(
         buildId = fileByPath['output.pdf'].build
       }
       $scope.pdf.downloadUrl =
-        `/download/project/${$scope.project_id}${
+        `/SHARELATEX/download/project/${$scope.project_id}${
           buildId ? '/build/' + buildId : ''
         }/output/output.pdf` + createQueryString(qs)
       fetchLogs(fileByPath, { pdfDownloadDomain })
@@ -506,7 +506,7 @@ App.controller('PdfController', function(
             ? `${file.path.replace(/^output\./, '')} file`
             : file.path,
           url:
-            `/project/${$scope.project_id}/output/${file.path}` +
+            `/SHARELATEX/project/${$scope.project_id}/output/${file.path}` +
             createQueryString(qs),
           main: !!isOutputFile,
           fileName: file.path,
@@ -542,11 +542,11 @@ App.controller('PdfController', function(
         // FIXME clean this up when we have file.urls out consistently
         opts.url = file.url
       } else if (file && file.build) {
-        opts.url = `/project/${$scope.project_id}/build/${
+        opts.url = `/SHARELATEX/project/${$scope.project_id}/build/${
           file.build
         }/output/${name}`
       } else {
-        opts.url = `/project/${$scope.project_id}/output/${name}`
+        opts.url = `/SHARELATEX/project/${$scope.project_id}/output/${name}`
       }
       // check if we need to bust cache (build id is unique so don't need it in that case)
       if (!(file && file.build)) {
@@ -788,7 +788,7 @@ App.controller('PdfController', function(
     }
 
     return $http({
-      url: `/project/${$scope.project_id}/compile/stop`,
+      url: `/SHARELATEX/project/${$scope.project_id}/compile/stop`,
       method: 'POST',
       params: {
         clsiserverid: ide.clsiServerId
@@ -804,7 +804,7 @@ App.controller('PdfController', function(
     const deferred = $q.defer()
 
     $http({
-      url: `/project/${$scope.project_id}/output`,
+      url: `/SHARELATEX/project/${$scope.project_id}/output`,
       method: 'DELETE',
       params: {
         clsiserverid: ide.clsiServerId
@@ -918,7 +918,7 @@ App.factory('synctex', function(ide, $http, $q) {
       const { row, column } = cursorPosition
 
       $http({
-        url: `/project/${ide.project_id}/sync/code`,
+        url: `/SHARELATEX/project/${ide.project_id}/sync/code`,
         method: 'GET',
         params: {
           file: path,
@@ -979,7 +979,7 @@ App.factory('synctex', function(ide, $http, $q) {
       }
 
       $http({
-        url: `/project/${ide.project_id}/sync/pdf`,
+        url: `/SHARELATEX/project/${ide.project_id}/sync/pdf`,
         method: 'GET',
         params: {
           page: position.page + 1,

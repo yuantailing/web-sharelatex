@@ -64,7 +64,7 @@ export default App.factory('metadata', function($http, ide) {
 
   metadata.loadProjectMetaFromServer = () =>
     $http
-      .get(`/project/${window.project_id}/metadata`)
+      .get(`/SHARELATEX/project/${window.project_id}/metadata`)
       .then(function(response) {
         const { data } = response
         if (data.projectMeta) {
@@ -80,7 +80,7 @@ export default App.factory('metadata', function($http, ide) {
       })
 
   metadata.loadDocMetaFromServer = docId =>
-    $http.post(`/project/${window.project_id}/doc/${docId}/metadata`, {
+    $http.post(`/SHARELATEX/project/${window.project_id}/doc/${docId}/metadata`, {
       _csrf: window.csrfToken
     })
 

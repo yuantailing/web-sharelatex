@@ -21,7 +21,7 @@ export default App.controller('FreeTrialModalController', function(
           source
         )
       }
-      url = `/user/subscription/new?planCode=${plan}&ssp=true`
+      url = `/SHARELATEX/user/subscription/new?planCode=${plan}&ssp=true`
       url = `${url}&itm_campaign=${source}`
       if (version) {
         url = `${url}&itm_content=${version}`
@@ -48,7 +48,7 @@ App.controller('UpgradeModalController', function($scope, eventTracking) {
       if (typeof ga === 'function') {
         ga('send', 'event', 'subscription-funnel', 'upgraded-plan', source)
       }
-      url = '/user/subscription'
+      url = '/SHARELATEX/user/subscription'
       $scope.startedFreeTrial = true
 
       w.location = url

@@ -456,7 +456,7 @@ App.controller('GroupPlansModalPurchaseController', function(
     if ($location.search().itm_content) {
       queryParams.itm_content = $location.search().itm_content
     }
-    window.location = `/user/subscription/new?${$httpParamSerializer(
+    window.location = `/SHARELATEX/user/subscription/new?${$httpParamSerializer(
       queryParams
     )}`
   }

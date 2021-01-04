@@ -67,9 +67,9 @@ app.factory('unAuthHttpResponseInterceptor', ($q, $location) => ({
       // for /project urls set the ?redir parameter to come back here
       // otherwise just go to the login page
       if (window.location.pathname.match(/^\/project/)) {
-        window.location = `/login?redir=${encodeURI(window.location.pathname)}`
+        window.location = `/SHARELATEX/login?redir=${encodeURI(window.location.pathname)}`
       } else {
-        window.location = '/login'
+        window.location = '/SHARELATEX/login'
       }
     }
     // pass the response back to the original requester

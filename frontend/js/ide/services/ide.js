@@ -62,7 +62,7 @@ App.factory('ide', function($http, queuedHttp, $modal, $q, $filter, $timeout) {
     } else if (typeof error === 'string') {
       errorObj.message = error
     }
-    return $http.post('/error/client', {
+    return $http.post('/SHARELATEX/error/client', {
       error: errorObj,
       meta,
       _csrf: window.csrfToken

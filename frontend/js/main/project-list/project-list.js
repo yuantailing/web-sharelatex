@@ -344,7 +344,7 @@ App.controller('ProjectPageController', function(
     for (let projectId of removedProjectIds) {
       queuedHttp({
         method: 'DELETE',
-        url: `/tag/${tag._id}/project/${projectId}`,
+        url: `/SHARELATEX/tag/${tag._id}/project/${projectId}`,
         headers: {
           'X-CSRF-Token': window.csrfToken
         }
@@ -369,7 +369,7 @@ App.controller('ProjectPageController', function(
       project.tags.splice(index, 1)
       queuedHttp({
         method: 'DELETE',
-        url: `/tag/${tag._id}/project/${project.id}`,
+        url: `/SHARELATEX/tag/${tag._id}/project/${project.id}`,
         headers: {
           'X-CSRF-Token': window.csrfToken
         }
@@ -406,7 +406,7 @@ App.controller('ProjectPageController', function(
     }
 
     for (let projectId of addedProjectIds) {
-      queuedHttp.post(`/tag/${tag._id}/project/${projectId}`, {
+      queuedHttp.post(`/SHARELATEX/tag/${tag._id}/project/${projectId}`, {
         _csrf: window.csrfToken
       })
     }
@@ -435,7 +435,7 @@ App.controller('ProjectPageController', function(
       template = 'none'
     }
     return queuedHttp
-      .post('/project/new', {
+      .post('/SHARELATEX/project/new', {
         _csrf: window.csrfToken,
         projectName: name,
         template
@@ -477,7 +477,7 @@ App.controller('ProjectPageController', function(
 
   $scope.renameProject = (project, newName) =>
     queuedHttp
-      .post(`/project/${project.id}/rename`, {
+      .post(`/SHARELATEX/project/${project.id}/rename`, {
         newProjectName: newName,
         _csrf: window.csrfToken
       })
@@ -512,7 +512,7 @@ App.controller('ProjectPageController', function(
       'Clone'
     )
     return queuedHttp
-      .post(`/project/${project.id}/clone`, {
+      .post(`/SHARELATEX/project/${project.id}/clone`, {
         _csrf: window.csrfToken,
         projectName: cloneName
       })
@@ -721,7 +721,7 @@ App.controller('ProjectPageController', function(
   const _archiveProject = function(project) {
     return queuedHttp({
       method: 'POST',
-      url: `/project/${project.id}/archive`,
+      url: `/SHARELATEX/project/${project.id}/archive`,
       headers: {
         'X-CSRF-Token': window.csrfToken
       }
@@ -731,7 +731,7 @@ App.controller('ProjectPageController', function(
   const _unarchiveProject = function(project) {
     return queuedHttp({
       method: 'DELETE',
-      url: `/project/${project.id}/archive`,
+      url: `/SHARELATEX/project/${project.id}/archive`,
       headers: {
         'X-CSRF-Token': window.csrfToken
       }
@@ -741,7 +741,7 @@ App.controller('ProjectPageController', function(
   const _trashProject = function(project) {
     return queuedHttp({
       method: 'POST',
-      url: `/project/${project.id}/trash`,
+      url: `/SHARELATEX/project/${project.id}/trash`,
       headers: {
         'X-CSRF-Token': window.csrfToken
       }
@@ -751,7 +751,7 @@ App.controller('ProjectPageController', function(
   const _untrashProject = function(project) {
     return queuedHttp({
       method: 'DELETE',
-      url: `/project/${project.id}/trash`,
+      url: `/SHARELATEX/project/${project.id}/trash`,
       headers: {
         'X-CSRF-Token': window.csrfToken
       }
@@ -761,7 +761,7 @@ App.controller('ProjectPageController', function(
   const _leaveProject = function(project) {
     return queuedHttp({
       method: 'POST',
-      url: `/project/${project.id}/leave`,
+      url: `/SHARELATEX/project/${project.id}/leave`,
       headers: {
         'X-CSRF-Token': window.csrfToken
       }
@@ -771,7 +771,7 @@ App.controller('ProjectPageController', function(
   const _deleteProject = function(project) {
     return queuedHttp({
       method: 'DELETE',
-      url: `/project/${project.id}`,
+      url: `/SHARELATEX/project/${project.id}`,
       headers: {
         'X-CSRF-Token': window.csrfToken
       }
@@ -814,9 +814,9 @@ App.controller('ProjectPageController', function(
       'Download Zip'
     )
     if (projectIds.length > 1) {
-      path = `/project/download/zip?project_ids=${projectIds.join(',')}`
+      path = `/SHARELATEX/project/download/zip?project_ids=${projectIds.join(',')}`
     } else {
-      path = `/project/${projectIds[0]}/download/zip`
+      path = `/SHARELATEX/project/${projectIds[0]}/download/zip`
     }
     return (window.location = path)
   }
@@ -850,7 +850,7 @@ App.controller('ProjectListItemController', function(
   ProjectListService
 ) {
   $scope.projectLink = function(project) {
-    return `/project/${project.id}`
+    return `/SHARELATEX/project/${project.id}`
   }
 
   $scope.isLinkSharingProject = project => project.source === 'token'

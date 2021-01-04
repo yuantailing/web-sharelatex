@@ -24,7 +24,7 @@ export default App.controller('TeamInviteController', function($scope, $http) {
 
   $scope.cancelPersonalSubscription = function() {
     $scope.inflight = true
-    const request = $http.post('/user/subscription/cancel', {
+    const request = $http.post('/SHARELATEX/user/subscription/cancel', {
       _csrf: window.csrfToken
     })
     request.then(function() {
@@ -40,7 +40,7 @@ export default App.controller('TeamInviteController', function($scope, $http) {
 
   return ($scope.joinTeam = function() {
     $scope.inflight = true
-    const request = $http.put(`/subscription/invites/${window.inviteToken}/`, {
+    const request = $http.put(`/SHARELATEX/subscription/invites/${window.inviteToken}/`, {
       _csrf: window.csrfToken
     })
     request.then(function(response) {

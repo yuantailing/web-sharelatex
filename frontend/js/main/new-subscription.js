@@ -39,7 +39,7 @@ export default App.controller('NewSubscriptionController', function(
       'subscription-form-switch-to-student',
       window.plan_code
     )
-    window.location = `/user/subscription/new?planCode=${planCode}&currency=${
+    window.location = `/SHARELATEX/user/subscription/new?planCode=${planCode}&currency=${
       $scope.currencyCode
     }&cc=${$scope.data.coupon}&itm_campaign=${window.ITMCampaign}&itm_content=${
       window.ITMContent
@@ -276,7 +276,7 @@ export default App.controller('NewSubscriptionController', function(
         postData.subscriptionDetails.plan_code
       )
       return $http
-        .post('/user/subscription/create', postData)
+        .post('/SHARELATEX/user/subscription/create', postData)
         .then(function() {
           eventTracking.sendMB('subscription-submission-success')
           eventTracking.send(
@@ -284,7 +284,7 @@ export default App.controller('NewSubscriptionController', function(
             'subscription-submission-success',
             postData.subscriptionDetails.plan_code
           )
-          window.location.href = '/user/subscription/thank-you'
+          window.location.href = '/SHARELATEX/user/subscription/thank-you'
         })
         .catch(response => {
           $scope.processing = false

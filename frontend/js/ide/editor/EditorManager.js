@@ -270,7 +270,7 @@ export default (EditorManager = (function() {
           this.ide.reportError(error, meta)
           this.ide.showOutOfSyncModal(
             'Out of sync',
-            "Sorry, this file has gone out of sync and we need to do a full refresh. <br> <a href='/learn/Kb/Editor_out_of_sync_problems'>Please see this help guide for more information</a>",
+            "Sorry, this file has gone out of sync and we need to do a full refresh. <br> <a href='/SHARELATEX/learn/Kb/Editor_out_of_sync_problems'>Please see this help guide for more information</a>",
             sharejs_doc.doc._doc.snapshot
           )
         }

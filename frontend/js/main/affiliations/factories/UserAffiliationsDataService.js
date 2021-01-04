@@ -414,11 +414,11 @@ App.factory('UserAffiliationsDataService', function($http, $q) {
   const getDefaultDepartmentHints = () => $q.resolve(defaultDepartmentHints)
 
   const getUserEmails = () =>
-    $http.get('/user/emails').then(response => response.data)
+    $http.get('/SHARELATEX/user/emails').then(response => response.data)
 
   const getUserEmailsEnsureAffiliation = () =>
     $http
-      .get('/user/emails?ensureAffiliation=true')
+      .get('/SHARELATEX/user/emails?ensureAffiliation=true')
       .then(response => response.data)
 
   const getUserDefaultEmail = () =>
@@ -432,7 +432,7 @@ App.factory('UserAffiliationsDataService', function($http, $q) {
       universitiesFromCountry = universities[country.code]
     } else {
       universitiesFromCountry = $http
-        .get('/institutions/list', {
+        .get('/SHARELATEX/institutions/list', {
           params: { country_code: country.code }
         })
         .then(response => (universities[country.code] = response.data))
@@ -447,7 +447,7 @@ App.factory('UserAffiliationsDataService', function($http, $q) {
       return $q.resolve(universitiesByDomain[partialDomainInput])
     } else {
       return $http
-        .get('/institutions/domains', {
+        .get('/SHARELATEX/institutions/domains', {
           params: { hostname: partialDomainInput, limit: 1 }
         })
         .then(function(response) {
@@ -464,11 +464,11 @@ App.factory('UserAffiliationsDataService', function($http, $q) {
 
   const getUniversityDetails = universityId =>
     $http
-      .get(`/institutions/list/${universityId}`)
+      .get(`/SHARELATEX/institutions/list/${universityId}`)
       .then(response => response.data)
 
   const addUserEmail = email =>
-    $http.post('/user/emails', {
+    $http.post('/SHARELATEX/user/emails', {
       email,
       _csrf: window.csrfToken
     })
@@ -480,7 +480,7 @@ App.factory('UserAffiliationsDataService', function($http, $q) {
     role,
     department
   ) =>
-    $http.post('/user/emails', {
+    $http.post('/SHARELATEX/user/emails', {
       email,
       university: {
         name: unknownUniversityName,
@@ -492,7 +492,7 @@ App.factory('UserAffiliationsDataService', function($http, $q) {
     })
 
   const addUserAffiliation = (email, universityId, role, department) =>
-    $http.post('/user/emails', {
+    $http.post('/SHARELATEX/user/emails', {
       email,
       university: {
         id: universityId
@@ -503,7 +503,7 @@ App.factory('UserAffiliationsDataService', function($http, $q) {
     })
 
   const addRoleAndDepartment = (email, role, department) =>
-    $http.post('/user/emails/endorse', {
+    $http.post('/SHARELATEX/user/emails/endorse', {
       email,
       role,
       department,
@@ -511,19 +511,19 @@ App.factory('UserAffiliationsDataService', function($http, $q) {
     })
 
   const setDefaultUserEmail = email =>
-    $http.post('/user/emails/default', {
+    $http.post('/SHARELATEX/user/emails/default', {
       email,
       _csrf: window.csrfToken
     })
 
   const removeUserEmail = email =>
-    $http.post('/user/emails/delete', {
+    $http.post('/SHARELATEX/user/emails/delete', {
       email,
       _csrf: window.csrfToken
     })
 
   const resendConfirmationEmail = email =>
-    $http.post('/user/emails/resend_confirmation', {
+    $http.post('/SHARELATEX/user/emails/resend_confirmation', {
       email,
       _csrf: window.csrfToken
     })

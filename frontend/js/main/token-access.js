@@ -16,7 +16,7 @@ App.controller(
     }
 
     $scope.buildZipDownloadPath = projectId => {
-      return `/overleaf/project/${projectId}/download/zip`
+      return `/SHARELATEX/overleaf/project/${projectId}/download/zip`
     }
 
     $scope.getProjectName = () => {

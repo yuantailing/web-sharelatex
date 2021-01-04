@@ -18,7 +18,7 @@ import _ from 'lodash'
  * Full docs: https://github.com/decaffeinate/decaffeinate/blob/master/docs/suggestions.md
  */
 import App from '../base'
-const SUBSCRIPTION_URL = '/user/subscription/update'
+const SUBSCRIPTION_URL = '/SHARELATEX/user/subscription/update'
 
 const ensureRecurlyIsSetup = _.once(() => {
   if (typeof recurly === 'undefined' || !recurly) {
@@ -44,7 +44,7 @@ App.controller('MetricsEmailController', function($scope, $http) {
     $scope.subscriptionChanging = true
     return $http({
       method: 'POST',
-      url: `/institutions/${institutionId}/emailSubscription`,
+      url: `/SHARELATEX/institutions/${institutionId}/emailSubscription`,
       headers: {
         'X-CSRF-Token': window.csrfToken
       }
@@ -146,7 +146,7 @@ App.controller('LeaveGroupModalController', function(
   $scope.confirmLeaveGroup = function() {
     $scope.inflight = true
     return $http({
-      url: '/subscription/group/user',
+      url: '/SHARELATEX/subscription/group/user',
       method: 'DELETE',
       params: {
         subscriptionId: $scope.subscriptionId,
@@ -245,8 +245,8 @@ App.controller('RecurlyCancellationController', function(
 
     $scope.inflight = true
     return $http
-      .post('/user/subscription/cancel', body)
-      .then(() => (location.href = '/user/subscription/canceled'))
+      .post('/SHARELATEX/user/subscription/cancel', body)
+      .then(() => (location.href = '/SHARELATEX/user/subscription/canceled'))
       .catch(() => console.log('something went wrong changing plan'))
   }
 
@@ -254,7 +254,7 @@ App.controller('RecurlyCancellationController', function(
     const body = { _csrf: window.csrfToken }
     $scope.inflight = true
     return $http
-      .put('/user/subscription/extend', body)
+      .put('/SHARELATEX/user/subscription/extend', body)
       .then(() => location.reload())
       .catch(() => console.log('something went wrong changing plan'))
   }

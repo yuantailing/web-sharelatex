@@ -63,7 +63,7 @@ App.controller('ShareProjectModalController', function(
     //  their contacts. This request would result in a 403 for anonymous
     //  users, which in turn would redirect them to the /login.
   } else {
-    $http.get('/user/contacts').then(processContactsResponse)
+    $http.get('/SHARELATEX/user/contacts').then(processContactsResponse)
   }
 
   function processContactsResponse(response) {

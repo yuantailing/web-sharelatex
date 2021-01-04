@@ -186,7 +186,7 @@ class SpellCheckManager {
   }
 
   learnWord(highlight) {
-    this.apiRequest('/learn', { word: highlight.word })
+    this.apiRequest('/SHARELATEX/learn', { word: highlight.word })
     this.adapter.highlightedWordManager.removeWord(highlight.word)
     const language = this.$scope.spellCheckLanguage
     this.cache.put(`${language}:${highlight.word}`, true)
@@ -341,7 +341,7 @@ class SpellCheckManager {
     const requestHandler = this.$q.defer()
     const options = { timeout: requestHandler.promise }
     this.$http
-      .post(`/spelling${endpoint}`, data, options)
+      .post(`/SHARELATEX/spelling${endpoint}`, data, options)
       .then(response => {
         return callback(null, response.data)
       })

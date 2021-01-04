@@ -49,7 +49,7 @@ App.factory('eventTracking', function($http, localStorage) {
 
   const _sendEditingSessionHeartbeat = () =>
     $http({
-      url: `/editingSession/${window.project_id}`,
+      url: `/SHARELATEX/editingSession/${window.project_id}`,
       method: 'PUT',
       headers: {
         'X-CSRF-Token': window.csrfToken
@@ -96,7 +96,7 @@ App.factory('eventTracking', function($http, localStorage) {
         segmentation = {}
       }
       return $http({
-        url: `/event/${key}`,
+        url: `/SHARELATEX/event/${key}`,
         method: 'POST',
         data: segmentation,
         headers: {

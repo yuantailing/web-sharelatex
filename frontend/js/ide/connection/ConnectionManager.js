@@ -155,7 +155,7 @@ export default (ConnectionManager = (function() {
           this.connected = false
           return this.$scope.$apply(() => {
             return (this.$scope.state.error =
-              "Unable to connect, please view the <u><a href='/learn/Kb/Connection_problems'>connection problems guide</a></u> to fix the issue.")
+              "Unable to connect, please view the <u><a href='/SHARELATEX/learn/Kb/Connection_problems'>connection problems guide</a></u> to fix the issue.")
           })
         }
       }
@@ -220,7 +220,7 @@ export default (ConnectionManager = (function() {
         this.connected = false
         return this.$scope.$apply(() => {
           return (this.$scope.state.error =
-            "Unable to connect, please view the <u><a href='/learn/Kb/Connection_problems'>connection problems guide</a></u> to fix the issue.")
+            "Unable to connect, please view the <u><a href='/SHARELATEX/learn/Kb/Connection_problems'>connection problems guide</a></u> to fix the issue.")
         })
       })
 
@@ -357,7 +357,7 @@ The editor will refresh in automatically in 10 seconds.\
         (err != null ? err.message : undefined) === 'not authorized' ||
         (err != null ? err.message : undefined) === 'invalid session'
       ) {
-        return (window.location = `/login?redir=${encodeURI(
+        return (window.location = `/SHARELATEX/login?redir=${encodeURI(
           window.location.pathname
         )}`)
       } else {

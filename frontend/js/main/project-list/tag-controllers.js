@@ -139,7 +139,7 @@ App.controller('NewTagModalController', function(
     $scope.state.inflight = true
     $scope.state.error = false
     $http
-      .post('/tag', {
+      .post('/SHARELATEX/tag', {
         _csrf: window.csrfToken,
         name
       })
@@ -180,7 +180,7 @@ App.controller('RenameTagModalController', function(
     $scope.state.inflight = true
     $scope.state.error = false
     return $http
-      .post(`/tag/${tag._id}/rename`, {
+      .post(`/SHARELATEX/tag/${tag._id}/rename`, {
         _csrf: window.csrfToken,
         name
       })
@@ -214,7 +214,7 @@ export default App.controller('DeleteTagModalController', function(
     $scope.state.error = false
     return $http({
       method: 'DELETE',
-      url: `/tag/${tag._id}`,
+      url: `/SHARELATEX/tag/${tag._id}`,
       headers: {
         'X-CSRF-Token': window.csrfToken
       }

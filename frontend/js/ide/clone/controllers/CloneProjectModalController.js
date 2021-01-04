@@ -29,7 +29,7 @@ export default App.controller('CloneProjectModalController', function(
   )
 
   const cloneProject = cloneName =>
-    $http.post(`/project/${ide.$scope.project._id}/clone`, {
+    $http.post(`/SHARELATEX/SHARELATEX/project/${ide.$scope.project._id}/clone`, {
       _csrf: window.csrfToken,
       projectName: cloneName
     })

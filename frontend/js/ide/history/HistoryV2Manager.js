@@ -260,7 +260,7 @@ export default (HistoryManager = (function() {
     }
 
     restoreFile(version, pathname) {
-      const url = `/project/${this.$scope.project_id}/restore_file`
+      const url = `/SHARELATEX/project/${this.$scope.project_id}/restore_file`
 
       return this.ide.$http.post(url, {
         version,
@@ -278,7 +278,7 @@ export default (HistoryManager = (function() {
     }
 
     _loadFileTree(toV, fromV) {
-      let url = `/project/${this.$scope.project_id}/filetree/diff`
+      let url = `/SHARELATEX/project/${this.$scope.project_id}/filetree/diff`
       let selection = this.$scope.history.selection
       const query = [`from=${fromV}`, `to=${toV}`]
       url += `?${query.join('&')}`
@@ -605,13 +605,13 @@ export default (HistoryManager = (function() {
         return
       }
 
-      let updatesURL = `/project/${this.ide.project_id}/updates?min_count=${
+      let updatesURL = `/SHARELATEX/project/${this.ide.project_id}/updates?min_count=${
         this.BATCH_SIZE
       }`
       if (this.$scope.history.nextBeforeTimestamp != null) {
         updatesURL += `&before=${this.$scope.history.nextBeforeTimestamp}`
       }
-      const labelsURL = `/project/${this.ide.project_id}/labels`
+      const labelsURL = `/SHARELATEX/project/${this.ide.project_id}/labels`
 
       const requests = { updates: this.ide.$http.get(updatesURL) }
 
@@ -708,7 +708,7 @@ export default (HistoryManager = (function() {
       if (toV == null) {
         return
       }
-      let url = `/project/${this.$scope.project_id}/diff`
+      let url = `/SHARELATEX/project/${this.$scope.project_id}/diff`
       const query = [
         `pathname=${encodeURIComponent(pathname)}`,
         `from=${toV}`,
@@ -754,7 +754,7 @@ export default (HistoryManager = (function() {
       }
 
       diff.loading = true
-      let url = `/project/${this.$scope.project_id}/diff`
+      let url = `/SHARELATEX/project/${this.$scope.project_id}/diff`
       const query = [`pathname=${encodeURIComponent(pathname)}`]
       if (diff.fromV != null && diff.toV != null) {
         query.push(`from=${diff.fromV}`, `to=${diff.toV}`)
@@ -784,7 +784,7 @@ export default (HistoryManager = (function() {
     }
 
     deleteLabel(label) {
-      const url = `/project/${this.$scope.project_id}/labels/${label.id}`
+      const url = `/SHARELATEX/project/${this.$scope.project_id}/labels/${label.id}`
 
       return this.ide
         .$http({
@@ -961,7 +961,7 @@ export default (HistoryManager = (function() {
     }
 
     _labelVersion(comment, version) {
-      const url = `/project/${this.$scope.project_id}/labels`
+      const url = `/SHARELATEX/project/${this.$scope.project_id}/labels`
       return this.ide.$http
         .post(url, {
           comment,
