@@ -18,24 +18,24 @@ mixin linkAdvisors(linkText, linkClass, track)
 		span(ng-non-bindable) #{linkText ? linkText : 'advisor programme'}
 
 mixin linkBenefits(linkText, linkClass)
-	a(href=(settings.siteUrl ? settings.siteUrl : '') + "/for/authors" class=linkClass ? linkClass : '', ng-non-bindable)
+	a(href=(settings.siteUrl ? settings.siteUrl : '') + "/SHARELATEX/for/authors" class=linkClass ? linkClass : '', ng-non-bindable)
 		| #{linkText ? linkText : 'benefits'}
 		
 mixin linkBlog(linkText, linkClass, slug)
 	if slug
-		a(href=(settings.siteUrl ? settings.siteUrl : '') + "/blog/" + slug class=linkClass ? linkClass : '', ng-non-bindable)
+		a(href=(settings.siteUrl ? settings.siteUrl : '') + "/SHARELATEX/blog/" + slug class=linkClass ? linkClass : '', ng-non-bindable)
 			| #{linkText ? linkText : 'blog'}
 
 mixin linkContact(linkText, linkClass)
-	a(href=(settings.siteUrl ? settings.siteUrl : '') + "/contact" class=linkClass ? linkClass : '', ng-non-bindable)
+	a(href=(settings.siteUrl ? settings.siteUrl : '') + "/SHARELATEX/contact" class=linkClass ? linkClass : '', ng-non-bindable)
 		| #{linkText ? linkText : 'contact'}
 
 mixin linkDash(linkText, linkClass)
-	a(href="/project" class=linkClass ? linkClass : '', ng-non-bindable)
+	a(href="/SHARELATEX/project" class=linkClass ? linkClass : '', ng-non-bindable)
 		| #{linkText ? linkText : 'project dashboard'}
 
 mixin linkEducation(linkText, linkClass)
-	a(href=(settings.siteUrl ? settings.siteUrl : '') + "/for/edu" class=linkClass ? linkClass : '', ng-non-bindable)
+	a(href=(settings.siteUrl ? settings.siteUrl : '') + "/SHARELATEX/for/edu" class=linkClass ? linkClass : '', ng-non-bindable)
 		| #{linkText ? linkText : 'teaching toolkit'}
 
 mixin linkInvite(linkText, linkClass, track)
@@ -46,7 +46,7 @@ mixin linkInvite(linkText, linkClass, track)
 	- var mbSegmentation = track && track.segmentation ? track.segmentation : null
 	- var trigger = track && track.trigger ? track.trigger : null
 
-	a(href="/user/bonus"
+	a(href="/SHARELATEX/user/bonus"
 		class=linkClass ? linkClass : ''
 		event-tracking-ga=gaCategory
 		event-tracking=gaAction
@@ -58,7 +58,7 @@ mixin linkInvite(linkText, linkClass, track)
 		span(ng-non-bindable) #{linkText ? linkText : 'invite your friends'}
 
 mixin linkPlansAndPricing(linkText, linkClass)
-	a(href="/user/subscription/plans" class=linkClass ? linkClass : '', ng-non-bindable)
+	a(href="/SHARELATEX/user/subscription/plans" class=linkClass ? linkClass : '', ng-non-bindable)
 		| #{linkText ? linkText : 'plans and pricing'}
 
 mixin linkPrintNewTab(linkText, linkClass, icon, track)
@@ -86,11 +86,11 @@ mixin linkPrintNewTab(linkText, linkClass, icon, track)
 		span(ng-non-bindable) #{linkText ? linkText : 'print'}
 
 mixin linkSignIn(linkText, linkClass, redirect)
-	a(href=`/login${redirect ? '?redir=' + redirect : ''}` class=linkClass ? linkClass : '', ng-non-bindable)
+	a(href=`/SHARELATEX/login${redirect ? '?redir=' + redirect : ''}` class=linkClass ? linkClass : '', ng-non-bindable)
 		| #{linkText ? linkText : 'sign in'}
 
 mixin linkSignUp(linkText, linkClass, redirect)
-	a(href=`/register${redirect ? '?redir=' + redirect : ''}` class=linkClass ? linkClass : '', ng-non-bindable)
+	a(href=`/SHARELATEX/register${redirect ? '?redir=' + redirect : ''}` class=linkClass ? linkClass : '', ng-non-bindable)
 		| #{linkText ? linkText : 'sign up'}
 
 mixin linkTweet(linkText, linkClass, tweetText, track)
@@ -114,5 +114,5 @@ mixin linkTweet(linkText, linkClass, tweetText, track)
 	) #{linkText ? linkText : 'tweet'}
 
 mixin linkUniversities(linkText, linkClass)
-	a(href=(settings.siteUrl ? settings.siteUrl : '') + "/for/universities" class=linkClass ? linkClass : '', ng-non-bindable)
+	a(href=(settings.siteUrl ? settings.siteUrl : '') + "/SHARELATEX/for/universities" class=linkClass ? linkClass : '', ng-non-bindable)
 		| #{linkText ? linkText : 'universities'}

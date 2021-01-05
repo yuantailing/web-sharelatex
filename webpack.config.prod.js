@@ -31,7 +31,7 @@ module.exports = merge.smart(
               loader: 'file-loader',
               options: {
                 outputPath: 'fonts',
-                publicPath: '/fonts/',
+                publicPath: '/SHARELATEX/fonts/',
                 name: '[name]-[hash].[ext]'
               }
             }

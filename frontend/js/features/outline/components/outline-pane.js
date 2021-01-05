@@ -74,7 +74,7 @@ function OutlinePane({
           {expanded ? (
             <OverlayTrigger placement="top" overlay={tooltip} delayHide={100}>
               <a
-                href="/learn/how-to/Using_the_File_Outline_in_Overleaf"
+                href="/SHARELATEX/learn/how-to/Using_the_File_Outline_in_Overleaf"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="outline-header-info-badge"

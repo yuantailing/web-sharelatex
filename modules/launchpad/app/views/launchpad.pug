@@ -9,7 +9,7 @@ block content
 			authMethod: "!{authMethod}"
 		}
 
-	script(type="text/javascript" src=(wsUrl || '/socket.io') + '/socket.io.js')
+	script(type="text/javascript" src=(wsUrl || '/SHARELATEX/socket.io') + '/socket.io.js')
 
 	style.
 		hr { margin-bottom: 5px; }
@@ -153,7 +153,7 @@ block content
 										.row(ng-if="createAdminSuccess")
 											.col-md-12.text-center
 												.alert.alert-success
-													| !{translate('admin_user_created_message', {link: '/login?redir=/launchpad'})}
+													| !{translate('admin_user_created_message', {link: '/SHARELATEX/login?redir=/launchpad'})}
 
 										<!-- error message -->
 										.row(ng-if="createAdminError")
@@ -259,9 +259,9 @@ block content
 											.text-center
 												br
 												p
-													a(href="/admin").btn.btn-info
+													a(href="/SHARELATEX/admin").btn.btn-info
 														| Go To Admin Panel
 													| &nbsp;
-													a(href="/project").btn.btn-primary
+													a(href="/SHARELATEX/project").btn.btn-primary
 														| Start Using #{settings.appName}
 												br

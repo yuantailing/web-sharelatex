@@ -63,7 +63,7 @@ App.controller('ShareProjectModalController', function(
     //  their contacts. This request would result in a 403 for anonymous
     //  users, which in turn would redirect them to the /login.
   } else {
-    $http.get('/user/contacts').then(processContactsResponse)
+    $http.get('/SHARELATEX/user/contacts').then(processContactsResponse)
   }
 
   function processContactsResponse(response) {
@@ -266,7 +266,7 @@ App.controller('ShareProjectModalController', function(
 
   $scope.$watch('project.tokens.readAndWrite', function(token) {
     if (token != null) {
-      $scope.readAndWriteTokenLink = `${location.origin}/${token}`
+      $scope.readAndWriteTokenLink = `${location.origin}/SHARELATEX/${token}`
     } else {
       $scope.readAndWriteTokenLink = null
     }
@@ -274,7 +274,7 @@ App.controller('ShareProjectModalController', function(
 
   $scope.$watch('project.tokens.readOnly', function(token) {
     if (token != null) {
-      $scope.readOnlyTokenLink = `${location.origin}/read/${token}`
+      $scope.readOnlyTokenLink = `${location.origin}/SHARELATEX/read/${token}`
     } else {
       $scope.readOnlyTokenLink = null
     }

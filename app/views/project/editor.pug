@@ -36,7 +36,7 @@ block content
 			.alert.alert-warning.small(ng-if="sync_tex_error")
 				strong #{translate("synctex_failed")}.
 				a#synctex-more-info-button.alert-link-as-btn.pull-right(
-					href="/learn/how-to/SyncTeX_Errors"
+					href="/SHARELATEX/learn/how-to/SyncTeX_Errors"
 					target="_blank"
 				) #{translate("more_info")}
 
@@ -175,9 +175,9 @@ block content
 		window.wikiEnabled = #{!!(settings.apis.wiki && settings.apis.wiki.url)};
 		window.gitBridgePublicBaseUrl = '#{gitBridgePublicBaseUrl}'
 		//- Set base path for Ace scripts loaded on demand/workers and don't use cdn
-		window.aceBasePath = "/js/#{lib('ace')}"
+		window.aceBasePath = "/SHARELATEX/js/#{lib('ace')}"
 		//- Set path for PDFjs CMaps
-		window.pdfCMapsPath = "/js/cmaps/"
+		window.pdfCMapsPath = "/SHARELATEX/js/cmaps/"
 		window.uiConfig = JSON.parse('!{StringHelper.stringifyJsonForScript(uiConfig)}');
 		//- enable doc hash checking for all projects
 		//- used in public/js/libs/sharejs.js
@@ -189,7 +189,7 @@ block content
 			window.overallThemes = JSON.parse('!{StringHelper.stringifyJsonForScript(overallThemes)}');
 
 block foot-scripts
-	script(type="text/javascript" src=(wsUrl || '/socket.io') + '/socket.io.js')
+	script(type="text/javascript" src=(wsUrl || '/SHARELATEX/socket.io') + '/socket.io.js')
 	script(src=mathJaxPath)
 	script(src=buildJsPath('libraries.js'))
 	script(src=buildJsPath('ide.js'))

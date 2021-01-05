@@ -16,7 +16,7 @@ div.binary-file-header
       | Imported from
       |
       a(ng-if='!openFile.linkedFileData.v1_source_doc_id'
-        ng-href='/project/{{openFile.linkedFileData.source_project_id}}' target="_blank")
+        ng-href='/SHARELATEX/project/{{openFile.linkedFileData.source_project_id}}' target="_blank")
         | Another project
       span(ng-if='openFile.linkedFileData.v1_source_doc_id')
         | Another project
@@ -31,7 +31,7 @@ div.binary-file-header
       | Imported from the output of
       |
       a(ng-if='!openFile.linkedFileData.v1_source_doc_id'
-        ng-href='/project/{{openFile.linkedFileData.source_project_id}}' target="_blank")
+        ng-href='/SHARELATEX/project/{{openFile.linkedFileData.source_project_id}}' target="_blank")
         | Another project
       span(ng-if='openFile.linkedFileData.v1_source_doc_id')
         | Another project
@@ -53,7 +53,7 @@ div.binary-file-header
       span(ng-show="refreshing") Refreshing…
     | &nbsp;
   a.btn.btn-info(
-    ng-href="/project/{{ project_id }}/file/{{ openFile.id }}"
+    ng-href="/SHARELATEX/project/{{ project_id }}/file/{{ openFile.id }}"
   )
     i.fa.fa-fw.fa-download
     |

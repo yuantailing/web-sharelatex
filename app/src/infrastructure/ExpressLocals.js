@@ -72,13 +72,13 @@ module.exports = function(webRouter, privateApiRouter, publicApiRouter) {
     if (cdnAvailable && !isSmoke && !cdnBlocked) {
       staticFilesBase = Settings.cdn.web.host
     } else {
-      staticFilesBase = ''
+      staticFilesBase = '/SHARELATEX/'
     }
 
     res.locals.buildBaseAssetPath = function() {
       // Return the base asset path (including the CDN url) so that webpack can
       // use this to dynamically fetch scripts (e.g. PDFjs worker)
-      return Url.resolve(staticFilesBase, '/')
+      return Url.resolve(staticFilesBase, '/SHARELATEX/')
     }
 
     res.locals.buildJsPath = function(jsFile) {
@@ -87,12 +87,12 @@ module.exports = function(webRouter, privateApiRouter, publicApiRouter) {
         // In dev: resolve path within JS asset directory
         // We are *not* guaranteed to have a manifest file when the server
         // starts up
-        path = Path.join('/js', jsFile)
+        path = Path.join('/SHARELATEX/js', jsFile)
       } else {
         // In production: resolve path from webpack manifest file
         // We are guaranteed to have a manifest file since webpack compiles in
         // the build
-        path = `/${webpackManifest[jsFile]}`
+        path = `/SHARELATEX/${webpackManifest[jsFile]}`
       }
 
       return Url.resolve(staticFilesBase, path)
@@ -106,18 +106,18 @@ module.exports = function(webRouter, privateApiRouter, publicApiRouter) {
         // In dev: resolve path to root directory
         // We are *not* guaranteed to have a manifest file when the server
         // starts up
-        path = Path.join('/', jsFile)
+        path = Path.join('/SHARELATEX/', jsFile)
       } else {
         // In production: resolve path from webpack manifest file
         // We are guaranteed to have a manifest file since webpack compiles in
         // the build
-        path = `/${webpackManifest[jsFile]}`
+        path = `/SHARELATEX/${webpackManifest[jsFile]}`
       }
 
       return Url.resolve(staticFilesBase, path)
     }
 
-    res.locals.mathJaxPath = `/js/libs/mathjax/MathJax.js?${querystring.stringify(
+    res.locals.mathJaxPath = `/SHARELATEX/js/libs/mathjax/MathJax.js?${querystring.stringify(
       {
         config: 'TeX-AMS_HTML,Safe'
       }
@@ -157,19 +157,19 @@ module.exports = function(webRouter, privateApiRouter, publicApiRouter) {
         // In dev: resolve path within CSS asset directory
         // We are *not* guaranteed to have a manifest file when the server
         // starts up
-        path = Path.join('/stylesheets/', cssFileName)
+        path = Path.join('/SHARELATEX/stylesheets/', cssFileName)
       } else {
         // In production: resolve path from webpack manifest file
         // We are guaranteed to have a manifest file since webpack compiles in
         // the build
-        path = `/${webpackManifest[cssFileName]}`
+        path = `/SHARELATEX/${webpackManifest[cssFileName]}`
       }
 
       return Url.resolve(staticFilesBase, path)
     }
 
     res.locals.buildImgPath = function(imgFile) {
-      const path = Path.join('/img/', imgFile)
+      const path = Path.join('/SHARELATEX/img/', imgFile)
       return Url.resolve(staticFilesBase, path)
     }
 

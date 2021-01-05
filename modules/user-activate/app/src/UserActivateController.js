@@ -28,7 +28,7 @@ module.exports = {
           // Already seen this user, so account must be activate
           // This lets users keep clicking the 'activate' link in their email
           // as a way to log in which, if I know our users, they will.
-          res.redirect(`/login`)
+          res.redirect(`/SHARELATEX/login`)
         } else {
           req.session.doLoginAfterPasswordReset = true
           res.render(Path.resolve(__dirname, '../views/user/activate'), {

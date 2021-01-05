@@ -429,7 +429,7 @@ const UserController = {
     const requestedRedirect = req.body.redirect
       ? UrlHelper.getSafeRedirectPath(req.body.redirect)
       : undefined
-    const redirectUrl = requestedRedirect || '/login'
+    const redirectUrl = requestedRedirect || '/SHARELATEX/login'
 
     UserController.doLogout(req, err => {
       if (err != null) {

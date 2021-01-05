@@ -566,7 +566,7 @@ export default (FileTreeManager = class FileTreeManager {
     }
     // We'll wait for the socket.io notification to actually
     // add the doc for us.
-    return this.ide.$http.post(`/project/${this.ide.project_id}/doc`, {
+    return this.ide.$http.post(`/SHARELATEX/project/${this.ide.project_id}/doc`, {
       name,
       parent_folder_id: parent_folder != null ? parent_folder.id : undefined,
       _csrf: window.csrfToken
@@ -583,7 +583,7 @@ export default (FileTreeManager = class FileTreeManager {
     }
     // We'll wait for the socket.io notification to actually
     // add the folder for us.
-    return this.ide.$http.post(`/project/${this.ide.project_id}/folder`, {
+    return this.ide.$http.post(`/SHARELATEX/project/${this.ide.project_id}/folder`, {
       name,
       parent_folder_id: parent_folder != null ? parent_folder.id : undefined,
       _csrf: window.csrfToken
@@ -601,7 +601,7 @@ export default (FileTreeManager = class FileTreeManager {
     // We'll wait for the socket.io notification to actually
     // add the file for us.
     return this.ide.$http.post(
-      `/project/${this.ide.project_id}/linked_file`,
+      `/SHARELATEX/project/${this.ide.project_id}/linked_file`,
       {
         name,
         parent_folder_id: parent_folder != null ? parent_folder.id : undefined,
@@ -624,7 +624,7 @@ export default (FileTreeManager = class FileTreeManager {
       return
     }
     return this.ide.$http.post(
-      `/project/${this.ide.project_id}/linked_file/${file.id}/refresh`,
+      `/SHARELATEX/project/${this.ide.project_id}/linked_file/${file.id}/refresh`,
       {
         _csrf: window.csrfToken
       },
@@ -652,7 +652,7 @@ export default (FileTreeManager = class FileTreeManager {
     entity.renamingToName = name
     return this.ide.$http
       .post(
-        `/project/${this.ide.project_id}/${entity.type}/${entity.id}/rename`,
+        `/SHARELATEX/project/${this.ide.project_id}/${entity.type}/${entity.id}/rename`,
         {
           name,
           _csrf: window.csrfToken
@@ -670,7 +670,7 @@ export default (FileTreeManager = class FileTreeManager {
     }
     return this.ide.queuedHttp({
       method: 'DELETE',
-      url: `/project/${this.ide.project_id}/${entity.type}/${entity.id}`,
+      url: `/SHARELATEX/project/${this.ide.project_id}/${entity.type}/${entity.id}`,
       headers: {
         'X-Csrf-Token': window.csrfToken
       }
@@ -690,7 +690,7 @@ export default (FileTreeManager = class FileTreeManager {
     // Wait for the http response before doing the move
     this.ide.queuedHttp
       .post(
-        `/project/${this.ide.project_id}/${entity.type}/${entity.id}/move`,
+        `/SHARELATEX/project/${this.ide.project_id}/${entity.type}/${entity.id}/move`,
         {
           folder_id: parent_folder.id,
           _csrf: window.csrfToken

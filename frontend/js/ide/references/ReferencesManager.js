@@ -92,7 +92,7 @@ export default (ReferencesManager = class ReferencesManager {
       _csrf: window.csrfToken
     }
     return this.ide.$http
-      .post(`/project/${this.$scope.project_id}/references/index`, opts)
+      .post(`/SHARELATEX/project/${this.$scope.project_id}/references/index`, opts)
       .then(response => {
         return this._storeReferencesKeys(response.data.keys)
       })
@@ -104,7 +104,7 @@ export default (ReferencesManager = class ReferencesManager {
       _csrf: window.csrfToken
     }
     return this.ide.$http
-      .post(`/project/${this.$scope.project_id}/references/indexAll`, opts)
+      .post(`/SHARELATEX/project/${this.$scope.project_id}/references/indexAll`, opts)
       .then(response => {
         return this._storeReferencesKeys(response.data.keys)
       })

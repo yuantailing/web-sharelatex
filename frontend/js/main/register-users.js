@@ -34,7 +34,7 @@ export default App.controller('RegisterUsersController', function(
     $scope.error = false
     return Array.from(emails).map(email =>
       queuedHttp
-        .post('/admin/register', {
+        .post('/SHARELATEX/admin/register', {
           email,
           _csrf: window.csrfToken
         })

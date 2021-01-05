@@ -26,16 +26,16 @@ export default App.factory('settings', (ide, eventTracking) => ({
     // End of tracking code.
 
     data._csrf = window.csrfToken
-    return ide.$http.post('/user/settings', data)
+    return ide.$http.post('/SHARELATEX/user/settings', data)
   },
 
   saveProjectSettings(data) {
     data._csrf = window.csrfToken
-    return ide.$http.post(`/project/${ide.project_id}/settings`, data)
+    return ide.$http.post(`/SHARELATEX/project/${ide.project_id}/settings`, data)
   },
 
   saveProjectAdminSettings(data) {
     data._csrf = window.csrfToken
-    return ide.$http.post(`/project/${ide.project_id}/settings/admin`, data)
+    return ide.$http.post(`/SHARELATEX/project/${ide.project_id}/settings/admin`, data)
   }
 }))

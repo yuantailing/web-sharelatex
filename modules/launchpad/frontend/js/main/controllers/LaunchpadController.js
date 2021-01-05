@@ -53,7 +53,7 @@ export default App.controller('LaunchpadController', function(
     $scope.testEmail.inflight = true
     $scope.testEmail.status = null
     return $http
-      .post('/launchpad/send_test_email', {
+      .post('/SHARELATEX/launchpad/send_test_email', {
         email: $scope.testEmail.emailAddress,
         _csrf: window.csrfToken
       })
@@ -133,7 +133,7 @@ export default App.controller('LaunchpadController', function(
   $scope.tryHealthCheck = function() {
     $scope.statusChecks.healthCheck.status = 'inflight'
     return $http
-      .get('/health_check')
+      .get('/SHARELATEX/health_check')
       .then(function(response) {
         const { status } = response
         if (status >= 200 && status < 300) {

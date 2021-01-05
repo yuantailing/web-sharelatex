@@ -192,7 +192,7 @@ templates.reactivatedSubscription = ctaTemplate({
     return 'View Subscription Dashboard'
   },
   ctaURL(opts) {
-    return `${settings.siteUrl}/user/subscription`
+    return `${settings.siteUrl}/SHARELATEX/user/subscription`
   }
 })
 
@@ -429,7 +429,7 @@ templates.userOnboardingEmail = NoCTAEmailTemplate({
     )
     const userSettingsLink = EmailMessageHelper.displayLink(
       'here',
-      `${settings.siteUrl}/user/settings`,
+      `${settings.siteUrl}/SHARELATEX/user/settings`,
       isPlainText
     )
     const onboardingSurveyLink = EmailMessageHelper.displayLink(

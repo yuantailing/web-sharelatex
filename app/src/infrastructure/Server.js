@@ -109,6 +109,7 @@ webRouter.use(
     proxy: Settings.behindProxy,
     cookie: {
       domain: Settings.cookieDomain,
+      path: '/SHARELATEX/',
       maxAge: Settings.cookieSessionLength, // in milliseconds, see https://github.com/expressjs/session#cookiemaxage
       secure: Settings.secureCookie,
       sameSite: Settings.sameSiteCookie
@@ -250,9 +251,9 @@ const server = require('http').createServer(app)
 // provide settings for separate web and api processes
 if (Settings.enabledServices.includes('api')) {
   logger.info('providing api router')
-  app.use(privateApiRouter)
-  app.use(Validation.errorMiddleware)
-  app.use(ErrorController.handleApiError)
+  app.use('/SHARELATEX', privateApiRouter)
+  app.use('/SHARELATEX', Validation.errorMiddleware)
+  app.use('/SHARELATEX', ErrorController.handleApiError)
 }
 
 if (Settings.enabledServices.includes('web')) {
@@ -267,13 +268,13 @@ if (Settings.enabledServices.includes('web')) {
     app.enable('view cache')
   }
 
-  app.use(publicApiRouter) // public API goes with web router for public access
-  app.use(Validation.errorMiddleware)
-  app.use(ErrorController.handleApiError)
+  app.use('/SHARELATEX', publicApiRouter) // public API goes with web router for public access
+  app.use('/SHARELATEX', Validation.errorMiddleware)
+  app.use('/SHARELATEX', ErrorController.handleApiError)
 
-  app.use(webRouter)
-  app.use(Validation.errorMiddleware)
-  app.use(ErrorController.handleError)
+  app.use('/SHARELATEX', webRouter)
+  app.use('/SHARELATEX', Validation.errorMiddleware)
+  app.use('/SHARELATEX', ErrorController.handleError)
 }
 
 metrics.injectMetricsRoute(webRouter)

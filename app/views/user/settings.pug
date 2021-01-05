@@ -19,7 +19,7 @@ block content
 							.row
 								.col-md-5
 									h3 #{translate("update_account_info")}
-									form(async-form="settings", name="settingsForm", method="POST", action="/user/settings", novalidate)
+									form(async-form="settings", name="settingsForm", method="POST", action="/SHARELATEX/user/settings", novalidate)
 										input(type="hidden", name="_csrf", value=csrfToken)
 										if !hasFeature('affiliations')
 											if !externalAuthenticationSystemUsed() 
@@ -95,10 +95,10 @@ block content
 											Password settings are managed externally
 									else if !hasPassword
 										p
-											| #[a(href="/user/password/reset", target='_blank') #{translate("no_existing_password")}]
+											| #[a(href="/SHARELATEX/user/password/reset", target='_blank') #{translate("no_existing_password")}]
 									else
 										- var submitAction
-										- submitAction = '/user/password/update'
+										- submitAction = '/SHARELATEX/user/password/update'
 										form(
 											async-form="changepassword"
 											name="changePasswordForm"
@@ -164,7 +164,7 @@ block content
 									| #{translate("beta_program_already_participating")}
 							
 							div
-								a(id="beta-program-participate-link" href="/beta/participate") #{translate("manage_beta_program_membership")}
+								a(id="beta-program-participate-link" href="/SHARELATEX/beta/participate") #{translate("manage_beta_program_membership")}
 
 							hr
 	
@@ -172,7 +172,7 @@ block content
 								| #{translate("sessions")}
 
 							div
-								a(id="sessions-link", href="/user/sessions") #{translate("manage_sessions")}
+								a(id="sessions-link", href="/SHARELATEX/user/sessions") #{translate("manage_sessions")}
 
 							if hasFeature('oauth')
 								hr
@@ -224,7 +224,7 @@ block content
 			if settings.overleaf && !hasPassword
 				p
 					b
-						| #[a(href="/user/password/reset", target='_blank') #{translate("delete_acct_no_existing_pw")}].
+						| #[a(href="/SHARELATEX/user/password/reset", target='_blank') #{translate("delete_acct_no_existing_pw")}].
 			else
 				form(novalidate, name="deleteAccountForm")
 					label #{translate('email')}
@@ -269,7 +269,7 @@ block content
 					div.alert.alert-info
 						| If you can't remember your password, or if you are using Single-Sign-On with another provider
 						| to sign in (such as Twitter or Google), please
-						| #[a(href="/user/password/reset", target='_blank') reset your password],
+						| #[a(href="/SHARELATEX/user/password/reset", target='_blank') reset your password],
 						| and try again.
 		.modal-footer
 			button.btn.btn-default(

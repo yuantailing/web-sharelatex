@@ -176,7 +176,7 @@ function makeMailchimpProvider() {
 
   function getSubscriberPath(email) {
     const emailHash = hashEmail(email)
-    return `/lists/${MAILCHIMP_LIST_ID}/members/${emailHash}`
+    return `/SHARELATEX/lists/${MAILCHIMP_LIST_ID}/members/${emailHash}`
   }
 
   function hashEmail(email) {

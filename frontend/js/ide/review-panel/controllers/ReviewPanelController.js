@@ -350,7 +350,7 @@ export default App.controller('ReviewPanelController', function(
   }
 
   const refreshRanges = () =>
-    $http.get(`/project/${$scope.project_id}/ranges`).then(function(response) {
+    $http.get(`/SHARELATEX/project/${$scope.project_id}/ranges`).then(function(response) {
       const docs = response.data
       return (() => {
         const result = []
@@ -612,7 +612,7 @@ export default App.controller('ReviewPanelController', function(
 
   var _doAcceptChanges = function(change_ids) {
     $http.post(
-      `/project/${$scope.project_id}/doc/${
+      `/SHARELATEX/project/${$scope.project_id}/doc/${
         $scope.editor.open_doc_id
       }/changes/accept`,
       { change_ids, _csrf: window.csrfToken }
@@ -710,7 +710,7 @@ export default App.controller('ReviewPanelController', function(
     thread.submitting = true
     $scope.$broadcast('comment:add', thread_id, offset, length)
     $http
-      .post(`/project/${$scope.project_id}/thread/${thread_id}/messages`, {
+      .post(`/SHARELATEX/project/${$scope.project_id}/thread/${thread_id}/messages`, {
         content,
         _csrf: window.csrfToken
       })
@@ -737,7 +737,7 @@ export default App.controller('ReviewPanelController', function(
     const { thread_id } = entry
     const content = entry.replyContent
     $http
-      .post(`/project/${$scope.project_id}/thread/${thread_id}/messages`, {
+      .post(`/SHARELATEX/project/${$scope.project_id}/thread/${thread_id}/messages`, {
         content,
         _csrf: window.csrfToken
       })
@@ -771,7 +771,7 @@ export default App.controller('ReviewPanelController', function(
   $scope.resolveComment = function(entry, entry_id) {
     entry.focused = false
     $http.post(
-      `/project/${$scope.project_id}/thread/${entry.thread_id}/resolve`,
+      `/SHARELATEX/project/${$scope.project_id}/thread/${entry.thread_id}/resolve`,
       { _csrf: window.csrfToken }
     )
     _onCommentResolved(entry.thread_id, ide.$scope.user)
@@ -782,7 +782,7 @@ export default App.controller('ReviewPanelController', function(
 
   $scope.unresolveComment = function(thread_id) {
     _onCommentReopened(thread_id)
-    $http.post(`/project/${$scope.project_id}/thread/${thread_id}/reopen`, {
+    $http.post(`/SHARELATEX/project/${$scope.project_id}/thread/${thread_id}/reopen`, {
       _csrf: window.csrfToken
     })
     return eventTracking.sendMB('rp-comment-reopen')
@@ -844,7 +844,7 @@ export default App.controller('ReviewPanelController', function(
     _onThreadDeleted(thread_id)
     $http({
       method: 'DELETE',
-      url: `/project/${$scope.project_id}/doc/${doc_id}/thread/${thread_id}`,
+      url: `/SHARELATEX/project/${$scope.project_id}/doc/${doc_id}/thread/${thread_id}`,
       headers: {
         'X-CSRF-Token': window.csrfToken
       }
@@ -854,7 +854,7 @@ export default App.controller('ReviewPanelController', function(
 
   $scope.saveEdit = function(thread_id, comment) {
     $http.post(
-      `/project/${$scope.project_id}/thread/${thread_id}/messages/${
+      `/SHARELATEX/project/${$scope.project_id}/thread/${thread_id}/messages/${
         comment.id
       }/edit`,
       {
@@ -869,7 +869,7 @@ export default App.controller('ReviewPanelController', function(
     _onCommentDeleted(thread_id, comment.id)
     $http({
       method: 'DELETE',
-      url: `/project/${$scope.project_id}/thread/${thread_id}/messages/${
+      url: `/SHARELATEX/project/${$scope.project_id}/thread/${thread_id}/messages/${
         comment.id
       }`,
       headers: {
@@ -973,7 +973,7 @@ export default App.controller('ReviewPanelController', function(
       }
     }
     data._csrf = window.csrfToken
-    return $http.post(`/project/${$scope.project_id}/track_changes`, data)
+    return $http.post(`/SHARELATEX/project/${$scope.project_id}/track_changes`, data)
   }
 
   const applyTrackChangesStateToClient = function(state) {
@@ -1101,7 +1101,7 @@ export default App.controller('ReviewPanelController', function(
     _refreshingRangeUsers = true
 
     return $http
-      .get(`/project/${$scope.project_id}/changes/users`)
+      .get(`/SHARELATEX/project/${$scope.project_id}/changes/users`)
       .then(function(response) {
         const users = response.data
         _refreshingRangeUsers = false
@@ -1137,7 +1137,7 @@ export default App.controller('ReviewPanelController', function(
     _threadsLoaded = true
     $scope.reviewPanel.loadingThreads = true
     return $http
-      .get(`/project/${$scope.project_id}/threads`)
+      .get(`/SHARELATEX/project/${$scope.project_id}/threads`)
       .then(function(response) {
         const threads = response.data
         $scope.reviewPanel.loadingThreads = false

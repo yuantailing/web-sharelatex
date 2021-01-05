@@ -19,7 +19,7 @@ include ../../_mixins/saml
 					.notification-action
 						a.pull-right.btn.btn-sm.btn-info(
 							ng-show="notification.accepted",
-							href="/project/{{ notification.messageOpts.projectId }}"
+							href="/SHARELATEX/project/{{ notification.messageOpts.projectId }}"
 						) #{translate("open_project")}
 						a.pull-right.btn.btn-sm.btn-info(
 							href,
@@ -58,7 +58,7 @@ include ../../_mixins/saml
 						|	 to everyone at {{notification.messageOpts.university_name}}? <br/>
 						|	Add an institutional email address to claim your account.
 					.notification-action
-						a.pull-right.btn.btn-sm.btn-info(href="/user/settings")
+						a.pull-right.btn.btn-sm.btn-info(href="/SHARELATEX/user/settings")
 							| Add Affiliation
 					.notification-close
 						button.btn-sm(ng-click="dismiss(notification)").close.pull-right
@@ -74,7 +74,7 @@ include ../../_mixins/saml
 						|	has gone over the 2000 file limit using an integration (e.g. Dropbox or Github) <br/>
 						| Please decrease the size of your project to prevent further errors.
 					.notification-action
-						a.pull-right.btn.btn-sm.btn-info(href="/user/settings")
+						a.pull-right.btn.btn-sm.btn-info(href="/SHARELATEX/user/settings")
 							| Account Settings
 					.notification-close
 						button.btn-sm(ng-click="dismiss(notification)").close.pull-right
@@ -137,7 +137,7 @@ include ../../_mixins/saml
 						| !{translate("tried_to_register_with_email", {appName: settings.appName, email: "{{notification.email}}"})}
 						| #{translate("we_logged_you_in")}
 					.notification-action
-						a.btn.btn-sm.btn-info(href="/learn/how-to/Institutional_Login")
+						a.btn.btn-sm.btn-info(href="/SHARELATEX/learn/how-to/Institutional_Login")
 							| #{translate("find_out_more")}
 					.notification-close
 						button(ng-click="dismiss(notification)").close.pull-right

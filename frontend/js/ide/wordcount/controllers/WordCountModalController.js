@@ -20,7 +20,7 @@ export default App.controller('WordCountModalController', function(
   $scope.status = { loading: true }
 
   const opts = {
-    url: `/project/${ide.project_id}/wordcount`,
+    url: `/SHARELATEX/project/${ide.project_id}/wordcount`,
     method: 'GET',
     params: {
       clsiserverid: ide.clsiServerId

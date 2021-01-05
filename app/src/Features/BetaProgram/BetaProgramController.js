@@ -16,7 +16,7 @@ const BetaProgramController = {
       if (err) {
         return next(err)
       }
-      res.redirect('/beta/participate')
+      res.redirect('/SHARELATEX/beta/participate')
     })
   },
 
@@ -30,7 +30,7 @@ const BetaProgramController = {
       if (err) {
         return next(err)
       }
-      res.redirect('/beta/participate')
+      res.redirect('/SHARELATEX/beta/participate')
     })
   },
 

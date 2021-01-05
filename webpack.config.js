@@ -87,7 +87,7 @@ module.exports = {
               // This prevents a security problem where the Worker - normally
               // loaded from a CDN - has cross-origin issues, by forcing it to not
               // be loaded from the CDN
-              publicPath: '/'
+              publicPath: '/SHARELATEX/'
             }
           }
         ]
@@ -123,7 +123,7 @@ module.exports = {
             options: {
               // Output to public/font
               outputPath: 'fonts',
-              publicPath: '/fonts/',
+              publicPath: '/SHARELATEX/fonts/',
               name: '[name].[ext]'
             }
           }

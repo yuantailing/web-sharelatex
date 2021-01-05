@@ -38,8 +38,8 @@
 	meta(name="image", content=buildImgPath('ol-brand/overleaf_og_logo.png'))
 -else
 	//- the default image for ShareLaTeX
-	meta(itemprop="image", content='/touch-icon-192x192.png')
-	meta(name="image", content='/touch-icon-192x192.png')
+	meta(itemprop="image", content='/SHARELATEX/touch-icon-192x192.png')
+	meta(name="image", content='/SHARELATEX/touch-icon-192x192.png')
 
 //- Keywords
 -if (metadata && metadata.keywords)
@@ -68,7 +68,7 @@ meta(name="twitter:card", content=metadata && metadata.twitterCardType ? metadat
 	meta(name="twitter:image", content=buildImgPath('ol-brand/overleaf_og_logo.png'))
 -else
 	//- the default image for ShareLaTeX
-	meta(name="twitter:image", content='/touch-icon-192x192.png')
+	meta(name="twitter:image", content='/SHARELATEX/touch-icon-192x192.png')
 
 //- Open Graph
 //- to do - add og:url
@@ -88,7 +88,7 @@ meta(name="twitter:card", content=metadata && metadata.twitterCardType ? metadat
 	meta(property="og:image", content=buildImgPath('ol-brand/overleaf_og_logo.png'))
 -else
 	//- the default image for ShareLaTeX
-	meta(property="og:image", content='/touch-icon-192x192.png')
+	meta(property="og:image", content='/SHARELATEX/touch-icon-192x192.png')
 
 -if (metadata && metadata.openGraphType)
 	meta(property="og:type", metadata.openGraphType)
@@ -109,7 +109,7 @@ if settings.robotsNoindex
 
 
 //- Icons
-link(rel="icon", href="/" + settings.brandPrefix + "favicon.ico")
-link(rel="icon", sizes="192x192", href="/" + settings.brandPrefix + "touch-icon-192x192.png")
-link(rel="apple-touch-icon-precomposed", href="/" + settings.brandPrefix + "apple-touch-icon-precomposed.png")
-link(rel="mask-icon", href="/" + settings.brandPrefix + "mask-favicon.svg", color=settings.brandPrefix === 'sl-' ? "#a93529" : "#138A07")
+link(rel="icon", href="/SHARELATEX/" + settings.brandPrefix + "favicon.ico")
+link(rel="icon", sizes="192x192", href="/SHARELATEX/" + settings.brandPrefix + "touch-icon-192x192.png")
+link(rel="apple-touch-icon-precomposed", href="/SHARELATEX/" + settings.brandPrefix + "apple-touch-icon-precomposed.png")
+link(rel="mask-icon", href="/SHARELATEX/" + settings.brandPrefix + "mask-favicon.svg", color=settings.brandPrefix === 'sl-' ? "#a93529" : "#138A07")
