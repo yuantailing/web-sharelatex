@@ -109,7 +109,7 @@ export default (ConnectionManager = (function() {
       this.updateConnectionManagerState('connecting')
       let parsedURL
       try {
-        parsedURL = new URL(this.wsUrl || '/socket.io', window.location)
+        parsedURL = new URL(this.wsUrl || '/SHARELATEX/socket.io', window.location)
       } catch (e) {
         // hello IE11
         if (
@@ -122,7 +122,7 @@ export default (ConnectionManager = (function() {
         }
         parsedURL = {
           origin: null,
-          pathname: this.wsUrl || '/socket.io'
+          pathname: this.wsUrl || '/SHARELATEX/socket.io'
         }
       }
       this.ide.socket = SocketIoShim.connect(
@@ -654,7 +654,7 @@ Something went wrong connecting to your project. Please refresh if this continue
       this.gracefullyReconnecting = true
       this.reconnectGracefullyStarted = null
       // Clear cookie so we don't go to the same backend server
-      $.cookie('SERVERID', '', { expires: -1, path: '/' })
+      $.cookie('SERVERID', '', { expires: -1, path: '/SHARELATEX/' })
       return this.reconnectImmediately()
     }
   }

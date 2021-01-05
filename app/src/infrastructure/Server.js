@@ -109,7 +109,7 @@ webRouter.use(
     proxy: Settings.behindProxy,
     cookie: {
       domain: Settings.cookieDomain,
-      path: '/',
+      path: '/SHARELATEX/',
       maxAge: Settings.cookieSessionLength, // in milliseconds, see https://github.com/expressjs/session#cookiemaxage
       secure: Settings.secureCookie,
       sameSite: Settings.sameSiteCookie
